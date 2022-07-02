@@ -52,7 +52,7 @@ copyRight = "Copyright (c) 2022 Ludwig Stecher"
 # Alert
 alert = true
 alertDismissable = false
-alertText = 'Rulex will be renamed to pomsky. <a class="alert-link stretched-link" href="/blog/renaming-rulex">Read the announcement</a>'
+alertText = 'Rulex is being renamed to pomsky. <a class="alert-link stretched-link" href="/blog/renaming-rulex">Read the announcement</a>'
 
 # Edit Page
 repoHost = "GitHub"

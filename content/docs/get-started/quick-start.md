@@ -15,7 +15,7 @@ toc: true
 
 ## Playground
 
-Using [the playground](https://pomsky-lang/playground/) is the easiest and most convenient
+Using [the playground](https://playground.pomsky-lang/) is the easiest and most convenient
 way to get started using pomsky. It supports syntax highlighting and shows errors directly in your
 code.
 
@@ -26,7 +26,7 @@ The CLI allows you to compile pomsky expressions to regexes in the command line.
 ### Use pre-built binaries
 
 Binaries are available for Windows, Linux and macOS. Download them from the
-[releases page](https://github.com/rulex-rs/rulex/releases).
+[releases page](https://github.com/rulex-rs/pomsky/releases).
 
 ### Use AUR package
 
