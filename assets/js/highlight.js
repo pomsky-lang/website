@@ -164,6 +164,26 @@ hljs.registerLanguage('regexp', function () {
   }
 })
 
+hljs.registerLanguage('diff', function () {
+  return {
+    name: 'diff',
+    contains: [
+      {
+        className: 'diff-add',
+        begin: /^\+.*?$/s,
+      },
+      {
+        className: 'diff-del',
+        begin: /^-.*?$/s,
+      },
+      {
+        className: 'comment',
+        begin: /^#.*?$/s,
+      },
+    ],
+  }
+})
+
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('code[class|=language]').forEach((block) => hljs.highlightBlock(block))
 })
