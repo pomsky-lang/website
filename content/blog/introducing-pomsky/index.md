@@ -6,7 +6,7 @@ date: 2022-07-04T16:06:32+00:00
 lastmod: 2022-07-04T16:06:32+00:00
 contributors: ['Ludwig Stecher']
 draft: false
-images: ['diagnostics.png']
+images: ['pomsky.jpg', 'diagnostics.png']
 weight: 2
 toc: true
 ---
@@ -86,11 +86,13 @@ I want to thank [Evan Richter][evanrichter] for setting up the fuzzer, disclosin
 
 ## Renaming Rulex
 
+![Pomsky](pomsky.jpg)
+
 As announced in [my previous post][renaming-rulex], I had to rename Rulex to Pomsky. Read the announcement to find out the reasons, and why I chose the name "Pomsky".
 
-Note that if you installed the AUR package, you might have to replace it now.
-
 If you use the `rulex` library or the `rulex-macro` crate, instructions for migrating are in the [changelog].
+
+Note that the new AUR package hasn't been released yet.
 
 ## The website
 
