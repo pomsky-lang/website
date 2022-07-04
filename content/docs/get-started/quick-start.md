@@ -44,7 +44,7 @@ found [here](https://www.rust-lang.org/tools/install).
 Install the CLI with
 
 ```
-cargo install rulex-bin
+cargo install pomsky-bin
 ```
 
 ### Get help
@@ -52,24 +52,24 @@ cargo install rulex-bin
 To find out how to use the CLI, run
 
 ```
-rulex --help
+pomsky --help
 ```
 
 ## Rust macro
 
 If you want to write a pomsky expression directly in your Rust source code, the
-[rulex-macro](https://crates.io/crates/rulex-macro) got you covered. Run this command:
+[pomsky-macro](https://crates.io/crates/pomsky-macro) got you covered. Run this command:
 
 ```sh
-cargo add rulex-macro
+cargo add pomsky-macro
 ```
 
 Then you can import and use it with
 
 ```rs
-use rulex_macro::rulex;
+use pomsky_macro::pomsky;
 
-const MY_REGEX: &str = rulex!(["great!"] | "great!");
+const MY_REGEX: &str = pomsky!(["great!"] | "great!");
 ```
 
-Documentation can be [found here](https://docs.rs/rulex-macro/latest/rulex_macro/).
+Documentation can be [found here](https://docs.rs/pomsky-macro/latest/pomsky_macro/).
