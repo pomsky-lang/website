@@ -61,9 +61,12 @@
 }
 
 .hljs .hljs-title,
-.hljs .hljs-titlex,
 .hljs .hljs-built_in,
 .hljs .hljs-section {
+  color: #004d90;
+}
+
+.hljs .hljs-titlex {
   color: #004d90;
 }
 
@@ -71,9 +74,13 @@
 .hljs .hljs-meta,
 .hljs .hljs-builtin-name,
 .hljs .hljs-literal,
-.hljs .hljs-literalx,
 .hljs .hljs-type,
 .hljs .hljs-params {
+  color: #99008c;
+  font-weight: normal;
+}
+
+.hljs .hljs-literalx {
   color: #99008c;
   font-weight: normal;
 }
@@ -87,9 +94,12 @@
 }
 
 [data-dark-mode] body .hljs .hljs-title,
-[data-dark-mode] body .hljs .hljs-titlex,
 [data-dark-mode] body .hljs .hljs-built_in,
 [data-dark-mode] body .hljs .hljs-section {
+  color: #ffbb63;
+}
+
+[data-dark-mode] body .hljs .hljs-titlex {
   color: #ffbb63;
 }
 
@@ -101,4 +111,24 @@
 [data-dark-mode] body .hljs .hljs-type,
 [data-dark-mode] body .hljs .hljs-params {
   color: #ffa6f6;
+}
+
+[data-dark-mode] body .hljs .hljs-literalx {
+  color: #ffa6f6;
+}
+
+body .hljs .hljs-diff-add {
+  background-color: #b5ffae;
+}
+
+body .hljs .hljs-diff-del {
+  background-color: #ffbebe;
+}
+
+[data-dark-mode] body .hljs .hljs-diff-add {
+  background-color: #064d00;
+}
+
+[data-dark-mode] body .hljs .hljs-diff-del {
+  background-color: #4f0000;
 }
