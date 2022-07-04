@@ -128,6 +128,9 @@ To inform decisions about the future development of rulex, it would be useful to
 
 However, we currently don't have that data. Therefore, I'm asking you, if you're using Pomsky, or would like to, please write a comment in [this issue][general-feedback], or [send me an email][mail].
 
+Cheers,\
+Ludwig
+
 [homepage]: /#examples
 [hn]: https://news.ycombinator.com/item?id=31690878
 [security-advisories]: https://github.com/rulex-rs/pomsky/security/advisories?state=published
