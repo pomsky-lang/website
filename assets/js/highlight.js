@@ -1,9 +1,11 @@
 import hljs from 'highlight.js/lib/core'
 
 import rust from 'highlight.js/lib/languages/rust'
+import javascript from 'highlight.js/lib/languages/javascript'
 import ini from 'highlight.js/lib/languages/ini'
 
 hljs.registerLanguage('rust', rust)
+hljs.registerLanguage('javascript', javascript)
 hljs.registerLanguage('toml', ini)
 
 hljs.registerLanguage('pomsky', function (hljs) {

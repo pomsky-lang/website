@@ -10,8 +10,8 @@
   </div>
   <div data-title="Character classes" data-result="[acd[\]p-s][^\^]">['acd[]' 'p'-'s'] !['^']</div>
   <div data-title="Unicode" data-result="[\s\x15\uFEFF\p{Greek}]">[s U+15 U+FEFF Greek]</div>
-  <div data-title="Capturing groups" data-result="(\s)(?<named>.)\2">
-    :([s]) :named([.]) ::named
+  <div data-title="Capturing groups" data-result="(\s)(?<named>[\s\S])\2">
+    :([space]) :named(Codepoint) ::named
   </div>
   <div data-title="Lookaround" data-result="(?<=foo|bar)(?!foo|bar)">
     (<< 'foo' | 'bar') (!>> 'foo' | 'bar')

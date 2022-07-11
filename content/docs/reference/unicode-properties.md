@@ -13,7 +13,7 @@ weight: 302
 toc: true
 ---
 
-pomsky supports the following kinds of Unicode properties:
+Pomsky supports the following kinds of Unicode properties:
 
 - General categories
 - Scripts
