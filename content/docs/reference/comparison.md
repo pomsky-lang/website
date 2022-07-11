@@ -169,8 +169,8 @@ Let's see what Regex features are supported by languages that are transpiled to 
 | Unicode category           |          ✅           |   ✅   |
 | Unicode script/block       |                       |   ✅   |                       |        partly         |
 | Other Unicode property     |                       |   ✅   |
-| Code point                 | partly<sup>\*\*</sup> |   ✅   | partly<sup>\*\*</sup> | partly<sup>\*\*</sup> |
-| Grapheme                   |                       |   ✅   |
+| Any code point             | partly<sup>\*\*</sup> |   ✅   | partly<sup>\*\*</sup> | partly<sup>\*\*</sup> |
+| Any grapheme               |                       |   ✅   |
 | Atomic group               |                       |        |    ✅<sup>\*</sup>    |
 | Character set intersection |                       |        |                       |          ✅           |
 | Character set subtraction  |                       |        |                       |
