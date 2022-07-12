@@ -74,20 +74,21 @@ const tester = VerEx()
   .endOfLine()
 ```
 
+This page currently only discusses transpiled languages, but I welcome contributions.
+
 ## Compatibility
 
-Let's see what Regex flavors are supported by transpiled languages. We don't look at DSLs, because
-they only target one flavor.
+Let's see what Regex flavors are supported by transpiled languages.
 
 | Flavor     |     Melody      | Pomsky | Egg Expr. | Rx Expr. |
 | ---------- | :-------------: | :----: | :-------: | :------: |
 | ERE        |                 |        |    ✅     |    ✅    |
-| ECMAScript |       ✅        |   ✅   |           |
-| PCRE       | ✅<sup>\*</sup> |   ✅   |    ✅     |
-| .NET       | ✅<sup>\*</sup> |   ✅   |           |
-| Java       | ✅<sup>\*</sup> |   ✅   |           |
-| Ruby       | ✅<sup>\*</sup> |   ✅   |           |
-| Python     |                 |   ✅   |    ✅     |
+| ECMAScript |       ✅        |   ✅   |
+| PCRE       | ✅<sup>\*</sup> |   ✅   |
+| .NET       | ✅<sup>\*</sup> |   ✅   |
+| Java       | ✅<sup>\*</sup> |   ✅   |
+| Ruby       | ✅<sup>\*</sup> |   ✅   |
+| Python     |                 |   ✅   |
 | Rust       |                 |   ✅   |
 | RE2        |                 |        |
 
@@ -118,8 +119,7 @@ with several other flavors.
 
 - **Rust** refers to Rust's popular `regex` crate, which is used by `ripgrep`, for example.
 
-- **RE2** refers to Google's RE2 regex engine. Go's `"regexp"` module uses an almost identical
-  syntax.
+- **RE2** refers to Google's RE2 regex engine. Go's `"regexp"` module uses the same syntax.
 
 ## Features
 
@@ -127,24 +127,36 @@ Let's see what Regex features are supported by languages that are transpiled to 
 
 ### Basic regex features
 
-| Feature               |        Melody         |       Pomsky        | Egg Expr. | Rx Expr. |
-| --------------------- | :-------------------: | :-----------------: | :-------: | :------: |
-| Greedy quantifier     |          ✅           |         ✅          |    ✅     |    ✅    |
-| Lazy quantifier       |          ✅           |         ✅          |    ✅     |    ✅    |
-| Dot                   |          ✅           | partly<sup>\*</sup> |    ✅     |    ✅    |
-| Special char          |          ✅           |         ✅          |    ✅     |    ✅    |
-| Negated special char  |          ✅           |         ✅          |    ✅     |    ✅    |
-| Character class       |          ✅           |         ✅          |    ✅     |    ✅    |
-| Anchor                |          ✅           |         ✅          |    ✅     |    ✅    |
-| Word boundary         |          ✅           |         ✅          |    ✅     |    ✅    |
-| Negated word boundary |          ✅           |         ✅          |    ✅     |    ✅    |
-| Character range       | partly<sup>\*\*</sup> |         ✅          |    ✅     |    ✅    |
-| Character set         |                       |         ✅          |    ✅     |    ✅    |
-| Negated character set |                       |         ✅          |    ✅     |    ✅    |
-| Capturing group       |          ✅           |         ✅          |    ✅     |    ✅    |
-| Non-capturing group   |          ✅           |         ✅          |    ✅     |    ✅    |
-| Alternation           |          ✅           |         ✅          |    ✅     |    ✅    |
-| POSIX class           |                       |         ✅          |           |    ✅    |
+| Feature                            |        Melody         |       Pomsky        | Egg Expr. | Rx Expr. |
+| ---------------------------------- | :-------------------: | :-----------------: | :-------: | :------: |
+| [Greedy repetition][greedy]        |          ✅           |         ✅          |    ✅     |    ✅    |
+| [Lazy repetition][lazy]            |          ✅           |         ✅          |    ✅     |    ✅    |
+| [Dot]                              |          ✅           | partly<sup>\*</sup> |    ✅     |    ✅    |
+| [Character escape][non-printable]  |          ✅           |         ✅          |    ✅     |    ✅    |
+| [Character class][shorthand]       |          ✅           |         ✅          |    ✅     |    ✅    |
+| [Anchor]                           |          ✅           |         ✅          |    ✅     |    ✅    |
+| [Word boundary][boundary]          |          ✅           |         ✅          |    ✅     |    ✅    |
+| [Negated word boundary][boundary]  |          ✅           |         ✅          |    ✅     |    ✅    |
+| [Character range][charclass]       | partly<sup>\*\*</sup> |         ✅          |    ✅     |    ✅    |
+| [Character set][charclass]         |                       |         ✅          |    ✅     |    ✅    |
+| [Negated character set][charclass] |                       |         ✅          |    ✅     |    ✅    |
+| [Capturing group][capture]         |          ✅           |         ✅          |    ✅     |    ✅    |
+| [Alternation]                      |          ✅           |         ✅          |    ✅     |    ✅    |
+| [POSIX class][posix-class]         |                       |         ✅          |           |    ✅    |
+| [Non-capturing group][noncapture]  |          ✅           |         ✅          |           |          |
+
+[greedy]: https://www.regular-expressions.info/repeat.html
+[lazy]: https://www.regular-expressions.info/repeat.html#lazy
+[non-printable]: https://www.regular-expressions.info/nonprint.html
+[dot]: https://www.regular-expressions.info/dot.html
+[shorthand]: https://www.regular-expressions.info/shorthand.html
+[anchor]: https://www.regular-expressions.info/anchors.html
+[boundary]: https://www.regular-expressions.info/wordboundaries.html
+[charclass]: https://www.regular-expressions.info/charclass.html
+[capture]: https://www.regular-expressions.info/brackets.html
+[noncapture]: https://www.regular-expressions.info/brackets.html#noncap
+[alternation]: https://www.regular-expressions.info/alternation.html
+[posix-class]: https://www.regular-expressions.info/posixbrackets.html#class
 
 <sup>\*</sup>Pomsky deliberately does not support the dot. You can use instead:
 
@@ -155,34 +167,53 @@ Let's see what Regex features are supported by languages that are transpiled to 
 
 ### Advanced features
 
-| Feature                    |        Melody         | Pomsky |       Egg Expr.       |       Rx Expr.        |
-| -------------------------- | :-------------------: | :----: | :-------------------: | :-------------------: |
-| Variables/macros           |          ✅           |   ✅   |          ✅           |          ✅           |
-| Line comments              |          ✅           |   ✅   |          ✅           |          ✅           |
-| Block comments             |          ✅           |        |                       |                       |
-| Code point                 |                       |   ✅   |          ✅           |
-| Lookaround                 |          ✅           |   ✅   |    ✅<sup>\*</sup>    |
-| Named capturing group      |          ✅           |   ✅   |          ✅           |
-| Backreference              |                       |   ✅   |    ✅<sup>\*</sup>    |          ✅           |
-| Named backreference        |                       |   ✅   |    ✅<sup>\*</sup>    |
-| Relative backreference     |                       |   ✅   |
-| Unicode category           |          ✅           |   ✅   |
-| Unicode script/block       |                       |   ✅   |                       |        partly         |
-| Other Unicode property     |                       |   ✅   |
-| Any code point             | partly<sup>\*\*</sup> |   ✅   | partly<sup>\*\*</sup> | partly<sup>\*\*</sup> |
-| Any grapheme               |                       |   ✅   |
-| Atomic group               |                       |        |    ✅<sup>\*</sup>    |
-| Character set intersection |                       |        |                       |          ✅           |
-| Character set subtraction  |                       |        |                       |
-| Possessive quantifier      |                       |        |                       |
-| Conditional                |                       |        |                       |
-| Recursion                  |                       |        |                       |
-| Modes                      |                       |        |                       |
+| Feature                                     |       Melody        | Pomsky |      Egg Expr.      |      Rx Expr.       |
+| ------------------------------------------- | :-----------------: | :----: | :-----------------: | :-----------------: |
+| [Variable]                                  |         ✅          |   ✅   |         ✅          |         ✅          |
+| [Line comment][line-comment]                |         ✅          |   ✅   |         ✅          |         ✅          |
+| [Block comment][block-comment]              |         ✅          |        |                     |                     |
+| [Code point][codepoint]                     |                     |   ✅   |         ✅          |
+| [Lookaround]                                |         ✅          |   ✅   |                     |
+| [Named capturing group][named-capture]      |         ✅          |   ✅   |         ✅          |
+| [Backreference]                             |                     |   ✅   |                     |         ✅          |
+| [Named backreference][named-ref]            |                     |   ✅   |                     |
+| [Relative backreference][relative-ref]      |                     |   ✅   |
+| [Unicode category][category]                |         ✅          |   ✅   |
+| [Unicode script][script]/[block]            |                     |   ✅   |                     |       partly        |
+| [Other Unicode property][unicode]           |                     |   ✅   |
+| [Any code point][built-in-vars]             | partly<sup>\*</sup> |   ✅   | partly<sup>\*</sup> | partly<sup>\*</sup> |
+| [Any grapheme][built-in-vars]               |                     |   ✅   |
+| [Atomic group][atomic]                      |                     |        |                     |
+| [Character set intersection][charintersect] |                     |        |                     |         ✅          |
+| [Character set subtraction][charsubtract]   |                     |        |                     |
+| [Possessive quantifier][possessive]         |                     |        |                     |
+| [Conditional]                               |                     |        |                     |
+| [Recursion]                                 |                     |        |                     |
+| [Modifier]                                  |                     |        |                     |
 
-<sup>\*</sup>These features should be supported in Oil but can't be used because of a
-[bug][oil-bug].
+[variable]: https://pomsky-lang.org/docs/language-tour/variables/
+[line-comment]: https://pomsky-lang.org/docs/language-tour/basics/
+[block-comment]: https://yoav-lavi.github.io/melody/book/syntax.html#extras
+[codepoint]: https://www.regular-expressions.info/unicode.html#codepoint
+[lookaround]: https://www.regular-expressions.info/lookaround.html
+[named-capture]: https://www.regular-expressions.info/named.html
+[named-ref]: https://www.regular-expressions.info/named.html
+[relative-ref]: https://www.regular-expressions.info/backrefrel.html
+[backreference]: https://www.regular-expressions.info/backref.html
+[category]: https://www.regular-expressions.info/unicode.html#category
+[script]: https://www.regular-expressions.info/unicode.html#script
+[block]: https://www.regular-expressions.info/unicode.html#block
+[unicode]: https://www.regular-expressions.info/unicode.html
+[built-in-vars]: https://pomsky-lang.org/docs/reference/built-in-variables/
+[atomic]: https://www.regular-expressions.info/atomic.html
+[charsubtract]: https://www.regular-expressions.info/charclasssubtract.html
+[charintersect]: https://www.regular-expressions.info/charclassintersect.html
+[possessive]: https://www.regular-expressions.info/possessive.html
+[conditional]: https://www.regular-expressions.info/conditional.html
+[recursion]: https://www.regular-expressions.info/recurse.html
+[modifier]: https://www.regular-expressions.info/refmodifiers.html
 
-<sup>\*\*</sup>All languages can match a code point with the dot, if multiline mode is enabled in the
+<sup>\*</sup>All languages can match a code point with the dot, if multiline mode is enabled in the
 regex engine.
 
 ## Tooling
