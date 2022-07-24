@@ -25,6 +25,7 @@ with similar goals to Pomksy. Here's a list of the most popular projects:
 | [Egg Expressions][egg-expressions]       | _Transpiled_<br>_App_: Oil shell |
 | [Rx Expressions][emacs-rx]               | _Transpiled_<br>_App_: Emacs     |
 | [Raku Grammars][raku-grammars]           | _App_: Raku                      |
+| [Ribose]                                 | _DSL_: Java                      |
 | [Rosie]                                  | _App_: Rosie                     |
 | [SRL]                                    | _DSL_: PHP                       | {{<gh-stars SimpleRegex SRL-PHP >}}                   |
 | [Super Expressive][super-expressive]     | _DSL_: JS                        | {{<gh-stars francisrstokes super-expressive >}}       |
@@ -36,6 +37,7 @@ with similar goals to Pomksy. Here's a list of the most popular projects:
 [melody]: https://github.com/yoav-lavi/melody
 [pomsky]: https://pomsky-lang.org/
 [raku-grammars]: https://www.perl.com/article/perl-6-grammers-part-1/
+[ribose]: https://github.com/jrte/ribose/
 [rosie]: https://rosie-lang.org/
 [srl]: https://github.com/SimpleRegex/SRL-PHP
 [super-expressive]: https://github.com/francisrstokes/super-expressive
