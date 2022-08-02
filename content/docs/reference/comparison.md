@@ -142,8 +142,8 @@ Let's see what Regex features are supported by languages that are transpiled to 
 | [Negated character set][charclass] |                       |         ✅          |    ✅     |    ✅    |
 | [Capturing group][capture]         |          ✅           |         ✅          |    ✅     |    ✅    |
 | [Alternation]                      |          ✅           |         ✅          |    ✅     |    ✅    |
-| [POSIX class][posix-class]         |                       |         ✅          |           |    ✅    |
-| [Non-capturing group][noncapture]  |          ✅           |         ✅          |           |          |
+| [POSIX class][posix-class]         |                       |         ✅          |    ✅     |    ✅    |
+| [Non-capturing group][noncapture]  |          ✅           |         ✅          |    ✅     |          |
 
 [greedy]: https://www.regular-expressions.info/repeat.html
 [lazy]: https://www.regular-expressions.info/repeat.html#lazy
