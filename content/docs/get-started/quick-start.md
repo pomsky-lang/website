@@ -30,10 +30,10 @@ Binaries are available for Windows, Linux and macOS. Download them from the
 
 ### Use AUR package
 
-On Arch Linux, you can use the [AUR package](https://aur.archlinux.org/packages/rulex-rs-bin) with
+On Arch Linux, you can use the [AUR package](https://aur.archlinux.org/packages/pomsky-bin) with
 
 ```sh
-yay -S rulex-rs-bin
+yay -S pomsky-bin
 ```
 
 ### Install from source
