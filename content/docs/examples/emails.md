@@ -64,33 +64,33 @@ Here's a straightforward translation into pomsky:
 
 ```pomsky
 (
-  ['a'-'z' '0'-'9' "!#$%&'*+/=?^_`{|}~-"]+
-  ('.' ['a'-'z' '0'-'9' "!#$%&'*+/=?^_`{|}~-"]+ )*
-| '"'
-  (
-    [U+01-U+08 U+0b U+0c U+0e-U+1f U+21 U+23-U+5b U+5d-U+7f]
-  | '\' [U+01-U+09 U+0b U+0c U+0e-U+7f]
-  )*
-  '"'
+  | ['a'-'z' '0'-'9' "!#$%&'*+/=?^_`{|}~-"]+
+    ('.' ['a'-'z' '0'-'9' "!#$%&'*+/=?^_`{|}~-"]+ )*
+  | '"'
+    (
+      [U+01-U+08 U+0b U+0c U+0e-U+1f U+21 U+23-U+5b U+5d-U+7f]
+    | '\' [U+01-U+09 U+0b U+0c U+0e-U+7f]
+    )*
+    '"'
 )
 '@'
 (
-  ( ['a'-'z' '0'-'9'] ( ['a'-'z' '0'-'9' '-']* ['a'-'z' '0'-'9'] )? '.' )+
-  ['a'-'z' '0'-'9']
-  ( ['a'-'z' '0'-'9' '-']* ['a'-'z' '0'-'9'] )?
-| '['
-  (:(range '0'-'255') '.'){3}
-  (
-    :(range '0'-'255')
-  | ['a'-'z' '0'-'9' '-']*
+  | ( ['a'-'z' '0'-'9'] ( ['a'-'z' '0'-'9' '-']* ['a'-'z' '0'-'9'] )? '.' )+
     ['a'-'z' '0'-'9']
-    ':'
+    ( ['a'-'z' '0'-'9' '-']* ['a'-'z' '0'-'9'] )?
+  | '['
+    (:(range '0'-'255') '.'){3}
     (
-      [U+01-U+08 U+0b U+0c U+0e-U+1f U+21-U+5a U+53-U+7f]
-    | '\' [U+01-U+09 U+0b U+0c U+0e-U+7f]
-    )+
-  )
-  ']'
+      | :(range '0'-'255')
+      | ['a'-'z' '0'-'9' '-']*
+        ['a'-'z' '0'-'9']
+        ':'
+        (
+          | [U+01-U+08 U+0b U+0c U+0e-U+1f U+21-U+5a U+53-U+7f]
+          | '\' [U+01-U+09 U+0b U+0c U+0e-U+7f]
+        )+
+    )
+    ']'
 )
 ```
 
@@ -112,23 +112,23 @@ let escaped_port_char = '\' [U+01-U+09 U+0b U+0c U+0e-U+7f];
 
 
 (
-  char_before_at+ ('.' char_before_at+)*
-| '"' (quoted_char_before_at | escaped_char_before_at)* '"'
+  | char_before_at+ ('.' char_before_at+)*
+  | '"' (quoted_char_before_at | escaped_char_before_at)* '"'
 )
 '@'
 (
-  (lower_digit (lower_digit_dash* lower_digit)? '.')+
-  lower_digit
-  (lower_digit_dash* lower_digit)?
-| '['
-  (:(range '0'-'255') '.'){3}
-  (
-    :(range '0'-'255')
-  | lower_digit_dash*
+  | (lower_digit (lower_digit_dash* lower_digit)? '.')+
     lower_digit
-    ':'
-    (port_digit | escaped_port_char)+
-  )
-  ']'
+    (lower_digit_dash* lower_digit)?
+  | '['
+    (:(range '0'-'255') '.'){3}
+    (
+      | :(range '0'-'255')
+      | lower_digit_dash*
+        lower_digit
+        ':'
+        (port_digit | escaped_port_char)+
+    )
+    ']'
 )
 ```

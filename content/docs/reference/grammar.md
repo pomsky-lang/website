@@ -24,7 +24,7 @@ to read the grammar:
 - Verbatim text is wrapped in double quotes ({{<po>}}""{{</po>}}) or single quotes
   ({{<po>}}''{{</po>}}).
 
-- A {{<po>}}\*{{</po>}} after a rule indicates that it repeats 0 or more times.
+- A {{<po>}}*{{</po>}} after a rule indicates that it repeats 0 or more times.
 
 - A {{<po>}}+{{</po>}} after a rule indicates that it repeats 1 or more times.
 
@@ -33,7 +33,7 @@ to read the grammar:
 - Consecutive rules can be grouped together by wrapping them in parentheses
   ({{<po>}}(){{</po>}}).
 
-- Alternative rules are separated with a vertical bar ({{<po>}}|{{</po>}}).
+- Alternative rules are each preceded by a vertical bar ({{<po>}}|{{</po>}}).
 
 - Character classes are wrapped in square brackets ({{<po>}}[]{{</po>}}).
   A character class matches exactly one code point. It can contain
@@ -42,7 +42,7 @@ to read the grammar:
     `a`, `b`, `d` or `f`)
   - Unicode ranges (e.g. {{<po>}}'0'-'9'{{</po>}}, which is equivalent to
     {{<po>}}'0123456789'{{</po>}})
-  - shorthands (e.g. {{<po>}}w{{</po>}}, which matches a letter, digit or
+  - Shorthands (e.g. {{<po>}}w{{</po>}}, which matches a letter, digit or
     the ASCII underscore `_`)
 
   An exclamation mark ({{<po>}}!{{</po>}}) in front of the character class negates it.
@@ -69,17 +69,27 @@ Whitespace is required between consecutive words and code points, e.g.
 ```pomsky
 let Expression = Statement* OrExpression;
 
-let Statement = LetDeclaration | Modifier;
+let Statement =
+    | LetDeclaration
+    | Modifier;
 
 let LetDeclaration = 'let' VariableName '=' OrExpression ';';
-let Modifier = ('enable' | 'disable') BooleanSetting ';';
+
+let Modifier = ModifierKeyword BooleanSetting ';';
+
+let ModifierKeyword =
+    | 'enable'
+    | 'disable';
+
 let BooleanSetting = 'lazy';
 ```
 
 ### OrExpression
 
 ```pomsky
-let OrExpression = Alternative ('|' Alternative)*;
+let OrExpression = ('|'? Alternatives)?;
+
+let Alternatives = Alternative ('|' Alternative)*;
 
 let Alternative = FixExpression+;
 ```
@@ -89,40 +99,57 @@ let Alternative = FixExpression+;
 An expression which can have a prefix or suffix.
 
 ```pomsky
-let FixExpression = LookaroundPrefix Expression
-                  | AtomExpression RepetitionSuffix;
+let FixExpression =
+    | LookaroundPrefix* Expression
+    | AtomExpression RepetitionSuffix*;
 ```
 
 ### Lookaround
 
 ```pomsky
-let LookaroundPrefix = '!'? ('<<' | '>>');
+let LookaroundPrefix = '!'? LookaroundLiteral;
+
+let LookaroundLiteral =
+    | '<<'
+    | '>>';
 ```
 
 ### Repetitions
 
 ```pomsky
-let RepetitionSuffix = ('*' | '+' | '?' | RepetitionBraces) Quantifier?;
+let RepetitionSuffix = RepetitionCount Quantifier?;
 
-let RepetitionBraces = '{' Number '}'
-                     | '{' Number ',' Number? '}';
+let RepetitionCount =
+    | '*'
+    | '+'
+    | '?'
+    | RepetitionBraces;
 
-let Number = '0' | '1'-'9' ('0'-'9')*;
+let RepetitionBraces =
+    | '{' Number '}'
+    | '{' Number ',' Number? '}';
 
-let Quantifier = 'greedy' | 'lazy';
+let Number =
+    | '0'
+    | ['1'-'9'] ['0'-'9']*;
+
+let Quantifier =
+    | 'greedy'
+    | 'lazy';
 ```
 
 ### AtomExpression
 
 ```pomsky
-let AtomExpression = Group
-                   | String
-                   | CharacterClass
-                   | Boundary
-                   | Reference
-                   | CodePoint
-                   | NumberRange
-                   | VariableName;
+let AtomExpression =
+    | Group
+    | String
+    | CharacterClass
+    | Boundary
+    | Reference
+    | CodePoint
+    | NumberRange
+    | VariableName;
 ```
 
 ### Group
@@ -138,8 +165,16 @@ let Name = [w]+;
 ### String
 
 ```pomsky
-let String = '"' !['"']* '"'
-           | "'" !["'"]* "'";
+let String =
+  | '"' CharBetweenDoubleQuotes* '"'
+  | "'" CharBetweenSingleQuotes* "'";
+
+
+let CharBetweenDoubleQuotes =
+    | !['"']
+    | '\"';
+
+let CharBetweenSingleQuotes = !["'"];
 ```
 
 ### CharacterClass
@@ -147,46 +182,74 @@ let String = '"' !['"']* '"'
 ```pomsky
 let CharacterClass = '!'? '[' CharacterGroup ']';
 
-let CharacterGroup = '.' | 'cp' | CharacterGroupMulti+;
+let CharacterGroup =
+    | '.'
+    | 'cp'
+    | 'codepoint'
+    | CharacterGroupMulti+;
 
-let CharacterGroupMulti = Range
-                        | Characters
-                        | CodePoint
-                        | NonPrintable
-                        | Shorthand
-                        | UnicodeProperty
-                        | PosixClass;
+let CharacterGroupMulti =
+    | Range
+    | Characters
+    | CodePoint
+    | NonPrintable
+    | Shorthand
+    | UnicodeProperty
+    | PosixClass;
 
 let Range = Character '-' Character;
 
-let Characters = '"' !['"']* '"'
-               | "'" !["'"]* "'";
+let Characters =
+    | '"' CharBetweenDoubleQuotes* '"'
+    | "'" CharBetweenSingleQuotes* "'";
 
-let Character = '"' !['"'] '"'
-              | "'" !["'"] "'"
-              | CodePoint
-              | NonPrintable;
+let Character =
+    | '"' CharBetweenDoubleQuotes '"'
+    | "'" CharBetweenSingleQuotes "'"
+    | CodePoint
+    | NonPrintable;
 
-let NonPrintable = 'n' | 'r' | 't' | 'a' | 'e' | 'f';
+let NonPrintable =
+    | 'n'
+    | 'r'
+    | 't'
+    | 'a'
+    | 'e'
+    | 'f';
 
-let Shorthand = '!'? ('w' | 'word' |
-                      'd' | 'digit' |
-                      's' | 'space' |
-                      'h' | 'horiz_space' |
-                      'v' | 'vert_space' |
-                      'l' | 'line_break');
+let Shorthand = '!'? ShorthandIdent;
 
-let PosixClass = 'ascii_alpha' | 'ascii_alnum' | 'ascii' | 'ascii_blank'
-               | 'ascii_cntrl' | 'ascii_digit' | 'ascii_graph' | 'ascii_lower'
-               | 'ascii_print' | 'ascii_punct' | 'ascii_space' | 'ascii_upper'
-               | 'ascii_word'  | 'ascii_xdigit';
+let ShorthandIdent =
+    | 'w' | 'word'
+    | 'd' | 'digit'
+    | 's' | 'space'
+    | 'h' | 'horiz_space'
+    | 'v' | 'vert_space'
+    | 'l' | 'line_break'
+
+let PosixClass =
+    | 'ascii'
+    | 'ascii_alpha'
+    | 'ascii_alnum'
+    | 'ascii_blank'
+    | 'ascii_cntrl'
+    | 'ascii_digit'
+    | 'ascii_graph'
+    | 'ascii_lower'
+    | 'ascii_print'
+    | 'ascii_punct'
+    | 'ascii_space'
+    | 'ascii_upper'
+    | 'ascii_word'
+    | 'ascii_xdigit';
 ```
 
 ### CodePoint
 
 ```pomsky
-let CodePoint = 'U+' ['0'-'9' 'a'-'f' 'A'-'F']{1,6}
-              | 'U' ['0'-'9' 'a'-'f' 'A'-'F']{1,6};
+let CodePoint = 'U' '+'? HexDigit{1,6};
+
+let HexDigit = ['0'-'9' 'a'-'f' 'A'-'F'];
 ```
 
 Note that the second syntax exists mainly to be compatible with Rust tokenization.
@@ -202,13 +265,25 @@ let UnicodeProperty = '!'? [w]+;
 ### Boundary
 
 ```pomsky
-let Boundary = '%' | '!' '%' | '<%' | '%>';
+let Boundary =
+    | '^'
+    | '$'
+    | '!'? '%'
+    | '<%'
+    | '%>';
+```
+
+### Reference
+
+```pomsky
+let Reference = '::' [w]+;
 ```
 
 ### NumberRange
 
 ```pomsky
 let NumberRange = 'range' String '-' String Base?;
+
 let Base = 'base' Number;
 ```
 

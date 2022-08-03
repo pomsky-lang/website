@@ -63,7 +63,7 @@ On the left are pomsky expressions, on the right are the equivalent regexes:
 [Greek] U+30F Grapheme        # \p{Greek}\u030F\X
 
 # Boundaries
-Start End                     # ^$
+^ $                           # ^$
 % 'hello' !%                  # \bhello\B
 
 # Non-capturing groups

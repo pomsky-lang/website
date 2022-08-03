@@ -35,7 +35,7 @@ hljs.registerLanguage('pomsky', function (hljs) {
       },
       {
         className: 'literalx',
-        begin: /U\+[0-9a-fA-F]+|<%|%>|%/,
+        begin: /U\+[0-9a-fA-F]+|<%|%>|%|\^|\$/,
       },
       {
         className: 'titlex',

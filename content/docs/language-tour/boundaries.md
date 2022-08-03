@@ -22,9 +22,9 @@ Boundaries match a position in a string without consuming any code points. There
 - {{<po>}}!%{{</po>}} matches a position that is _not_ a word boundary. For example,
   {{<po>}}Codepoint !% Codepoint{{</po>}} matches `aa` and `::`, but not `a:` or `:a`.
 
-- {{<po>}}Start{{</po>}} matches the start of the string.
+- {{<po>}}^{{</po>}} (or `Start`) matches the start of the string.
 
-- {{<po>}}End{{</po>}} matches the end of the string.
+- {{<po>}}${{</po>}} (or `End`) matches the end of the string.
 
 A word character is anything that matches {{<po>}}[word]{{</po>}}. If the regex engine is
 Unicode-aware, this is {{<po>}}[Alphabetic Mark Decimal_Number Connector_Punctuation]{{</po>}}.

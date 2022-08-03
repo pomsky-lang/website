@@ -23,10 +23,10 @@ lowercase letter, digit and punctuation/symbol code point, and is at least 8 cod
 Equivalent pomsky expression:
 
 ```pomsky
-Start
-(>> [cp]* [digit])
-(>> [cp]* [Ll])
-(>> [cp]* [Lu])
-(>> [cp]* [P S])
-[cp]{8}
+^
+(>> C* [digit])
+(>> C* [Ll])
+(>> C* [Lu])
+(>> C* [P S])
+C{8}
 ```
