@@ -1,7 +1,7 @@
 ---
 title: 'Ranges'
 description: 'Matching a number in a certain range'
-lead: ''
+excerpt: ''
 date: 2022-05-17T13:55:00+00:00
 lastmod: 2022-05-17T13:55:00+00:00
 draft: false
@@ -27,13 +27,13 @@ This has many downsides:
 - It's easy to make a mistake somewhere
 - It's inefficient; a typical regex engine needs to backtrack in several places
 
-pomsky solves these problems with its `range` syntax:
+Pomsky solves these problems with its `range` syntax:
 
 ```pomsky
 range '0'-'255'
 ```
 
-pomsky creates a **DFA** (deterministic finite automaton) from this, so the generated regex is
+Pomsky creates a **DFA** (deterministic finite automaton) from this, so the generated regex is
 optimal in terms of matching performance. Since the algorithm for creating this regex is extensively
 tested, you can also rely on it's correctness. Here's the regex generated from
 {{<po>}}range '0'-'255'{{</po>}}:
@@ -44,7 +44,7 @@ tested, you can also rely on it's correctness. Here's the regex generated from
 
 ## Different bases
 
-pomsky can generate ranges in various bases. For example, to match hexadecimal numbers in a certain
+Pomsky can generate ranges in various bases. For example, to match hexadecimal numbers in a certain
 range, you might write:
 
 ```pomsky
@@ -59,7 +59,7 @@ This generates this regex:
 
 ## Leading zeroes
 
-If you wish to support leading zeros, this is easy to achieve by putting {{<po>}}'0'*{{</po>}}
+If you wish to support leading zeros, this is easy to achieve by putting {{<po>}}'0'\*{{</po>}}
 in front:
 
 ```pomsky

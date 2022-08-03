@@ -1,7 +1,7 @@
 ---
 title: 'Enable Unicode Support'
 description: 'Configure the RegExp engine to support Unicode.'
-lead: 'Configure the RegExp engine to support Unicode.'
+excerpt: 'Configure the RegExp engine to support Unicode.'
 date: 2022-05-17T13:55:00+00:00
 lastmod: 2022-05-17T13:55:00+00:00
 draft: false

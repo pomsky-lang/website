@@ -1,7 +1,7 @@
 ---
 title: 'Comparison with other projects'
 description: 'See how pomsky compares to similar projects'
-lead: ''
+excerpt: ''
 date: 2022-07-10T16:21:58+00:00
 lastmod: 2022-07-10T16:21:58+00:00
 draft: false

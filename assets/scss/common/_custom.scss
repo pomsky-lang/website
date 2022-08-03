@@ -107,6 +107,14 @@ h5,
   filter: drop-shadow(0 20px 15px #7774);
 }
 
+#toc a.active {
+  color: #b53636;
+
+  [data-dark-mode] & {
+    color: #f4b73d;
+  }
+}
+
 main > nav {
   h3 {
     color: #b53636;

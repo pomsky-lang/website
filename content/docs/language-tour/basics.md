@@ -1,7 +1,7 @@
 ---
 title: 'Basics'
 description: 'Comments, strings, alternation'
-lead: ''
+excerpt: ''
 date: 2022-05-17T13:55:00+00:00
 lastmod: 2022-05-17T13:55:00+00:00
 draft: false
@@ -15,7 +15,7 @@ toc: true
 
 First, let's get familiar with the basic building blocks of the language.
 
-pomsky expressions describe the syntactical structure of a text. There are several kinds of
+Pomsky expressions describe the syntactical structure of a text. There are several kinds of
 expressions, which will be explained now.
 
 In pomsky, whitespace is insignificant, except between quotes. This means that we can add spaces
@@ -48,7 +48,7 @@ prepending a backslash. Backslashes also must be escaped:
 
 ## Concatenate expressions
 
-pomsky consists of _expressions_. For example, a string is an expression. If we write several
+Pomsky consists of _expressions_. For example, a string is an expression. If we write several
 expressions in a row, they are matched one after the other:
 
 ```pomsky

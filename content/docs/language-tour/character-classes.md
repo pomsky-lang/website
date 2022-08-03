@@ -1,7 +1,7 @@
 ---
 title: 'Character Classes'
 description: 'Matching a code point with certain properties'
-lead: ''
+excerpt: ''
 date: 2022-05-17T13:55:00+00:00
 lastmod: 2022-05-17T13:55:00+00:00
 draft: false
@@ -53,7 +53,7 @@ put them into the same quotes:
 ['$_' 'a'-'z' 'A'-'Z']
 ```
 
-This is equivalent to {{<po>}}('$' | '_' | ['a'-'z' 'A'-'Z']){{</po>}}, but it's shorter
+This is equivalent to {{<po>}}('$' | '\_' | ['a'-'z' 'A'-'Z']){{</po>}}, but it's shorter
 and may be more efficient.
 
 ### Character ranges and Unicode

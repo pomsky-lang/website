@@ -1,7 +1,7 @@
 ---
 title: 'Unicode properties'
 description: 'Exhaustive list of Unicode general categories, scripts, blocks and other properties supported by pomsky'
-lead: ''
+excerpt: ''
 date: 2022-05-17T13:55:00+00:00
 lastmod: 2022-05-17T13:55:00+00:00
 draft: false

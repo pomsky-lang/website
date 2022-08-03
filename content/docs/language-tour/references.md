@@ -1,7 +1,7 @@
 ---
 title: 'References'
 description: 'Matching the same thing more than once'
-lead: ''
+excerpt: ''
 date: 2022-05-17T13:55:00+00:00
 lastmod: 2022-05-17T13:55:00+00:00
 draft: false
@@ -37,7 +37,7 @@ This is by no means a complete XML parser, but it recognizes an XML tag (without
 doesn't contain other XML tags. For example, it correctly matches `<span>Hello world</span>`. With a
 backreference, it ensures that the closing tag is the same as the opening tag.
 
-pomsky has three kinds of references:
+Pomsky has three kinds of references:
 
 - **Numeric references**, e.g. {{<po>}}::3{{</po>}}, match a capturing group by its number.
 - **Named references**, e.g. {{<po>}}::name{{</po>}}, match a named capturing group by its

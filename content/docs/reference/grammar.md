@@ -1,7 +1,7 @@
 ---
 title: 'Formal grammar'
 description: "pomsky' syntax specification"
-lead: ''
+excerpt: ''
 date: 2022-05-17T13:55:00+00:00
 lastmod: 2022-05-17T13:55:00+00:00
 draft: false
@@ -24,7 +24,7 @@ to read the grammar:
 - Verbatim text is wrapped in double quotes ({{<po>}}""{{</po>}}) or single quotes
   ({{<po>}}''{{</po>}}).
 
-- A {{<po>}}*{{</po>}} after a rule indicates that it repeats 0 or more times.
+- A {{<po>}}\*{{</po>}} after a rule indicates that it repeats 0 or more times.
 
 - A {{<po>}}+{{</po>}} after a rule indicates that it repeats 1 or more times.
 

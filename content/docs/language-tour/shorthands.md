@@ -1,7 +1,7 @@
 ---
 title: 'Shorthands'
 description: 'Character class shorthands'
-lead: ''
+excerpt: ''
 date: 2022-05-17T13:55:00+00:00
 lastmod: 2022-05-17T13:55:00+00:00
 draft: false
@@ -45,7 +45,7 @@ know that the input is only ASCII. Unicode-aware matching can be considerably sl
 the {{<po>}}[word]{{</po>}} character class includes more than 100,000 code points, so
 matching a {{<po>}}[ascii_word]{{</po>}}, which includes only 63 code points, is faster.
 
-pomsky supports a number of ASCII-only shorthands:
+Pomsky supports a number of ASCII-only shorthands:
 
 | Character class                 | Equivalent                                         |
 | ------------------------------- | -------------------------------------------------- |

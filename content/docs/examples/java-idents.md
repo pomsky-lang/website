@@ -1,7 +1,7 @@
 ---
 title: 'Example: Java Identifiers'
 description: 'Pomsky expression matching a Java identifier'
-lead: ''
+excerpt: ''
 date: 2022-05-17T13:55:00+00:00
 lastmod: 2022-05-17T13:55:00+00:00
 draft: false

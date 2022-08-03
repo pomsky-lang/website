@@ -1,7 +1,7 @@
 ---
 title: 'Introducing: Pomsky (formerly Rulex)'
 description: 'An update for the last 4 months, and a proper introduction'
-lead: ''
+excerpt: ''
 date: 2022-07-04T16:06:32+00:00
 lastmod: 2022-07-04T16:06:32+00:00
 contributors: ['Ludwig Stecher']

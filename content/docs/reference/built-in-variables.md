@@ -1,7 +1,7 @@
 ---
 title: 'Built-in variables'
 description: 'Variables provided by pomsky out of the box'
-lead: ''
+excerpt: ''
 date: 2022-06-19T13:50:00+00:00
 lastmod: 2022-06-19T13:50:00+00:00
 draft: false

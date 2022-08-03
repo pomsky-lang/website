@@ -1,7 +1,7 @@
 ---
 title: 'Quick Start'
 description: 'Summary of how to start using pomsky.'
-lead: 'Summary of how to start using pomsky.'
+excerpt: 'Summary of how to start using pomsky.'
 date: 2022-05-17T13:55:00+00:00
 lastmod: 2022-05-17T13:55:00+00:00
 draft: false

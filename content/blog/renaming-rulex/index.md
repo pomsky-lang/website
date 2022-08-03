@@ -1,7 +1,7 @@
 ---
 title: 'Renaming Rulex'
 description: 'Rulex will be renamed to pomsky.'
-lead: ''
+excerpt: ''
 date: 2022-07-01T13:06:32+00:00
 lastmod: 2022-07-01T13:06:32+00:00
 contributors: ['Ludwig Stecher']

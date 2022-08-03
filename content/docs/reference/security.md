@@ -1,7 +1,7 @@
 ---
 title: 'Security'
 description: 'Advice how to use pomsky securely'
-lead: ''
+excerpt: ''
 date: 2022-06-19T13:55:00+00:00
 lastmod: 2022-06-19T13:55:00+00:00
 draft: false
@@ -53,7 +53,7 @@ exponential runtime performance. A regex created with not enough care or by a ba
 take down a NodeJS server if the server naively matches a large body of text against the regex.
 
 What does this mean for pomsky? Unless you use RE2 or Rust's `regex` crate (which never backtrack),
-pomsky expressions are just as susceptible to
+Pomsky expressions are just as susceptible to
 [catastrophic backtracking](https://www.regular-expressions.info/catastrophic.html) as hand-written
 regexes. Therefore, _don't execute untrusted regexes on critical infrastructure_.
 
