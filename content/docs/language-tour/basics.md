@@ -70,4 +70,13 @@ The same works in pomsky:
 'one' | 'two' | 'three' | 'four' | 'five'
 ```
 
-This type of expression is called an _alternation_.
+This type of expression is called an _alternation_. Pomsky also allows a leading {{<po>}}|{{</po>}},
+which looks a bit nicer if we put each alternative on its own line:
+
+```pomsky
+| 'one'
+| 'two'
+| 'three'
+| 'four'
+| 'five'
+```

@@ -17,11 +17,15 @@ What if we want to match an arbitrary word? Enumerating every single word is obv
 so what to do instead? We can simply enumerate the characters and repeat them:
 
 ```pomsky
-('a' | 'b' | 'c' | 'd' | 'e' |
- 'f' | 'g' | 'h' | 'i' | 'j' |
- 'k' | 'l' | 'm' | 'n' | 'o' |
- 'p' | 'q' | 'r' | 's' | 't' |
- 'u' | 'v' | 'w' | 'x' | 'y' | 'z')+
+(
+  | 'a' | 'b' | 'c' | 'd'
+  | 'e' | 'f' | 'g' | 'h'
+  | 'i' | 'j' | 'k' | 'l'
+  | 'm' | 'n' | 'o' | 'p'
+  | 'q' | 'r' | 's' | 't'
+  | 'u' | 'v' | 'w' | 'x'
+  | 'y' | 'z'
+)+
 ```
 
 But this very verbose and still only matches lowercase letters. We programmers tend to be lazy, so
@@ -53,12 +57,12 @@ put them into the same quotes:
 ['$_' 'a'-'z' 'A'-'Z']
 ```
 
-This is equivalent to {{<po>}}('$' | '\_' | ['a'-'z' 'A'-'Z']){{</po>}}, but it's shorter
+This is equivalent to {{<po>}}('$' | '_' | ['a'-'z' 'A'-'Z']){{</po>}}, but it's shorter
 and may be more efficient.
 
 ### Character ranges and Unicode
 
-{{< alert icon="👉" text="You can skip this section if you know how the Unicode character set works." />}}
+{{< alert icon="👉" text="You can <a href=\"#unicode-properties\">skip this section</a> if you know how the Unicode character set works." />}}
 
 What is a range, exactly? Let's see with an example:
 

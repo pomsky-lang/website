@@ -39,7 +39,8 @@ In situations where this is not desired, you can opt into non-greedy matching wi
 keyword, for example:
 
 ```pomsky
-('r' | 'w' | 'x' | '-'){3,9} lazy '--'
+('r' | 'w' | 'x' | '-'){3,9} lazy
+'--'
 ```
 
 When given the string `rwxr--r--`, pomsky will first repeat the group 3 times (the minimum number of
