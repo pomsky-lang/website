@@ -10,125 +10,173 @@ Reference</button><div class="collapse show" id=section-63d5049791d9d79d86e9a108
 Language Tour</button><div class=collapse id=section-ed6102a01be50a8323f906f9c9eb5970><ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small"><li><a class="docs-link rounded" href=https://pomsky-lang.org/docs/language-tour/basics/>Basics</a></li><li><a class="docs-link rounded" href=https://pomsky-lang.org/docs/language-tour/groups/>Groups</a></li><li><a class="docs-link rounded" href=https://pomsky-lang.org/docs/language-tour/repetitions/>Repetitions</a></li><li><a class="docs-link rounded" href=https://pomsky-lang.org/docs/language-tour/character-classes/>Character Classes</a></li><li><a class="docs-link rounded" href=https://pomsky-lang.org/docs/language-tour/shorthands/>Shorthands</a></li><li><a class="docs-link rounded" href=https://pomsky-lang.org/docs/language-tour/boundaries/>Boundaries</a></li><li><a class="docs-link rounded" href=https://pomsky-lang.org/docs/language-tour/lookaround/>Lookaround</a></li><li><a class="docs-link rounded" href=https://pomsky-lang.org/docs/language-tour/ranges/>Ranges</a></li><li><a class="docs-link rounded" href=https://pomsky-lang.org/docs/language-tour/references/>References</a></li><li><a class="docs-link rounded" href=https://pomsky-lang.org/docs/language-tour/variables/>Variables</a></li><li><a class="docs-link rounded" href=https://pomsky-lang.org/docs/language-tour/graphemes/>Graphemes</a></li></ul></div></li><li class=mb-1><button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle=collapse data-bs-target=#section-e0c4332e8c13be976552a059f106354f aria-expanded=false>
 Get Started</button><div class=collapse id=section-e0c4332e8c13be976552a059f106354f><ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small"><li><a class="docs-link rounded" href=https://pomsky-lang.org/docs/get-started/introduction/>Introduction</a></li><li><a class="docs-link rounded" href=https://pomsky-lang.org/docs/get-started/quick-start/>Quick Start</a></li><li><a class="docs-link rounded" href=https://pomsky-lang.org/docs/get-started/enable-unicode/>Enable Unicode Support</a></li></ul></div></li></ul></nav></div><nav class="docs-toc d-none d-xl-block col-xl-3" aria-label="Secondary navigation"><div class=d-xl-none><button class="btn btn-outline-primary btn-sm doks-toc-toggle collapsed" type=button data-bs-toggle=collapse data-bs-target=#onThisPage aria-controls=doks-docs-nav aria-expanded=false aria-label="Toggle On this page navigation">
 <span></span>
-<span><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" class="doks doks-expand" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>Expand</title><polyline points="7 13 12 18 17 13"/><polyline points="7 6 12 11 17 6"/></svg><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" class="doks doks-collapse" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>Collapse</title><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg></span></button><div class=collapse id=onThisPage><div class="card card-body mt-3 py-1"><div class=page-links><nav id=TableOfContents><ul><li><a href=#summary>Summary</a><ul><li><a href=#whitespace>Whitespace</a></li></ul></li><li><a href=#formal-grammar>Formal grammar</a><ul><li><a href=#expression>Expression</a></li><li><a href=#orexpression>OrExpression</a></li><li><a href=#fixexpression>FixExpression</a></li><li><a href=#lookaround>Lookaround</a></li><li><a href=#repetitions>Repetitions</a></li><li><a href=#atomexpression>AtomExpression</a></li><li><a href=#group>Group</a></li><li><a href=#string>String</a></li><li><a href=#characterclass>CharacterClass</a></li><li><a href=#codepoint>CodePoint</a></li><li><a href=#unicodeproperty>UnicodeProperty</a></li><li><a href=#boundary>Boundary</a></li><li><a href=#numberrange>NumberRange</a></li><li><a href=#variablename>VariableName</a></li></ul></li><li><a href=#note-about-this-grammar>Note about this grammar</a></li></ul></nav></div></div></div></div><div class="page-links d-none d-xl-block"><h3></h3><nav id=toc><ul><li><a href=#summary>Summary</a><ul><li><a href=#whitespace>Whitespace</a></li></ul></li><li><a href=#formal-grammar>Formal grammar</a><ul><li><a href=#expression>Expression</a></li><li><a href=#orexpression>OrExpression</a></li><li><a href=#fixexpression>FixExpression</a></li><li><a href=#lookaround>Lookaround</a></li><li><a href=#repetitions>Repetitions</a></li><li><a href=#atomexpression>AtomExpression</a></li><li><a href=#group>Group</a></li><li><a href=#string>String</a></li><li><a href=#characterclass>CharacterClass</a></li><li><a href=#codepoint>CodePoint</a></li><li><a href=#unicodeproperty>UnicodeProperty</a></li><li><a href=#boundary>Boundary</a></li><li><a href=#numberrange>NumberRange</a></li><li><a href=#variablename>VariableName</a></li></ul></li><li><a href=#note-about-this-grammar>Note about this grammar</a></li></ul></nav></div></nav><main class="docs-content col-lg-11 col-xl-9"><h1>Formal grammar</h1><p class=lead></p><nav class=d-xl-none aria-label="Quaternary navigation"><div class=d-xl-none><button class="btn btn-outline-primary btn-sm doks-toc-toggle collapsed" type=button data-bs-toggle=collapse data-bs-target=#onThisPage aria-controls=doks-docs-nav aria-expanded=false aria-label="Toggle On this page navigation">
+<span><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" class="doks doks-expand" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>Expand</title><polyline points="7 13 12 18 17 13"/><polyline points="7 6 12 11 17 6"/></svg><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" class="doks doks-collapse" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>Collapse</title><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg></span></button><div class=collapse id=onThisPage><div class="card card-body mt-3 py-1"><div class=page-links><nav id=TableOfContents><ul><li><a href=#summary>Summary</a><ul><li><a href=#whitespace>Whitespace</a></li></ul></li><li><a href=#formal-grammar>Formal grammar</a><ul><li><a href=#expression>Expression</a></li><li><a href=#orexpression>OrExpression</a></li><li><a href=#fixexpression>FixExpression</a></li><li><a href=#lookaround>Lookaround</a></li><li><a href=#repetitions>Repetitions</a></li><li><a href=#atomexpression>AtomExpression</a></li><li><a href=#group>Group</a></li><li><a href=#string>String</a></li><li><a href=#characterclass>CharacterClass</a></li><li><a href=#codepoint>CodePoint</a></li><li><a href=#unicodeproperty>UnicodeProperty</a></li><li><a href=#boundary>Boundary</a></li><li><a href=#reference>Reference</a></li><li><a href=#numberrange>NumberRange</a></li><li><a href=#variablename>VariableName</a></li></ul></li><li><a href=#note-about-this-grammar>Note about this grammar</a></li></ul></nav></div></div></div></div><div class="page-links d-none d-xl-block"><h3></h3><nav id=toc><ul><li><a href=#summary>Summary</a><ul><li><a href=#whitespace>Whitespace</a></li></ul></li><li><a href=#formal-grammar>Formal grammar</a><ul><li><a href=#expression>Expression</a></li><li><a href=#orexpression>OrExpression</a></li><li><a href=#fixexpression>FixExpression</a></li><li><a href=#lookaround>Lookaround</a></li><li><a href=#repetitions>Repetitions</a></li><li><a href=#atomexpression>AtomExpression</a></li><li><a href=#group>Group</a></li><li><a href=#string>String</a></li><li><a href=#characterclass>CharacterClass</a></li><li><a href=#codepoint>CodePoint</a></li><li><a href=#unicodeproperty>UnicodeProperty</a></li><li><a href=#boundary>Boundary</a></li><li><a href=#reference>Reference</a></li><li><a href=#numberrange>NumberRange</a></li><li><a href=#variablename>VariableName</a></li></ul></li><li><a href=#note-about-this-grammar>Note about this grammar</a></li></ul></nav></div></nav><main class="docs-content col-lg-11 col-xl-9"><h1>Formal grammar</h1><p class=lead></p><nav class=d-xl-none aria-label="Quaternary navigation"><div class=d-xl-none><button class="btn btn-outline-primary btn-sm doks-toc-toggle collapsed" type=button data-bs-toggle=collapse data-bs-target=#onThisPage aria-controls=doks-docs-nav aria-expanded=false aria-label="Toggle On this page navigation">
 <span></span>
-<span><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" class="doks doks-expand" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>Expand</title><polyline points="7 13 12 18 17 13"/><polyline points="7 6 12 11 17 6"/></svg><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" class="doks doks-collapse" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>Collapse</title><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg></span></button><div class=collapse id=onThisPage><div class="card card-body mt-3 py-1"><div class=page-links><nav id=TableOfContents><ul><li><a href=#summary>Summary</a><ul><li><a href=#whitespace>Whitespace</a></li></ul></li><li><a href=#formal-grammar>Formal grammar</a><ul><li><a href=#expression>Expression</a></li><li><a href=#orexpression>OrExpression</a></li><li><a href=#fixexpression>FixExpression</a></li><li><a href=#lookaround>Lookaround</a></li><li><a href=#repetitions>Repetitions</a></li><li><a href=#atomexpression>AtomExpression</a></li><li><a href=#group>Group</a></li><li><a href=#string>String</a></li><li><a href=#characterclass>CharacterClass</a></li><li><a href=#codepoint>CodePoint</a></li><li><a href=#unicodeproperty>UnicodeProperty</a></li><li><a href=#boundary>Boundary</a></li><li><a href=#numberrange>NumberRange</a></li><li><a href=#variablename>VariableName</a></li></ul></li><li><a href=#note-about-this-grammar>Note about this grammar</a></li></ul></nav></div></div></div></div><div class="page-links d-none d-xl-block"><h3></h3><nav id=toc><ul><li><a href=#summary>Summary</a><ul><li><a href=#whitespace>Whitespace</a></li></ul></li><li><a href=#formal-grammar>Formal grammar</a><ul><li><a href=#expression>Expression</a></li><li><a href=#orexpression>OrExpression</a></li><li><a href=#fixexpression>FixExpression</a></li><li><a href=#lookaround>Lookaround</a></li><li><a href=#repetitions>Repetitions</a></li><li><a href=#atomexpression>AtomExpression</a></li><li><a href=#group>Group</a></li><li><a href=#string>String</a></li><li><a href=#characterclass>CharacterClass</a></li><li><a href=#codepoint>CodePoint</a></li><li><a href=#unicodeproperty>UnicodeProperty</a></li><li><a href=#boundary>Boundary</a></li><li><a href=#numberrange>NumberRange</a></li><li><a href=#variablename>VariableName</a></li></ul></li><li><a href=#note-about-this-grammar>Note about this grammar</a></li></ul></nav></div></nav><h2 id=summary>Summary <a href=#summary class=anchor aria-hidden=true>#</a></h2><p>This document uses pomsky syntax. Here&rsquo;s an incomplete summary of the syntax, which should be enough
-to read the grammar:</p><ul><li><p>Variables are declared as <code class=language-pomsky>let var_name = expression;</code>
-. This assigns
-<code>expression</code> to the variable <code>var_name</code>.</p></li><li><p>Verbatim text is wrapped in double quotes (<code class=language-pomsky>""</code>
-) or single quotes
-(<code class=language-pomsky>''</code>
-).</p></li><li><p>A <code class=language-pomsky>\*</code>
-after a rule indicates that it repeats 0 or more times.</p></li><li><p>A <code class=language-pomsky>+</code>
-after a rule indicates that it repeats 1 or more times.</p></li><li><p>A <code class=language-pomsky>?</code>
-after a rule indicates that the rule is optional.</p></li><li><p>Consecutive rules can be grouped together by wrapping them in parentheses
-(<code class=language-pomsky>()</code>
-).</p></li><li><p>Alternative rules are separated with a vertical bar (<code class=language-pomsky>|</code>
-).</p></li><li><p>Character classes are wrapped in square brackets (<code class=language-pomsky>[]</code>
-).
-A character class matches exactly one code point. It can contain</p><ul><li>sequences of characters (e.g. <code class=language-pomsky>'abdf'</code>
-, which matches either
-<code>a</code>, <code>b</code>, <code>d</code> or <code>f</code>)</li><li>Unicode ranges (e.g. <code class=language-pomsky>'0'-'9'</code>
-, which is equivalent to
-<code class=language-pomsky>'0123456789'</code>
-)</li><li>shorthands (e.g. <code class=language-pomsky>w</code>
-, which matches a letter, digit or
-the ASCII underscore <code>_</code>)</li></ul><p>An exclamation mark (<code class=language-pomsky>!</code>
-) in front of the character class negates it.
-For example, <code class=language-pomsky>![w]</code>
-matches anything <em>except</em> a letter, digit or
+<span><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" class="doks doks-expand" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>Expand</title><polyline points="7 13 12 18 17 13"/><polyline points="7 6 12 11 17 6"/></svg><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" class="doks doks-collapse" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>Collapse</title><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg></span></button><div class=collapse id=onThisPage><div class="card card-body mt-3 py-1"><div class=page-links><nav id=TableOfContents><ul><li><a href=#summary>Summary</a><ul><li><a href=#whitespace>Whitespace</a></li></ul></li><li><a href=#formal-grammar>Formal grammar</a><ul><li><a href=#expression>Expression</a></li><li><a href=#orexpression>OrExpression</a></li><li><a href=#fixexpression>FixExpression</a></li><li><a href=#lookaround>Lookaround</a></li><li><a href=#repetitions>Repetitions</a></li><li><a href=#atomexpression>AtomExpression</a></li><li><a href=#group>Group</a></li><li><a href=#string>String</a></li><li><a href=#characterclass>CharacterClass</a></li><li><a href=#codepoint>CodePoint</a></li><li><a href=#unicodeproperty>UnicodeProperty</a></li><li><a href=#boundary>Boundary</a></li><li><a href=#reference>Reference</a></li><li><a href=#numberrange>NumberRange</a></li><li><a href=#variablename>VariableName</a></li></ul></li><li><a href=#note-about-this-grammar>Note about this grammar</a></li></ul></nav></div></div></div></div><div class="page-links d-none d-xl-block"><h3></h3><nav id=toc><ul><li><a href=#summary>Summary</a><ul><li><a href=#whitespace>Whitespace</a></li></ul></li><li><a href=#formal-grammar>Formal grammar</a><ul><li><a href=#expression>Expression</a></li><li><a href=#orexpression>OrExpression</a></li><li><a href=#fixexpression>FixExpression</a></li><li><a href=#lookaround>Lookaround</a></li><li><a href=#repetitions>Repetitions</a></li><li><a href=#atomexpression>AtomExpression</a></li><li><a href=#group>Group</a></li><li><a href=#string>String</a></li><li><a href=#characterclass>CharacterClass</a></li><li><a href=#codepoint>CodePoint</a></li><li><a href=#unicodeproperty>UnicodeProperty</a></li><li><a href=#boundary>Boundary</a></li><li><a href=#reference>Reference</a></li><li><a href=#numberrange>NumberRange</a></li><li><a href=#variablename>VariableName</a></li></ul></li><li><a href=#note-about-this-grammar>Note about this grammar</a></li></ul></nav></div></nav><h2 id=summary>Summary <a href=#summary class=anchor aria-hidden=true>#</a></h2><p>This document uses pomsky syntax. Here&rsquo;s an incomplete summary of the syntax, which should be enough
+to read the grammar:</p><ul><li><p>Variables are declared as <code class=language-pomsky>let var_name = expression;</code>. This assigns
+<code>expression</code> to the variable <code>var_name</code>.</p></li><li><p>Verbatim text is wrapped in double quotes (<code class=language-pomsky>""</code>) or single quotes
+(<code class=language-pomsky>''</code>).</p></li><li><p>A <code class=language-pomsky>*</code> after a rule indicates that it repeats 0 or more times.</p></li><li><p>A <code class=language-pomsky>+</code> after a rule indicates that it repeats 1 or more times.</p></li><li><p>A <code class=language-pomsky>?</code> after a rule indicates that the rule is optional.</p></li><li><p>Consecutive rules can be grouped together by wrapping them in parentheses
+(<code class=language-pomsky>()</code>).</p></li><li><p>Alternative rules are each preceded by a vertical bar (<code class=language-pomsky>|</code>).</p></li><li><p>Character classes are wrapped in square brackets (<code class=language-pomsky>[]</code>).
+A character class matches exactly one code point. It can contain</p><ul><li>sequences of characters (e.g. <code class=language-pomsky>'abdf'</code>, which matches either
+<code>a</code>, <code>b</code>, <code>d</code> or <code>f</code>)</li><li>Unicode ranges (e.g. <code class=language-pomsky>'0'-'9'</code>, which is equivalent to
+<code class=language-pomsky>'0123456789'</code>)</li><li>Shorthands (e.g. <code class=language-pomsky>w</code>, which matches a letter, digit or
+the ASCII underscore <code>_</code>)</li></ul><p>An exclamation mark (<code class=language-pomsky>!</code>) in front of the character class negates it.
+For example, <code class=language-pomsky>![w]</code> matches anything <em>except</em> a letter, digit or
 ASCII underscore.</p></li></ul><h3 id=whitespace>Whitespace <a href=#whitespace class=anchor aria-hidden=true>#</a></h3><p>Comments start with <code>#</code> and end at the end of the same line.</p><p>Comments and whitespace are ignored; they can be added anywhere, except in strings, in tokens
-(such as <code class=language-pomsky>>></code>
-), in words, numbers and code points (such as
-<code class=language-pomsky>U+306F</code>
-). For example, <code class=language-pomsky>>></code>
-can&rsquo;t be written as
-<code class=language-pomsky>> ></code>
-, but <code class=language-pomsky>!>>'test'+</code>
-can be written as
-<code class=language-pomsky>! >> 'test' +</code>
-.</p><p>Whitespace is required between consecutive words and code points, e.g.
-<code class=language-pomsky>[a n Latin U+50]</code>
-.</p><h2 id=formal-grammar>Formal grammar <a href=#formal-grammar class=anchor aria-hidden=true>#</a></h2><h3 id=expression>Expression <a href=#expression class=anchor aria-hidden=true>#</a></h3><pre><code class=language-pomsky>let Expression = Statement* OrExpression;
+(such as <code class=language-pomsky>>></code>), in words, numbers and code points (such as
+<code class=language-pomsky>U+306F</code>). For example, <code class=language-pomsky>>></code> can&rsquo;t be written as
+<code class=language-pomsky>> ></code>, but <code class=language-pomsky>!>>'test'+</code> can be written as
+<code class=language-pomsky>! >> 'test' +</code>.</p><p>Whitespace is required between consecutive words and code points, e.g.
+<code class=language-pomsky>[a n Latin U+50]</code>.</p><h2 id=formal-grammar>Formal grammar <a href=#formal-grammar class=anchor aria-hidden=true>#</a></h2><h3 id=expression>Expression <a href=#expression class=anchor aria-hidden=true>#</a></h3><pre><code class=language-pomsky>let Expression = Statement* OrExpression;
 
-let Statement = LetDeclaration | Modifier;
+let Statement =
+    | LetDeclaration
+    | Modifier;
 
 let LetDeclaration = 'let' VariableName '=' OrExpression ';';
-let Modifier = ('enable' | 'disable') BooleanSetting ';';
+
+let Modifier = ModifierKeyword BooleanSetting ';';
+
+let ModifierKeyword =
+    | 'enable'
+    | 'disable';
+
 let BooleanSetting = 'lazy';
-</code></pre><h3 id=orexpression>OrExpression <a href=#orexpression class=anchor aria-hidden=true>#</a></h3><pre><code class=language-pomsky>let OrExpression = Alternative ('|' Alternative)*;
+</code></pre><h3 id=orexpression>OrExpression <a href=#orexpression class=anchor aria-hidden=true>#</a></h3><pre><code class=language-pomsky>let OrExpression = ('|'? Alternatives)?;
+
+let Alternatives = Alternative ('|' Alternative)*;
 
 let Alternative = FixExpression+;
-</code></pre><h3 id=fixexpression>FixExpression <a href=#fixexpression class=anchor aria-hidden=true>#</a></h3><p>An expression which can have a prefix or suffix.</p><pre><code class=language-pomsky>let FixExpression = LookaroundPrefix Expression
-                  | AtomExpression RepetitionSuffix;
-</code></pre><h3 id=lookaround>Lookaround <a href=#lookaround class=anchor aria-hidden=true>#</a></h3><pre><code class=language-pomsky>let LookaroundPrefix = '!'? ('&lt;&lt;' | '&gt;&gt;');
-</code></pre><h3 id=repetitions>Repetitions <a href=#repetitions class=anchor aria-hidden=true>#</a></h3><pre><code class=language-pomsky>let RepetitionSuffix = ('*' | '+' | '?' | RepetitionBraces) Quantifier?;
+</code></pre><h3 id=fixexpression>FixExpression <a href=#fixexpression class=anchor aria-hidden=true>#</a></h3><p>An expression which can have a prefix or suffix.</p><pre><code class=language-pomsky>let FixExpression =
+    | LookaroundPrefix* Expression
+    | AtomExpression RepetitionSuffix*;
+</code></pre><h3 id=lookaround>Lookaround <a href=#lookaround class=anchor aria-hidden=true>#</a></h3><pre><code class=language-pomsky>let LookaroundPrefix = '!'? LookaroundLiteral;
 
-let RepetitionBraces = '{' Number '}'
-                     | '{' Number ',' Number? '}';
+let LookaroundLiteral =
+    | '&lt;&lt;'
+    | '&gt;&gt;';
+</code></pre><h3 id=repetitions>Repetitions <a href=#repetitions class=anchor aria-hidden=true>#</a></h3><pre><code class=language-pomsky>let RepetitionSuffix = RepetitionCount Quantifier?;
 
-let Number = '0' | '1'-'9' ('0'-'9')*;
+let RepetitionCount =
+    | '*'
+    | '+'
+    | '?'
+    | RepetitionBraces;
 
-let Quantifier = 'greedy' | 'lazy';
-</code></pre><h3 id=atomexpression>AtomExpression <a href=#atomexpression class=anchor aria-hidden=true>#</a></h3><pre><code class=language-pomsky>let AtomExpression = Group
-                   | String
-                   | CharacterClass
-                   | Boundary
-                   | Reference
-                   | CodePoint
-                   | NumberRange
-                   | VariableName;
+let RepetitionBraces =
+    | '{' Number '}'
+    | '{' Number ',' Number? '}';
+
+let Number =
+    | '0'
+    | ['1'-'9'] ['0'-'9']*;
+
+let Quantifier =
+    | 'greedy'
+    | 'lazy';
+</code></pre><h3 id=atomexpression>AtomExpression <a href=#atomexpression class=anchor aria-hidden=true>#</a></h3><pre><code class=language-pomsky>let AtomExpression =
+    | Group
+    | String
+    | CharacterClass
+    | Boundary
+    | Reference
+    | CodePoint
+    | NumberRange
+    | VariableName;
 </code></pre><h3 id=group>Group <a href=#group class=anchor aria-hidden=true>#</a></h3><pre><code class=language-pomsky>let Group = Capture? '(' Expression ')';
 
 let Capture = ':' Name?;
 
 let Name = [w]+;
-</code></pre><h3 id=string>String <a href=#string class=anchor aria-hidden=true>#</a></h3><pre><code class=language-pomsky>let String = '&quot;' !['&quot;']* '&quot;'
-           | &quot;'&quot; ![&quot;'&quot;]* &quot;'&quot;;
+</code></pre><h3 id=string>String <a href=#string class=anchor aria-hidden=true>#</a></h3><pre><code class=language-pomsky>let String =
+  | '&quot;' CharBetweenDoubleQuotes* '&quot;'
+  | &quot;'&quot; CharBetweenSingleQuotes* &quot;'&quot;;
+
+
+let CharBetweenDoubleQuotes =
+    | !['&quot;']
+    | '\&quot;';
+
+let CharBetweenSingleQuotes = ![&quot;'&quot;];
 </code></pre><h3 id=characterclass>CharacterClass <a href=#characterclass class=anchor aria-hidden=true>#</a></h3><pre><code class=language-pomsky>let CharacterClass = '!'? '[' CharacterGroup ']';
 
-let CharacterGroup = '.' | 'cp' | CharacterGroupMulti+;
+let CharacterGroup =
+    | '.'
+    | 'cp'
+    | 'codepoint'
+    | CharacterGroupMulti+;
 
-let CharacterGroupMulti = Range
-                        | Characters
-                        | CodePoint
-                        | NonPrintable
-                        | Shorthand
-                        | UnicodeProperty
-                        | PosixClass;
+let CharacterGroupMulti =
+    | Range
+    | Characters
+    | CodePoint
+    | NonPrintable
+    | Shorthand
+    | UnicodeProperty
+    | PosixClass;
 
 let Range = Character '-' Character;
 
-let Characters = '&quot;' !['&quot;']* '&quot;'
-               | &quot;'&quot; ![&quot;'&quot;]* &quot;'&quot;;
+let Characters =
+    | '&quot;' CharBetweenDoubleQuotes* '&quot;'
+    | &quot;'&quot; CharBetweenSingleQuotes* &quot;'&quot;;
 
-let Character = '&quot;' !['&quot;'] '&quot;'
-              | &quot;'&quot; ![&quot;'&quot;] &quot;'&quot;
-              | CodePoint
-              | NonPrintable;
+let Character =
+    | '&quot;' CharBetweenDoubleQuotes '&quot;'
+    | &quot;'&quot; CharBetweenSingleQuotes &quot;'&quot;
+    | CodePoint
+    | NonPrintable;
 
-let NonPrintable = 'n' | 'r' | 't' | 'a' | 'e' | 'f';
+let NonPrintable =
+    | 'n'
+    | 'r'
+    | 't'
+    | 'a'
+    | 'e'
+    | 'f';
 
-let Shorthand = '!'? ('w' | 'word' |
-                      'd' | 'digit' |
-                      's' | 'space' |
-                      'h' | 'horiz_space' |
-                      'v' | 'vert_space' |
-                      'l' | 'line_break');
+let Shorthand = '!'? ShorthandIdent;
 
-let PosixClass = 'ascii_alpha' | 'ascii_alnum' | 'ascii' | 'ascii_blank'
-               | 'ascii_cntrl' | 'ascii_digit' | 'ascii_graph' | 'ascii_lower'
-               | 'ascii_print' | 'ascii_punct' | 'ascii_space' | 'ascii_upper'
-               | 'ascii_word'  | 'ascii_xdigit';
-</code></pre><h3 id=codepoint>CodePoint <a href=#codepoint class=anchor aria-hidden=true>#</a></h3><pre><code class=language-pomsky>let CodePoint = 'U+' ['0'-'9' 'a'-'f' 'A'-'F']{1,6}
-              | 'U' ['0'-'9' 'a'-'f' 'A'-'F']{1,6};
+let ShorthandIdent =
+    | 'w' | 'word'
+    | 'd' | 'digit'
+    | 's' | 'space'
+    | 'h' | 'horiz_space'
+    | 'v' | 'vert_space'
+    | 'l' | 'line_break'
+
+let PosixClass =
+    | 'ascii'
+    | 'ascii_alpha'
+    | 'ascii_alnum'
+    | 'ascii_blank'
+    | 'ascii_cntrl'
+    | 'ascii_digit'
+    | 'ascii_graph'
+    | 'ascii_lower'
+    | 'ascii_print'
+    | 'ascii_punct'
+    | 'ascii_space'
+    | 'ascii_upper'
+    | 'ascii_word'
+    | 'ascii_xdigit';
+</code></pre><h3 id=codepoint>CodePoint <a href=#codepoint class=anchor aria-hidden=true>#</a></h3><pre><code class=language-pomsky>let CodePoint = 'U' '+'? HexDigit{1,6};
+
+let HexDigit = ['0'-'9' 'a'-'f' 'A'-'F'];
 </code></pre><p>Note that the second syntax exists mainly to be compatible with Rust tokenization.</p><h3 id=unicodeproperty>UnicodeProperty <a href=#unicodeproperty class=anchor aria-hidden=true>#</a></h3><p>Details about supported Unicode properties can be <a href=../unicode-properties>found here</a>.</p><pre><code class=language-pomsky>let UnicodeProperty = '!'? [w]+;
-</code></pre><h3 id=boundary>Boundary <a href=#boundary class=anchor aria-hidden=true>#</a></h3><pre><code class=language-pomsky>let Boundary = '%' | '!' '%' | '&lt;%' | '%&gt;';
+</code></pre><h3 id=boundary>Boundary <a href=#boundary class=anchor aria-hidden=true>#</a></h3><pre><code class=language-pomsky>let Boundary =
+    | '^'
+    | '$'
+    | '!'? '%'
+    | '&lt;%'
+    | '%&gt;';
+</code></pre><h3 id=reference>Reference <a href=#reference class=anchor aria-hidden=true>#</a></h3><pre><code class=language-pomsky>let Reference = '::' [w]+;
 </code></pre><h3 id=numberrange>NumberRange <a href=#numberrange class=anchor aria-hidden=true>#</a></h3><pre><code class=language-pomsky>let NumberRange = 'range' String '-' String Base?;
+
 let Base = 'base' Number;
 </code></pre><h3 id=variablename>VariableName <a href=#variablename class=anchor aria-hidden=true>#</a></h3><pre><code class=language-pomsky>let VariableName = [w]+;
 </code></pre><h2 id=note-about-this-grammar>Note about this grammar <a href=#note-about-this-grammar class=anchor aria-hidden=true>#</a></h2><p>Even though this grammar is written using pomsky syntax, it isn&rsquo;t actually accepted by the pomsky
 compiler, because it uses cyclic variables.</p><div class="page-footer-meta d-flex flex-column flex-md-row justify-content-between"></div><div class="docs-navigation d-flex justify-content-between"><a href=/docs/language-tour/graphemes/><div class="card my-1"><div class="card-body py-2">&larr; Graphemes</div></div></a><a class=ms-auto href=/docs/reference/unicode-properties/><div class="card my-1"><div class="card-body py-2">Unicode properties &rarr;</div></div></a></div></main></div></div></div><footer class="footer text-muted"><div class=container-xxl><div class=row><div class="col-lg-8 order-last order-lg-first"><ul class=list-inline><li class=list-inline-item>Powered by <a class=text-muted href=https://gohugo.io/>Hugo</a> and <a class=text-muted href=https://getdoks.org/>Doks</a></li></ul></div><div class="col-lg-8 order-first order-lg-last text-lg-end"><ul class=list-inline></ul></div></div></div></footer><script src=/js/bootstrap.min.ef1425a29febf9dea096c6f9561e75a96bc55a045a6df4dada5872c7428a9b8964080e98e582f5f856f01ea8b8829bc8825a4864d7465df63a5f8547cea33d83.js integrity="sha512-7xQlop/r+d6glsb5Vh51qWvFWgRabfTa2lhyx0KKm4lkCA6Y5YL1+FbwHqi4gpvIglpIZNdGXfY6X4VHzqM9gw==" crossorigin=anonymous defer></script>
-<script src=/js/highlight.min.6078de7b2054bc2ef8c56189f9fdc18edcf1f30ee4b0d209d5b3790bd698c5fa7c804ecb08a21d19bdf43f5df2e649a2df6234410a83962652743e88525e5edb.js integrity="sha512-YHjeeyBUvC74xWGJ+f3Bjtzx8w7ksNIJ1bN5C9aYxfp8gE7LCKIdGb30P13y5kmi32I0QQqDliZSdD6IUl5e2w==" crossorigin=anonymous defer></script>
+<script src=/js/highlight.min.646a592125ec0ee46b06356016e0ed16f54e2069183f46c22caf051f38c3339380c843713086db335841aad95b6d194e9512df6540730b30319444e342764105.js integrity="sha512-ZGpZISXsDuRrBjVgFuDtFvVOIGkYP0bCLK8FHzjDM5OAyENxMIbbM1hBqtlbbRlOlRLfZUBzCzAxlETjQnZBBQ==" crossorigin=anonymous defer></script>
 <script src=/main.min.8d5eef60b17c8b5f1560c4f964562512096eea903b1ceac7a8d3b04d3d036adb8638ed9232929ba08cbb97d432358c740bd1c31e902034f12447fcbcdb7658ef.js integrity="sha512-jV7vYLF8i18VYMT5ZFYlEglu6pA7HOrHqNOwTT0DatuGOO2SMpKboIy7l9QyNYx0C9HDHpAgNPEkR/y823ZY7w==" crossorigin=anonymous defer></script>
-<script src=https://pomsky-lang.org/index.min.0f94fcab9c9c4783859f4cfd0ba1a05f584a26e7129eda8703048fc7b8c26709e9ab8d1caeecfeed1f174046234baae546461b54503897960b9d9fe3a5c09322.js integrity="sha512-D5T8q5ycR4OFn0z9C6GgX1hKJucSntqHAwSPx7jCZwnpq40cruz+7R8XQEYjS6rlRkYbVFA4l5YLnZ/jpcCTIg==" crossorigin=anonymous defer></script></body></html>
+<script src=https://pomsky-lang.org/index.min.6dab50a4bcc5b12a63602842ee6af7f76884385c07d3b0ef3e75fbe183ca82a4b29a69ca4b740ae6c20bb47b9ebe44b152bedb293eca72e745e2928be4ae3595.js integrity="sha512-batQpLzFsSpjYChC7mr392iEOFwH07DvPnX74YPKgqSymmnKS3QK5sILtHuevkSxUr7bKT7KcudF4pKL5K41lQ==" crossorigin=anonymous defer></script></body></html>
