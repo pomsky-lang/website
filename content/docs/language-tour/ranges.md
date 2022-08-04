@@ -59,7 +59,7 @@ This generates this regex:
 
 ## Leading zeroes
 
-If you wish to support leading zeros, this is easy to achieve by putting {{<po>}}'0'\*{{</po>}}
+If you wish to support leading zeros, this is easy to achieve by putting {{<po>}}'0'*{{</po>}}
 in front:
 
 ```pomsky

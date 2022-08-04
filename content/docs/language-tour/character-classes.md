@@ -126,7 +126,7 @@ different languages, there's no excuse for not using it.
 The character class {{<po>}}['a'-'z' 'A'-'Z']{{</po>}} only recognizes Latin characters.
 What should we do instead? We should use a
 [Unicode category](https://en.wikipedia.org/wiki/Unicode_character_property#General_Category).
-In this case, `Letter` seems like an obvious candidate. pomsky makes it very easy to use Unicode
+In this case, `Letter` seems like an obvious candidate. Pomsky makes it very easy to use Unicode
 categories:
 
 ```pomsky
