@@ -139,7 +139,7 @@ Let's see what Regex features are supported by languages that are transpiled to 
 | [Negated word boundary][boundary]  |          ✅           |         ✅          |    ✅     |    ✅    |
 | [Character range][charclass]       | partly<sup>\*\*</sup> |         ✅          |    ✅     |    ✅    |
 | [Character set][charclass]         |                       |         ✅          |    ✅     |    ✅    |
-| [Negated character set][charclass] |                       |         ✅          |    ✅     |    ✅    |
+| [Negated character set][charclass] | partly<sup>\*\*</sup> |         ✅          |    ✅     |    ✅    |
 | [Capturing group][capture]         |          ✅           |         ✅          |    ✅     |    ✅    |
 | [Alternation]                      |          ✅           |         ✅          |    ✅     |    ✅    |
 | [POSIX class][posix-class]         |                       |         ✅          |    ✅     |    ✅    |
@@ -163,7 +163,18 @@ Let's see what Regex features are supported by languages that are transpiled to 
 - `C` to match all code points
 - `![n]` to match all code points except line breaks
 
-<sup>\*\*</sup>Character ranges in Melody are only supported for ASCII letters and digits.
+<sup>\*\*</sup>Character ranges and negated sets in Melody only support ASCII letters, digits and
+a few special characters.
+
+Note that Melody allows embedding a regex by wrapping it in backticks, so _technically_ everything
+is supported. For example:
+
+```js
+either {
+  'Foo';
+  `[^Bar;]`;
+}
+```
 
 ### Advanced features
 
@@ -249,7 +260,7 @@ regex engine.
 | ----------------------------- | :-------------------: | :-----------------: | :-----------------: |
 | Syntax highlighting           |          ✅           |         ✅          |         ✅          |
 | Error highlighting            |                       |                     |         ✅          |
-| Code folding                  |          ✅           |         ✅          |                     |
+| Code folding                  |          ✅           |         ✅          |         ✅          |
 | Auto indentation              |          ✅           |         ✅          |         ✅          |
 | Matching brackets and quotes  |          ✅           |                     |         ✅          |
 | Keyword autocomplete          |          ✅           |                     |         ✅          |
@@ -258,7 +269,7 @@ regex engine.
 | Unicode property autocomplete |                       |                     |         ✅          |
 | Hover tooltips                |                       |                     |                     |
 | Apply suggestions             |                       |                     |                     |
-| Share link                    |                       |         ✅          |                     |
+| Share link                    |                       |         ✅          |         ✅          |
 
 ---
 
