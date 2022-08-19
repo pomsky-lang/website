@@ -15,7 +15,7 @@ toc: true
 
 ## Playground
 
-Using [the playground](https://playground.pomsky-lang/) is the easiest and most convenient
+Using [the playground](https://playground.pomsky-lang.org/) is the easiest and most convenient
 way to get started using pomsky. It supports syntax highlighting and shows errors directly in your
 code.
 
