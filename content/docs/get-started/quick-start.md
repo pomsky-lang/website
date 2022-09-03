@@ -55,6 +55,42 @@ To find out how to use the CLI, run
 pomsky --help
 ```
 
+## Node module
+
+Pomsky can be used with the `pomsky-wasm` npm module. Install with
+
+```sh
+$ npm install pomsky-wasm   # yarn add pomsky-wasm
+```
+
+Then import and use it like this:
+
+```js
+import init, { compile } from 'pomsky-wasm'
+
+init().then(() => {
+  const input = `^ ('test' '!'+)? $`
+  const { output } = compile(input, 'js')
+  console.log(output)
+})
+```
+
+It currently works in browsers, but not in Node. If you use `vite` for bundling, you need to
+**disable optimizations** for `pomsky-wasm` in development mode:
+
+```js
+// vite.config.js
+import { defineConfig } from 'vite'
+
+export default defineConfig((config) => ({
+  optimizeDeps: {
+    exclude: config.mode === 'production' ? [] : ['pomsky-wasm'],
+  },
+}))
+```
+
+The `compile` function throws an exception if compilation fails.
+
 ## Rust macro
 
 If you want to write a pomsky expression directly in your Rust source code, the

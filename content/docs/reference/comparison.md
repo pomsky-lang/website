@@ -194,7 +194,7 @@ either {
 | [Other Unicode property][unicode]           |                     |   ✅   |
 | [Any code point][built-in-vars]             | partly<sup>\*</sup> |   ✅   | partly<sup>\*</sup> | partly<sup>\*</sup> |
 | [Any grapheme][built-in-vars]               |                     |   ✅   |
-| [Atomic group][atomic]                      |                     |        |                     |
+| [Atomic group][atomic]                      |                     |   ✅   |                     |
 | [Character set intersection][charintersect] |                     |        |                     |         ✅          |
 | [Character set subtraction][charsubtract]   |                     |        |                     |
 | [Possessive quantifier][possessive]         |                     |        |                     |
@@ -251,7 +251,7 @@ regex engine.
 | GitHub release binary for Apple   |   ✅   |   ✅   |
 | GitHub release binary for Windows |        |   ✅   |
 | GitHub release binary for Linux   |        |   ✅   |
-| Node module                       |   ✅   |        |
+| Node module                       |   ✅   |   ✅   |
 | Python module                     |   ✅   |        |
 
 ## IDE features

@@ -15,8 +15,8 @@ toc: true
 
 ## Summary
 
-This document uses pomsky syntax. Here's an incomplete summary of the syntax, which should be enough
-to read the grammar:
+This document uses pomsky syntax to describe pomsky's syntax. Here's an incomplete summary,
+which should be enough to read the grammar:
 
 - Variables are declared as {{<po>}}let var_name = expression;{{</po>}}. This assigns
   `expression` to the variable `var_name`.
@@ -30,39 +30,14 @@ to read the grammar:
 
 - A {{<po>}}?{{</po>}} after a rule indicates that the rule is optional.
 
-- Consecutive rules can be grouped together by wrapping them in parentheses
-  ({{<po>}}(){{</po>}}).
+- Rules can be grouped together by wrapping them in parentheses ({{<po>}}(){{</po>}}).
 
 - Alternative rules are each preceded by a vertical bar ({{<po>}}|{{</po>}}).
 
-- Character classes are wrapped in square brackets ({{<po>}}[]{{</po>}}).
-  A character class matches exactly one code point. It can contain
-
-  - sequences of characters (e.g. {{<po>}}'abdf'{{</po>}}, which matches either
-    `a`, `b`, `d` or `f`)
-  - Unicode ranges (e.g. {{<po>}}'0'-'9'{{</po>}}, which is equivalent to
-    {{<po>}}'0123456789'{{</po>}})
-  - Shorthands (e.g. {{<po>}}w{{</po>}}, which matches a letter, digit or
-    the ASCII underscore `_`)
-
-  An exclamation mark ({{<po>}}!{{</po>}}) in front of the character class negates it.
-  For example, {{<po>}}![w]{{</po>}} matches anything _except_ a letter, digit or
-  ASCII underscore.
-
-### Whitespace
-
-Comments start with `#` and end at the end of the same line.
-
-Comments and whitespace are ignored; they can be added anywhere, except in strings, in tokens
-(such as {{<po>}}>>{{</po>}}), in words, numbers and code points (such as
-{{<po>}}U+306F{{</po>}}). For example, {{<po>}}>>{{</po>}} can't be written as
-{{<po>}}> >{{</po>}}, but {{<po>}}!>>'test'+{{</po>}} can be written as
-{{<po>}}! >> 'test' +{{</po>}}.
-
-Whitespace is required between consecutive words and code points, e.g.
-{{<po>}}[a n Latin U+50]{{</po>}}.
-
 ## Formal grammar
+
+Comments start with `#` and end at the end of the same line. Comments and whitespace are ignored;
+they can be added anywhere.
 
 ### Expression
 
@@ -73,7 +48,7 @@ let Statement =
     | LetDeclaration
     | Modifier;
 
-let LetDeclaration = 'let' VariableName '=' OrExpression ';';
+let LetDeclaration = 'let' Name '=' OrExpression ';';
 
 let Modifier = ModifierKeyword BooleanSetting ';';
 
@@ -107,11 +82,9 @@ let FixExpression =
 ### Lookaround
 
 ```pomsky
-let LookaroundPrefix = '!'? LookaroundLiteral;
-
-let LookaroundLiteral =
-    | '<<'
-    | '>>';
+let LookaroundPrefix =
+    | '!'? '<<'
+    | '!'? '>>';
 ```
 
 ### Repetitions
@@ -127,11 +100,7 @@ let RepetitionCount =
 
 let RepetitionBraces =
     | '{' Number '}'
-    | '{' Number ',' Number? '}';
-
-let Number =
-    | '0'
-    | ['1'-'9'] ['0'-'9']*;
+    | '{' Number? ',' Number? '}';
 
 let Quantifier =
     | 'greedy'
@@ -144,78 +113,48 @@ let Quantifier =
 let AtomExpression =
     | Group
     | String
-    | CharacterClass
+    | CharacterSet
     | Boundary
     | Reference
-    | CodePoint
     | NumberRange
-    | VariableName;
+    | CodePoint
+    | Name;
 ```
 
 ### Group
 
 ```pomsky
-let Group = Capture? '(' Expression ')';
+let Group = GroupKind? '(' Expression ')';
 
-let Capture = ':' Name?;
-
-let Name = [w]+;
+let GroupKind = ':' Name?;
 ```
 
-### String
+### CharacterSet
 
 ```pomsky
-let String =
-  | '"' CharBetweenDoubleQuotes* '"'
-  | "'" CharBetweenSingleQuotes* "'";
+let CharacterSet =
+    | '!'? '[' '.' ']' # deprecated!
+    | '!'? '[' CharacterSetInner+ ']';
 
-
-let CharBetweenDoubleQuotes =
-    | !['"']
-    | '\"';
-
-let CharBetweenSingleQuotes = !["'"];
-```
-
-### CharacterClass
-
-```pomsky
-let CharacterClass = '!'? '[' CharacterGroup ']';
-
-let CharacterGroup =
-    | '.'
-    | 'cp'
-    | 'codepoint'
-    | CharacterGroupMulti+;
-
-let CharacterGroupMulti =
+let CharacterSetInner =
     | Range
-    | Characters
+    | String
     | CodePoint
     | NonPrintable
     | Shorthand
     | UnicodeProperty
     | PosixClass;
 
-let Range = Character '-' Character;
+let Range = SingleChar '-' SingleChar;
 
-let Characters =
-    | '"' CharBetweenDoubleQuotes* '"'
-    | "'" CharBetweenSingleQuotes* "'";
-
-let Character =
-    | '"' CharBetweenDoubleQuotes '"'
-    | "'" CharBetweenSingleQuotes "'"
+let SingleChar =
+    | StringOneChar
     | CodePoint
     | NonPrintable;
 
 let NonPrintable =
-    | 'n'
-    | 'r'
-    | 't'
-    | 'a'
-    | 'e'
-    | 'f';
+    | 'n' | 'r' | 't'
+    | 'a' | 'e' | 'f';
 
 let Shorthand = '!'? ShorthandIdent;
 
@@ -244,23 +183,13 @@ let PosixClass =
     | 'ascii_xdigit';
 ```
 
-### CodePoint
-
-```pomsky
-let CodePoint = 'U' '+'? HexDigit{1,6};
-
-let HexDigit = ['0'-'9' 'a'-'f' 'A'-'F'];
-```
-
-Note that the second syntax exists mainly to be compatible with Rust tokenization.
-
 ### UnicodeProperty
 
-Details about supported Unicode properties can be [found here](../unicode-properties).
-
 ```pomsky
-let UnicodeProperty = '!'? [w]+;
+let UnicodeProperty = '!'? Name;
 ```
+
+Details about supported Unicode properties can be [found here](../unicode-properties).
 
 ### Boundary
 
@@ -268,15 +197,19 @@ let UnicodeProperty = '!'? [w]+;
 let Boundary =
     | '^'
     | '$'
-    | '!'? '%'
-    | '<%'
-    | '%>';
+    | '!'? '%';
 ```
 
 ### Reference
 
 ```pomsky
-let Reference = '::' [w]+;
+let Reference =
+    | '::' Name
+    | '::' Sign? Number;
+
+let Sign =
+    | '+'
+    | '-';
 ```
 
 ### NumberRange
@@ -287,11 +220,75 @@ let NumberRange = 'range' String '-' String Base?;
 let Base = 'base' Number;
 ```
 
-### VariableName
+Note that the strings must contain digits or ASCII letters in the supported range. For example,
+in `base 16`, the characters `0123456789abcdefABCDEF` are allowed. The base must be between 2 and
+36.
+
+## Tokens
+
+Tokens (also called _terminals_) cannot be further divided. There are the following token types
+used in the above grammar:
+
+### Name
+
+Names (or _identifiers_) consist of a letter or underscore, followed by any number of letters,
+digits and underscores. For example:
 
 ```pomsky
-let VariableName = [w]+;
+# valid identifiers
+hello  i18n  _foo_  Gänsefüßchen
+
+# invalid identifiers
+kebab-case  42  👍‍
 ```
+
+### Number
+
+A whole number without a sign and without leading zeros. For example:
+
+```pomsky
+# valid numbers
+0  1  42  10000
+
+# invalid numbers
+042  -30  +30  30.1  10_000  10,000
+```
+
+### String
+
+A string is a sequence of code points surrounded by single or double quotes. In double quoted
+strings, double quotes and backslashes are escaped by preceding them with a backslash. No other
+escapes are supported: For example:
+
+```pomsky
+# valid strings
+'test'  "test"  "C:\\User\\Dwayne \"The Rock\" Johnson"  'C:\User\Dwayne "The Rock" Johnson'
+'this is a
+multiline string'
+
+# invalid strings
+"\n"  "\uFFFF"  '\''
+```
+
+### StringOneChar
+
+Same as `String`, with the limitation that the string must contain exactly one code point or
+grapheme.
+
+### CodePoint
+
+A code point consists of `U+` followed by 1 to 6 hexadecimal digits (0-9, a-f, A-F). It must
+represent a valid Unicode code point. For example:
+
+```pomsky
+# valid code points
+U+0  U+10  U+FFF  U+10FFFF
+
+# invalid code points
+U+30000  U+100000000  U+FGHI
+```
+
+Note that the `+` is not required, mainly to be compatible with Rust tokenization.
 
 ## Note about this grammar
 
