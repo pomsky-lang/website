@@ -4,7 +4,7 @@
 title = "Pomsky"
 titleSeparator = "-"
 titleAddition = "Home"
-description = "A new, portable, regular expression language"
+description = "A portable, modern regular expression language"
 favicon = "images/favicon.svg"
 
 ## Documentation

@@ -27,7 +27,7 @@ hljs.registerLanguage('pomsky', function (hljs) {
       },
       {
         className: 'keyword',
-        beginKeywords: 'let enable disable greedy lazy range base',
+        beginKeywords: 'let lazy greedy range base atomic enable disable if else recursion regex',
       },
       {
         className: 'keyword',
