@@ -105,7 +105,7 @@ In the last two releases, there were a few syntax changes:
 
   ```pomsky
   # this is guaranteed to never backtrack
-  % atomic ('integer' | 'insert' | 'in') %
+  % atomic('integer' | 'insert' | 'in') %
   ```
 
   Atomic groups can be more performant than regular groups. Note that atomic groups are only

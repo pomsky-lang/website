@@ -56,3 +56,16 @@ so you don't need to count groups and instead refer to each group by a name:
 ```
 
 Now, the first group is named `name` and the third group is named `adverb`.
+
+## Atomic groups
+
+If we put the `atomic` keyword in front of a group, the RegExp engine can't backtrack into the
+group. This can improve matching performance and prevent "catastrophic backtracking":
+
+```pomsky
+% atomic('if' | 'else' | 'while' | 'for') %
+```
+
+You can find out more about backtracking [here](https://www.regular-expressions.info/catastrophic.html).
+
+Note that atomic groups are only supported in the Java, PCRE, Ruby and .NET flavors.
