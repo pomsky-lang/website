@@ -6,7 +6,7 @@ variables, and a much more readable syntax. Check out the
 pomsky, or the <a href=https://pomsky-lang.org/docs/examples/>examples</a> to see some real pomsky
 expressions.</p><p>Pomsky is <em>not</em> a regex engine. Instead, a pomsky expression is transpiled to a normal RegExp,
 compatible with many RegExp engines, including JavaScript, Java, PCRE, Ruby, Python, Rust and .NET.</p><h2 id=summary-of-the-changes>Summary of the changes <a href=#summary-of-the-changes class=anchor aria-hidden=true>#</a></h2><p>Because I didn&rsquo;t publish a blog post when I released version 0.6, this post is a bit longer. Here&rsquo;s
-a summary:</p><blockquote><ul><li><p>The parser was rewritten and is now much faster</p></li><li><p>Pomsky is now published as WASM module to NPM</p></li><li><p>Some syntax additions make writing pomsky expressions more fun</p></li><li><p>Diagnostics were improved again. Most importantly, pomsky now detecs typos and suggests the
+a summary:</p><blockquote><ul><li><p>The parser was rewritten and is now much faster</p></li><li><p>Pomsky is now published as WASM module to npm</p></li><li><p>Some syntax additions make writing pomsky expressions more fun</p></li><li><p>Diagnostics were improved again. Most importantly, pomsky now detecs typos and suggests the
 correct spelling!</p></li><li><p>The binary size has been significantly decreased</p></li></ul></blockquote><h2 id=the-new-parser>The new parser <a href=#the-new-parser class=anchor aria-hidden=true>#</a></h2><p>The biggest change in this release is that the parser was rewritten from scratch. It previously used
 <a href=https://docs.rs/nom/latest/nom/>nom</a> parser combinators, but over time it became evident that
 nom isn&rsquo;t well suited for my use case. It made me jump through hoops to get decent error messages,
@@ -19,11 +19,13 @@ parser by <strong>up to 500%</strong> according to my
 explicit, so it&rsquo;s easier to reason about the code.</p><p>During the rewrite, I was glad that pomsky has a variety of integration tests that cover both valid
 and invalid inputs. Once the code compiled again, I ran the test suite to identify bugs. When all
 the bugs I found were fixed and all 200 tests were green, I had much more confidence that my code
-was correct.</p><h2 id=the-wasm-module>The WASM module <a href=#the-wasm-module class=anchor aria-hidden=true>#</a></h2><p>Pomsky is now <a href=https://www.npmjs.com/package/pomsky-wasm>published to NPM</a>. Getting it to work
+was correct.</p><h2 id=the-wasm-module>The WASM module <a href=#the-wasm-module class=anchor aria-hidden=true>#</a></h2><p>Pomsky is now <a href=https://www.npmjs.com/package/pomsky-wasm>published to npm</a>. Getting it to work
 turned out to be much more difficult than anticipated, but I finally found a good solution.</p><p>The problem was that the WASM module, compiled with <code>wasm-pack</code>, didn&rsquo;t work when imported with NPM
 and served with Vite in development mode. It did work with Vite in release mode and with Webpack,
 but my particular configuration seemed <em>jinxed</em>. As I&rsquo;m not ready to enter the world of pain that
-is Webpack again, I spent lots of hours researching the problem.</p><p>I actually found two problems:</p><ol><li><p><code>wasm-pack</code> emits JavaScript modules added with <code>wasm_bindgen</code> in a folder called <code>snippets</code>,
+is Webpack again, I spent lots of hours researching the problem.</p><br><blockquote><p>What is Vite?</p><p>In case you&rsquo;re not familiar, Vite is a modern JavaScript bundler. It is much faster than Webpack,
+requires less configuration, and many things (including TypeScript and SCSS support) work out of
+the box.</p></blockquote><br><p>I actually found two problems:</p><ol><li><p><code>wasm-pack</code> emits JavaScript modules added with <code>wasm_bindgen</code> in a folder called <code>snippets</code>,
 but this folder isn&rsquo;t included in the <code>package.json</code> file, so it is ignored when publishing the
 module to NPM.</p></li><li><p>Vite does some optimizations even in development mode. The optimized files are put in the
 <code>node_modules/.vite/deps</code> folder. This broke the dynamic import of the WASM file, because a
