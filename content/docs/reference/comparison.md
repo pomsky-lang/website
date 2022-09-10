@@ -14,7 +14,7 @@ toc: true
 ---
 
 [This wiki](https://github.com/oilshell/oil/wiki/Alternative-Regex-Syntax) has a list of projects
-with similar goals to Pomksy. Here's a list of the most popular projects:
+with similar goals to Pomsky. Here's a list of the most popular projects:
 
 {{< alert icon="⚠️" text="Disclaimer that as the maintainer of Pomsky, I am obviously biased. If you find any incorrect or misleading information, please <a href='https://github.com/rulex-rs/website/issues'>open an issue</a>." />}}
 

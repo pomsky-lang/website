@@ -37,7 +37,7 @@ a summary:
 >
 > - Some syntax additions make writing pomsky expressions more fun
 >
-> - Diagnostics were improved again. Most importantly, pomsky now detecs typos and suggests the
+> - Diagnostics were improved again. Most importantly, pomsky now detects typos and suggests the
 >   correct spelling!
 >
 > - The binary size has been significantly decreased
