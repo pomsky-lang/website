@@ -33,7 +33,7 @@ a summary:
 
 > - The parser was rewritten and is now much faster
 >
-> - Pomsky is now published as WASM module to NPM
+> - Pomsky is now published as WASM module to npm
 >
 > - Some syntax additions make writing pomsky expressions more fun
 >
@@ -66,13 +66,23 @@ was correct.
 
 ## The WASM module
 
-Pomsky is now [published to NPM](https://www.npmjs.com/package/pomsky-wasm). Getting it to work
+Pomsky is now [published to npm](https://www.npmjs.com/package/pomsky-wasm). Getting it to work
 turned out to be much more difficult than anticipated, but I finally found a good solution.
 
 The problem was that the WASM module, compiled with `wasm-pack`, didn't work when imported with NPM
 and served with Vite in development mode. It did work with Vite in release mode and with Webpack,
 but my particular configuration seemed _jinxed_. As I'm not ready to enter the world of pain that
 is Webpack again, I spent lots of hours researching the problem.
+
+<br>
+
+> What is Vite?
+>
+> In case you're not familiar, Vite is a modern JavaScript bundler. It is much faster than Webpack,
+> requires less configuration, and many things (including TypeScript and SCSS support) work out of
+> the box.
+
+<br>
 
 I actually found two problems:
 
