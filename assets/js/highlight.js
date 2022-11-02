@@ -114,7 +114,7 @@ hljs.registerLanguage('regexp', function () {
       },
       {
         className: 'keyword',
-        begin: /[+*?]+/,
+        begin: /[+*?.]+/,
       },
       {
         className: 'keyword',
