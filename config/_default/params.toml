@@ -5,7 +5,7 @@ title = "Pomsky"
 titleSeparator = "-"
 titleAddition = "Home"
 description = "A portable, modern regular expression language"
-favicon = "images/favicon.svg"
+favicon = "images/favicon.png"
 
 ## Documentation
 # docsVersion = "0.3"

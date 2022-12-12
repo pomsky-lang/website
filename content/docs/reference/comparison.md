@@ -127,23 +127,23 @@ Let's see what Regex features are supported by languages that are transpiled to 
 
 ### Basic regex features
 
-| Feature                            |        Melody         |       Pomsky        | Egg Expr. | Rx Expr. |
-| ---------------------------------- | :-------------------: | :-----------------: | :-------: | :------: |
-| [Greedy repetition][greedy]        |          ✅           |         ✅          |    ✅     |    ✅    |
-| [Lazy repetition][lazy]            |          ✅           |         ✅          |    ✅     |    ✅    |
-| [Dot]                              |          ✅           | partly<sup>\*</sup> |    ✅     |    ✅    |
-| [Character escape][non-printable]  |          ✅           |         ✅          |    ✅     |    ✅    |
-| [Character class][shorthand]       |          ✅           |         ✅          |    ✅     |    ✅    |
-| [Anchor]                           |          ✅           |         ✅          |    ✅     |    ✅    |
-| [Word boundary][boundary]          |          ✅           |         ✅          |    ✅     |    ✅    |
-| [Negated word boundary][boundary]  |          ✅           |         ✅          |    ✅     |    ✅    |
-| [Character range][charclass]       | partly<sup>\*\*</sup> |         ✅          |    ✅     |    ✅    |
-| [Character set][charclass]         |                       |         ✅          |    ✅     |    ✅    |
-| [Negated character set][charclass] | partly<sup>\*\*</sup> |         ✅          |    ✅     |    ✅    |
-| [Capturing group][capture]         |          ✅           |         ✅          |    ✅     |    ✅    |
-| [Alternation]                      |          ✅           |         ✅          |    ✅     |    ✅    |
-| [POSIX class][posix-class]         |                       |         ✅          |    ✅     |    ✅    |
-| [Non-capturing group][noncapture]  |          ✅           |         ✅          |    ✅     |          |
+| Feature                            |        Melody         | Pomsky | Egg Expr. | Rx Expr. |
+| ---------------------------------- | :-------------------: | :----: | :-------: | :------: |
+| [Greedy repetition][greedy]        |          ✅           |   ✅   |    ✅     |    ✅    |
+| [Lazy repetition][lazy]            |          ✅           |   ✅   |    ✅     |    ✅    |
+| [Dot]                              |          ✅           |   ✅   |    ✅     |    ✅    |
+| [Character escape][non-printable]  |          ✅           |   ✅   |    ✅     |    ✅    |
+| [Character class][shorthand]       |          ✅           |   ✅   |    ✅     |    ✅    |
+| [Anchor]                           |          ✅           |   ✅   |    ✅     |    ✅    |
+| [Word boundary][boundary]          |          ✅           |   ✅   |    ✅     |    ✅    |
+| [Negated word boundary][boundary]  |          ✅           |   ✅   |    ✅     |    ✅    |
+| [Character range][charclass]       | partly<sup>\*\*</sup> |   ✅   |    ✅     |    ✅    |
+| [Character set][charclass]         |                       |   ✅   |    ✅     |    ✅    |
+| [Negated character set][charclass] | partly<sup>\*\*</sup> |   ✅   |    ✅     |    ✅    |
+| [Capturing group][capture]         |          ✅           |   ✅   |    ✅     |    ✅    |
+| [Alternation]                      |          ✅           |   ✅   |    ✅     |    ✅    |
+| [POSIX class][posix-class]         |                       |   ✅   |    ✅     |    ✅    |
+| [Non-capturing group][noncapture]  |          ✅           |   ✅   |    ✅     |          |
 
 [greedy]: https://www.regular-expressions.info/repeat.html
 [lazy]: https://www.regular-expressions.info/repeat.html#lazy
@@ -158,49 +158,39 @@ Let's see what Regex features are supported by languages that are transpiled to 
 [alternation]: https://www.regular-expressions.info/alternation.html
 [posix-class]: https://www.regular-expressions.info/posixbrackets.html#class
 
-<sup>\*</sup>Pomsky deliberately does not support the dot. You can use instead:
-
 - `C` to match all code points
 - `![n]` to match all code points except line breaks
 
 <sup>\*\*</sup>Character ranges and negated sets in Melody only support ASCII letters, digits and
 a few special characters.
 
-Note that Melody allows embedding a regex by wrapping it in backticks, so _technically_ everything
-is supported. For example:
-
-```js
-either {
-  'Foo';
-  `[^Bar;]`;
-}
-```
-
 ### Advanced features
 
-| Feature                                     |       Melody        | Pomsky |      Egg Expr.      |      Rx Expr.       |
-| ------------------------------------------- | :-----------------: | :----: | :-----------------: | :-----------------: |
-| [Variable]                                  |         ✅          |   ✅   |         ✅          |         ✅          |
-| [Line comment][line-comment]                |         ✅          |   ✅   |         ✅          |         ✅          |
-| [Block comment][block-comment]              |         ✅          |        |                     |                     |
-| [Code point][codepoint]                     |                     |   ✅   |         ✅          |
-| [Lookaround]                                |         ✅          |   ✅   |                     |
-| [Named capturing group][named-capture]      |         ✅          |   ✅   |         ✅          |
-| [Backreference]                             |                     |   ✅   |                     |         ✅          |
-| [Named backreference][named-ref]            |                     |   ✅   |                     |
-| [Relative backreference][relative-ref]      |                     |   ✅   |
-| [Unicode category][category]                |         ✅          |   ✅   |
-| [Unicode script][script]/[block]            |                     |   ✅   |                     |       partly        |
-| [Other Unicode property][unicode]           |                     |   ✅   |
-| [Any code point][built-in-vars]             | partly<sup>\*</sup> |   ✅   | partly<sup>\*</sup> | partly<sup>\*</sup> |
-| [Any grapheme][built-in-vars]               |                     |   ✅   |
-| [Atomic group][atomic]                      |                     |   ✅   |                     |
-| [Character set intersection][charintersect] |                     |        |                     |         ✅          |
-| [Character set subtraction][charsubtract]   |                     |        |                     |
-| [Possessive quantifier][possessive]         |                     |        |                     |
-| [Conditional]                               |                     |        |                     |
-| [Recursion]                                 |                     |        |                     |
-| [Modifier]                                  |                     |        |                     |
+| Feature                                     |       Melody        |       Pomsky        |      Egg Expr.      |      Rx Expr.       |
+| ------------------------------------------- | :-----------------: | :-----------------: | :-----------------: | :-----------------: |
+| [Variable]/macro                            |         ✅          |         ✅          |         ✅          |         ✅          |
+| [Line comment][line-comment]                |         ✅          |         ✅          |         ✅          |         ✅          |
+| [Block comment][block-comment]              |         ✅          |                     |                     |                     |
+| [Code point][codepoint]                     |                     |         ✅          |         ✅          |
+| [Lookaround]                                |         ✅          |         ✅          |                     |
+| [Named capturing group][named-capture]      |         ✅          |         ✅          |         ✅          |
+| [Backreference]                             |                     |         ✅          |                     |         ✅          |
+| [Named backreference][named-ref]            |                     |         ✅          |                     |
+| [Relative backreference][relative-ref]      |                     |         ✅          |
+| [Unicode category][category]                |         ✅          |         ✅          |
+| [Unicode script][script]/[block]            |                     |         ✅          |                     |       partly        |
+| [Other Unicode property][unicode]           |                     |         ✅          |
+| [Any code point][built-in-vars]             | partly<sup>\*</sup> |         ✅          | partly<sup>\*</sup> | partly<sup>\*</sup> |
+| [Any grapheme][built-in-vars]               |                     |         ✅          |
+| [Atomic group][atomic]                      |                     |         ✅          |                     |
+| [Character set intersection][charintersect] |                     |                     |                     |         ✅          |
+| [Character set subtraction][charsubtract]   |                     |                     |                     |
+| [Possessive quantifier][possessive]         |                     |                     |                     |
+| [Conditional]                               |                     |                     |                     |
+| [Recursion]                                 |                     |                     |                     |
+| [Modifier]                                  |                     |                     |                     |
+| [Inline regex][inline-regex]                |         ✅          |         ✅          |                     |
+| Optimization                                |                     | some<sup>\*\*</sup> |                     |
 
 [variable]: https://pomsky-lang.org/docs/language-tour/variables/
 [line-comment]: https://pomsky-lang.org/docs/language-tour/basics/
@@ -223,9 +213,14 @@ either {
 [conditional]: https://www.regular-expressions.info/conditional.html
 [recursion]: https://www.regular-expressions.info/recurse.html
 [modifier]: https://www.regular-expressions.info/refmodifiers.html
+[inline-regex]: https://pomsky-lang.org/docs/language-tour/regex/
+
+Note that Melody and Pomsky support inline regexes. Because of this, all Regex features are _technically_ supported in Melody and Pomsky, but using inline regexes may be less ergonomic and more dangerous to use than properly supported features.
 
 <sup>\*</sup>All languages can match a code point with the dot, if multiline mode is enabled in the
 regex engine.
+
+<sup>\*\*</sup>Pomsky can currently optimize repetitions and remove redundant groups. More optimizations are planned.
 
 ## Tooling
 

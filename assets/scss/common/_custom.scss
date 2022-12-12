@@ -22,7 +22,7 @@
 }
 
 [data-dark-mode] body .alert-primary {
-  background-color: #5d2f86;
+  background-color: #962d2d;
   color: white;
 
   a {
@@ -104,7 +104,7 @@ h5,
 
 .front-logo {
   margin: 1.25rem 0 2.5rem;
-  width: 150px;
+  width: 192px;
   filter: drop-shadow(0 20px 15px #7774);
 }
 
@@ -148,7 +148,7 @@ main > nav {
 }
 
 .header-bar {
-  border-image-source: linear-gradient(90deg, #b53636, #f4b73d 50%, #d32e9d);
+  border-image-source: linear-gradient(90deg, #b53636, #f4b73d 50%, #b53636);
 }
 
 body .btn {

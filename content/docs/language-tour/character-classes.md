@@ -160,3 +160,33 @@ Character classes are negated by putting a {{<po>}}!{{</po>}} in front of it. Fo
 It's also possible to negate Unicode properties individually. For example,
 {{<po>}}[Latin !Alphabetic]{{</po>}} matches a code point that is either in the Latin script,
 or is not alphabetic.
+
+## Dot
+
+You can use the dot (`.`) to match any code point, except line breaks. For example:
+
+```pomsky
+...  # 3 code points
+```
+
+Be careful when repeating the dot. My personal recommendation is to _never repeat the dot_, unless it's absolutely necessary. Let's see why:
+
+```pomsky
+'{' .* '}'
+```
+
+This matches any content surrounded by curly braces. Why is this bad? Because {{<po>}}.*{{</po>}} will greedily consume anything, even curly braces, so looking for matches in the string `{ab} de {fg}` will return the whole string, but we probably expected to get the two matches `{ab}` and `{fg}`.
+
+We can fix this by making the repetition lazy:
+
+```pomsky
+'{' .* lazy '}'
+```
+
+However, it is arguably better to restrict which characters can be repeated:
+
+```pomsky
+'{' !['}']* '}'
+```
+
+Now the curly braces can contain anything except `}`, so we know that the repetition will end when a `}` is encountered.
