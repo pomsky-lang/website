@@ -2,8 +2,8 @@
 title: 'Pomsky 0.8 released'
 description: 'I just released pomsky 0.8 with a new, much faster parser.'
 excerpt: ''
-date: 2022-12-13T00:00:00
-lastmod: 2022-12-13T00:00:00
+date: 2022-12-22T12:00:00
+lastmod: 2022-12-22T12:00:00
 contributors: ['Ludwig Stecher']
 draft: false
 images: ['cover.jpg']
