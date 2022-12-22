@@ -90,7 +90,6 @@ Let's see what Regex flavors are supported by transpiled languages.
 | Ruby       | ✅<sup>\*</sup> |   ✅   |
 | Python     |                 |   ✅   |
 | Rust       |                 |   ✅   |
-| RE2        |                 |        |
 
 <sup>\*</sup>Melody can only emit ECMAScript regexes, but they also happen to be compatible
 with several other flavors.
@@ -101,12 +100,9 @@ with several other flavors.
   Because ERE supports only the most basic features, it is _mostly_ forward compatible with other
   regex flavors.
 
-- **ECMAScript** is the syntax used by JavaScript engines. Also `Boost.Regex` can be configured to
-  use the ECMAScript syntax.
+- **ECMAScript** is the syntax used in JavaScript and related languages (TypeScript, Elm, Dart, etc.) that are compiled to JS.
 
-- **PCRE** (an acronym for "Perl compatible regular expression") is the syntax used by the PCRE(2)
-  regex engine, which is arguably the most popular regex engine in the world. It is used by default
-  in PHP and R, and can be embedded in many other languages. It can also be used by GNU `grep`.
+- **PCRE** (an acronym for "Perl compatible regular expression") is the syntax used by the PCRE(2) regex engine, which is the default in at least Crystal, Delphi, Elixir, Erlang, Hack, Julia, PHP, R and Vala. It's also a popular choice in other languages like C and C++ and is used in many applications such as the Apache server, nginx, MariaDB, MongoDB, and optionally in GNU `grep`.
 
 - **.NET** refers to the `Regex` class in .NET languages such as C# and F#.
 
@@ -117,9 +113,9 @@ with several other flavors.
 
 - **Python** refers to Pythons `re` module. Note that Python 3 is required for good Unicode support.
 
-- **Rust** refers to Rust's popular `regex` crate, which is used by `ripgrep`, for example.
+- **Rust** refers to Rust's popular `regex` crate (used by `ripgrep`)
 
-- **RE2** refers to Google's RE2 regex engine. Go's `"regexp"` module uses the same syntax.
+Many more flavors exist, which are not (or only partially) supported by Pomsky and other languages.
 
 ## Features
 
