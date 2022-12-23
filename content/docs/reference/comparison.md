@@ -123,23 +123,23 @@ Let's see what Regex features are supported by languages that are transpiled to 
 
 ### Basic regex features
 
-| Feature                            |        Melody         | Pomsky | Egg Expr. | Rx Expr. |
-| ---------------------------------- | :-------------------: | :----: | :-------: | :------: |
-| [Greedy repetition][greedy]        |          ✅           |   ✅   |    ✅     |    ✅    |
-| [Lazy repetition][lazy]            |          ✅           |   ✅   |    ✅     |    ✅    |
-| [Dot]                              |          ✅           |   ✅   |    ✅     |    ✅    |
-| [Character escape][non-printable]  |          ✅           |   ✅   |    ✅     |    ✅    |
-| [Character class][shorthand]       |          ✅           |   ✅   |    ✅     |    ✅    |
-| [Anchor]                           |          ✅           |   ✅   |    ✅     |    ✅    |
-| [Word boundary][boundary]          |          ✅           |   ✅   |    ✅     |    ✅    |
-| [Negated word boundary][boundary]  |          ✅           |   ✅   |    ✅     |    ✅    |
-| [Character range][charclass]       | partly<sup>\*\*</sup> |   ✅   |    ✅     |    ✅    |
-| [Character set][charclass]         |                       |   ✅   |    ✅     |    ✅    |
-| [Negated character set][charclass] | partly<sup>\*\*</sup> |   ✅   |    ✅     |    ✅    |
-| [Capturing group][capture]         |          ✅           |   ✅   |    ✅     |    ✅    |
-| [Alternation]                      |          ✅           |   ✅   |    ✅     |    ✅    |
-| [POSIX class][posix-class]         |                       |   ✅   |    ✅     |    ✅    |
-| [Non-capturing group][noncapture]  |          ✅           |   ✅   |    ✅     |          |
+| Feature                            |       Melody        | Pomsky | Egg Expr. | Rx Expr. |
+| ---------------------------------- | :-----------------: | :----: | :-------: | :------: |
+| [Greedy repetition][greedy]        |         ✅          |   ✅   |    ✅     |    ✅    |
+| [Lazy repetition][lazy]            |         ✅          |   ✅   |    ✅     |    ✅    |
+| [Dot]                              |         ✅          |   ✅   |    ✅     |    ✅    |
+| [Character escape][non-printable]  |         ✅          |   ✅   |    ✅     |    ✅    |
+| [Character class][shorthand]       |         ✅          |   ✅   |    ✅     |    ✅    |
+| [Anchor]                           |         ✅          |   ✅   |    ✅     |    ✅    |
+| [Word boundary][boundary]          |         ✅          |   ✅   |    ✅     |    ✅    |
+| [Negated word boundary][boundary]  |         ✅          |   ✅   |    ✅     |    ✅    |
+| [Character range][charclass]       | partly<sup>\*</sup> |   ✅   |    ✅     |    ✅    |
+| [Character set][charclass]         |                     |   ✅   |    ✅     |    ✅    |
+| [Negated character set][charclass] | partly<sup>\*</sup> |   ✅   |    ✅     |    ✅    |
+| [Capturing group][capture]         |         ✅          |   ✅   |    ✅     |    ✅    |
+| [Alternation]                      |         ✅          |   ✅   |    ✅     |    ✅    |
+| [POSIX class][posix-class]         |                     |   ✅   |    ✅     |    ✅    |
+| [Non-capturing group][noncapture]  |         ✅          |   ✅   |    ✅     |          |
 
 [greedy]: https://www.regular-expressions.info/repeat.html
 [lazy]: https://www.regular-expressions.info/repeat.html#lazy
@@ -154,10 +154,7 @@ Let's see what Regex features are supported by languages that are transpiled to 
 [alternation]: https://www.regular-expressions.info/alternation.html
 [posix-class]: https://www.regular-expressions.info/posixbrackets.html#class
 
-- `C` to match all code points
-- `![n]` to match all code points except line breaks
-
-<sup>\*\*</sup>Character ranges and negated sets in Melody only support ASCII letters, digits and
+<sup>\*</sup>Character ranges and negated sets in Melody only support ASCII letters, digits and
 a few special characters.
 
 ### Advanced features
@@ -216,7 +213,7 @@ Note that Melody and Pomsky support inline regexes. Because of this, all Regex f
 <sup>\*</sup>All languages can match a code point with the dot, if multiline mode is enabled in the
 regex engine.
 
-<sup>\*\*</sup>Pomsky can currently optimize repetitions and remove redundant groups. More optimizations are planned.
+<sup>\*\*</sup>Pomsky can currently optimize repetitions, remove redundant or empty groups and deduplicate code points in character sets. More optimizations are planned.
 
 ## Tooling
 

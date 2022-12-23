@@ -24,7 +24,7 @@ which should be enough to read the grammar:
 - Verbatim text is wrapped in double quotes ({{<po>}}""{{</po>}}) or single quotes
   ({{<po>}}''{{</po>}}).
 
-- A {{<po>}}*{{</po>}} after a rule indicates that it repeats 0 or more times.
+- A {{<po>}}\*{{</po>}} after a rule indicates that it repeats 0 or more times.
 
 - A {{<po>}}+{{</po>}} after a rule indicates that it repeats 1 or more times.
 
@@ -114,11 +114,13 @@ let AtomExpression =
     | Group
     | String
     | CharacterSet
+    | InlineRegex
     | Boundary
     | Reference
     | NumberRange
     | CodePoint
-    | Name;
+    | Name
+    | '.';
 ```
 
 ### Group
@@ -126,7 +128,9 @@ let AtomExpression =
 ```pomsky
 let Group = GroupKind? '(' Expression ')';
 
-let GroupKind = ':' Name?;
+let GroupKind =
+    | ':' Name?
+    | 'atomic';
 ```
 
 ### CharacterSet
@@ -191,6 +195,12 @@ let UnicodeProperty = '!'? Name;
 
 Details about supported Unicode properties can be [found here](../unicode-properties).
 
+### InlineRegex
+
+```pomsky
+let InlineRegex = 'regex' String;
+```
+
 ### Boundary
 
 ```pomsky
@@ -221,8 +231,7 @@ let Base = 'base' Number;
 ```
 
 Note that the strings must contain digits or ASCII letters in the supported range. For example,
-in `base 16`, the characters `0123456789abcdefABCDEF` are allowed. The base must be between 2 and
-36.
+in `base 16`, the characters `0123456789abcdefABCDEF` are allowed. The base must be between 2 and 36.
 
 ## Tokens
 

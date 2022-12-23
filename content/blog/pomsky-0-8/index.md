@@ -28,7 +28,7 @@ compatible with many RegExp engines, including JavaScript, Java, PCRE, Ruby, Pyt
 
 ## Announcement
 
-Hi! I'm Ludwig, and I created Pomsky in my spare time. I am pleased to announce that you can now [sponsor me](https://github.com/sponsors/Aloso) for my work! It's been a lot of fun to develop Pomsky, but as Pomsky is being used by more and more people, I will need more time for maintenance and improving the developer experience.Donations will help me to invest the time needed. If you can spare a few bucks or convince your employer to sponsor me, that would go a long way to make Pomsky sustainable.
+Hi! I'm Ludwig, and I created Pomsky in my spare time. I am pleased to announce that you can now [sponsor me](https://github.com/sponsors/Aloso) for my work! It's been a lot of fun to develop Pomsky, but as Pomsky is being used by more and more people, I will need more time for maintenance and improving the developer experience. Donations will help me to invest the time needed. If you can spare a few bucks or convince your employer to sponsor me, that would go a long way to make Pomsky sustainable.
 
 All sponsors will receive monthly updates on what I am working on, as I want to be transparent about how your money is used. Find out more on [my GitHub sponsors page](https://github.com/sponsors/Aloso).
 
@@ -72,11 +72,11 @@ However, `Codepoint` won't work in ERE (POSIX-extended regular expressions), whi
 
 Pomsky now does an optimization pass right before code generation. Before, optimizations were intermingled with parsing and code generation, which led to some problems: Parsing wasn't lossless (extra parentheses would get lost), and the code was hard to maintain and iterate on. The new optimization pass solves these problems while significantly improving the generated code in some cases:
 
-- Subsequent repetitions are now merged whenever possible. For example, `('x'{1,9})?` becomes `x{0,9}`.
-- Duplicated items in a character set are removed. For example, `['hello world']` becomes `[helo wrd]`.
-- Empty groups like `(() '')` are removed, even when followed by a repetition.
+- Subsequent repetitions are now merged whenever possible. For example, {{<po>}}('x'{1,9})?{{</po>}} becomes {{<regexp>}}x{0,9}{{</regexp>}}.
+- Duplicated items in a character set are removed. For example, {{<po>}}['hello world']{{</po>}} becomes {{<regexp>}}[helo wrd]{{</regexp>}}.
+- Empty groups like {{<po>}}(() ''){{</po>}} are removed, even when followed by a repetition.
 
-More optimizations are planned: For example, we want to make it possible to combine alternatives with a common prefix, like `'make' | 'maple' | 'maker'`. Ideally, this would produce the output `ma(ker?|ple)`, which is much faster in more traditional regex engines that use backtracking instead of a [DFA](https://en.wikipedia.org/wiki/Deterministic_finite_automaton).
+More optimizations are planned: For example, we want to make it possible to combine alternatives with a common prefix, like {{<po>}}'make' | 'maple' | 'maker'{{</po>}}. Ideally, this would produce the output {{<regexp>}}ma(?:ker??|ple){{</regexp>}}, which is much faster in more mainstream[^1] regex engines that use backtracking instead of a [DFA](https://en.wikipedia.org/wiki/Deterministic_finite_automaton).
 
 ## Testing improvements and bugfixes
 
@@ -100,8 +100,8 @@ The help messages have been extended. `pomsky -h` now gives a short summary, whi
 
 You might remember that I replaced `clap` with a more lightweight argument parsing library. The new library we're using doesn't support help generation, so I wrote a macro to generate help messages that can contain formatting and color. It is general enough that I might publish it as a separate crate, stay tuned!
 
----
-
 Happy Hanukkah! Merry Christmas! Happy Holidays!
 
 Ludwig
+
+[^1]: An earlier version of this post said that “traditional” regex engines use backtracking. That's not quite correct; backtracking only became popular with Perl. All regex flavors supported by Pomsky use backtracking, except for Rust, which builds a lazy DFA.
