@@ -117,6 +117,8 @@ h5,
 }
 
 main > nav {
+  margin-bottom: 1rem;
+
   h3 {
     color: #b53636;
 
@@ -125,10 +127,19 @@ main > nav {
     }
   }
 
+  #onThisPage > .card-body {
+    border: none;
+    padding: 0;
+  }
+
   #TableOfContents {
     padding-left: 1rem;
     position: relative;
-    margin-bottom: 2rem;
+    margin: 0;
+
+    ul {
+      margin: -0.25rem 0 0.25rem 0;
+    }
 
     &::before {
       content: '';
@@ -191,11 +202,17 @@ body .offcanvas .banner .nav a.active,
   color: #b53636;
 }
 
-[data-dark-mode] body .btn-toggle-nav a.active,
-[data-dark-mode] body .offcanvas .nav-link.active,
-[data-dark-mode] body .offcanvas .banner .nav a.active,
-.banner .nav [data-dark-mode] body .offcanvas a.active {
-  color: #f4b73d;
+[data-dark-mode] body {
+  .btn-toggle-nav a.active,
+  .offcanvas .nav-link.active,
+  .offcanvas .banner .nav a.active,
+  .banner .nav .offcanvas a.active {
+    color: #f4b73d;
+  }
+
+  .btn-outline-primary:focus {
+    color: #212529;
+  }
 }
 
 p,
