@@ -30,7 +30,7 @@ schemaLogoWidth = 512
 schemaLogoHeight = 512
 
 ## Sitelinks Search Box
-siteLinksSearchBox = false
+siteLinksSearchBox = true
 
 ## Chrome Browser
 themeColor = "#fff"
@@ -69,6 +69,9 @@ docsRepoSubPath = ""
 editPage = false
 lastMod = false
 
+[sections]
+sectionNav = ["docs"]
+
 [options]
 lazySizes = true
 clipBoard = true
@@ -76,7 +79,7 @@ instantPage = true
 flexSearch = true
 darkMode = true
 bootStrapJs = true
-breadCrumb = false
+breadCrumb = true
 highLight = true
 kaTex = false
 multilingualMode = false
