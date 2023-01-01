@@ -1,34 +1,19 @@
-import Clipboard from 'clipboard'
-
-var pre = document.getElementsByTagName('pre')
+const pre = document.getElementsByTagName('pre')
 
 for (var i = 0; i < pre.length; ++i) {
-  var element = pre[i]
-  var mermaid = element.getElementsByClassName('language-mermaid')[0]
-
-  if (mermaid == null) {
-    element.insertAdjacentHTML('afterbegin', '<button class="btn btn-copy"></button>')
-  }
+  const element = pre[i]
+  const content = element.textContent
+  const button = document.createElement('button')
+  button.className = 'btn btn-copy'
+  button.addEventListener('click', () => {
+    navigator.clipboard.writeText(content).then(
+      () => {
+        console.log('copied')
+      },
+      () => {
+        console.log('copying to clipboard failed')
+      }
+    )
+  })
+  element.prepend(button)
 }
-
-var clipboard = new Clipboard('.btn-copy', {
-  target: function (trigger) {
-    return trigger.nextElementSibling
-  },
-})
-
-console.log(clipboard)
-
-clipboard.on('success', function (e) {
-  /*
-    console.info('Action:', e.action);
-    console.info('Text:', e.text);
-    console.info('Trigger:', e.trigger);
-    */
-
-  e.clearSelection()
-})
-
-clipboard.on('error', function (e) {
-  console.error('Clipboard error:', e)
-})
