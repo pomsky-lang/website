@@ -1,5 +1,5 @@
 #examples {
-  margin: 0 0 2rem 0;
+  margin: 2rem 0;
 
   &.hidden * {
     display: none;
@@ -7,41 +7,54 @@
 
   .example-tabs {
     display: flex;
-    flex-direction: column;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
     flex-wrap: wrap;
-
-    @media (min-width: 992px) {
-      flex-direction: row;
-      margin-bottom: 0;
-    }
 
     button.example-tab {
       background: transparent;
       border: none;
-      border-left: 3px solid transparent;
-      padding: 0.25rem 0.5rem;
+      padding: 0.45rem 0.75rem;
       font-weight: 500 !important;
       color: inherit;
       font: inherit;
+      font-size: 1.08rem;
       transition: border-bottom-color 0.5s;
       text-align: left;
 
       &.active {
         font-weight: 600 !important;
-        border-color: #b53636;
-
-        [data-dark-mode] & {
-          border-color: #ffbb63;
-        }
+        color: #ffbb63;
       }
+    }
 
-      @media (min-width: 992px) {
-        padding: 0.5rem;
-        margin: 0 0.5rem;
-        border-left: 0;
-        border-bottom: 3px solid transparent;
+    @media (min-width: 768px) {
+      font-size: inherit;
+
+      button.example-tab {
+        padding: 0.35rem 0.625rem;
       }
+    }
+
+    @media (min-width: 1200px) {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, 200px);
+    }
+  }
+
+  @media (min-width: 1200px) {
+    display: flex;
+    align-items: start;
+
+    .example-tabs {
+      width: 420px;
+
+      button.example-tab {
+        padding: 0.4rem 0.25rem;
+      }
+    }
+
+    .example-body {
+      flex-grow: 1;
     }
   }
 
@@ -50,22 +63,14 @@
     flex-direction: column;
     gap: 0.3rem 0;
     align-items: stretch;
-    width: 100%;
+    width: auto;
     border-radius: 0.4rem;
     overflow: hidden;
-
-    @media (min-width: 992px) {
-      flex-direction: row;
-    }
 
     pre {
       margin: 0;
       border-radius: 0;
-
-      @media (min-width: 992px) {
-        width: 0;
-        flex-grow: 1;
-      }
+      white-space: pre-wrap;
 
       code {
         border-radius: 0;
@@ -78,25 +83,6 @@
         display: none;
       }
 
-      @media (min-width: 992px) {
-        &:first-child::after {
-          content: '';
-          display: block;
-          position: absolute;
-          right: 0;
-          top: 32px;
-          width: 40px;
-          height: 40px;
-          transform: scaleX(0.67) rotate(45deg);
-          border: 8px solid #cac0ae;
-          border-width: 8px 8px 0 0;
-
-          [data-dark-mode] & {
-            border-color: #353b41;
-          }
-        }
-      }
-
       code::after {
         content: 'pomsky';
         display: block;
@@ -104,9 +90,8 @@
         bottom: 0;
         background-color: #eae7e1;
         font: 90% var(--bs-font-sans-serif);
-        padding: 0.3rem 0.6rem;
+        padding: 0.5rem 0.8rem;
         color: #7c7c7c;
-        opacity: 0;
         transition: opacity 0.3s;
 
         [data-dark-mode] & {
@@ -115,14 +100,10 @@
         }
       }
 
-      &:hover code::after {
-        opacity: 1;
-      }
-
       &:first-child code::after {
         content: 'pomsky';
-        left: 0;
-        border-top-right-radius: 0.4rem;
+        right: 0;
+        border-top-left-radius: 0.4rem;
       }
 
       &:last-child code::after {

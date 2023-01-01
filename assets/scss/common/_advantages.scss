@@ -1,0 +1,48 @@
+.advantages-row {
+  > div {
+    margin: 2.5rem 0 0 0;
+
+    > :not(img) {
+      margin-left: 130px;
+    }
+
+    img {
+      width: 96px;
+      height: auto;
+      float: left;
+      margin-right: 34px;
+    }
+  }
+
+  h2 {
+    margin-top: 0;
+  }
+
+  @media (min-width: 992px) {
+    margin-bottom: 3rem;
+
+    > div {
+      margin: 1rem 0 0 0;
+      text-align: center;
+
+      > :not(img) {
+        margin-left: 0;
+      }
+
+      img {
+        width: 144px;
+        float: none;
+        margin-right: 0;
+        margin-top: 1rem;
+      }
+    }
+
+    h2 {
+      margin-top: 1.25rem;
+    }
+  }
+}
+
+.advantages-row + h2 {
+  margin-top: 4rem;
+}
