@@ -24,7 +24,7 @@ which should be enough to read the grammar:
 - Verbatim text is wrapped in double quotes ({{<po>}}""{{</po>}}) or single quotes
   ({{<po>}}''{{</po>}}).
 
-- A {{<po>}}\*{{</po>}} after a rule indicates that it repeats 0 or more times.
+- A {{<po>}}*{{</po>}} after a rule indicates that it repeats 0 or more times.
 
 - A {{<po>}}+{{</po>}} after a rule indicates that it repeats 1 or more times.
 
@@ -75,7 +75,7 @@ An expression which can have a prefix or suffix.
 
 ```pomsky
 let FixExpression =
-    | LookaroundPrefix* Expression
+    | LookaroundPrefix Expression
     | AtomExpression RepetitionSuffix*;
 ```
 
@@ -222,6 +222,8 @@ let Sign =
     | '-';
 ```
 
+Note that references must be ASCII-only, so the allowed characters are `a-z`, `A-Z`, `_`, and `0-9`. Numbers may not appear the start of the name.
+
 ### NumberRange
 
 ```pomsky
@@ -240,7 +242,7 @@ used in the above grammar:
 
 ### Name
 
-Names (or _identifiers_) consist of a letter or underscore, followed by any number of letters,
+Names (or _identifiers_) consist of a letter or underscore (`_`), followed by any number of letters,
 digits and underscores. For example:
 
 ```pomsky
@@ -250,6 +252,8 @@ hello  i18n  _foo_  Gänsefüßchen
 # invalid identifiers
 kebab-case  42  👍‍
 ```
+
+A letter is any code point with the `Alphabetic` property, which can be matched in most regex flavors with `\p{Alpha}`. A digit is any code point from the `Number` general categories, which can be matched in most regex flavors with `\pN`.
 
 ### Number
 
@@ -301,5 +305,5 @@ Note that the `+` is not required, mainly to be compatible with Rust tokenizatio
 
 ## Note about this grammar
 
-Even though this grammar is written using pomsky syntax, it isn't actually accepted by the pomsky
+Even though this grammar is written using Pomsky syntax, it isn't actually accepted by the pomsky
 compiler, because it uses cyclic variables.
