@@ -57,7 +57,7 @@ footer = 'Powered by <a class="text-muted" href="https://gohugo.io/">Hugo</a> an
 copyRight = "Copyright (c) 2022 Ludwig Stecher"
 
 # Alert
-alert = true
+alert = false
 alertDismissable = false
 alertText = 'Pomsky 0.8 now available! <a class="alert-link stretched-link" href="/blog/pomsky-0.8-released/">Read blog post</a>'
 
