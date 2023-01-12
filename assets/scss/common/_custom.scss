@@ -21,12 +21,37 @@
     'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
+body .alert-primary {
+  background-color: #ff5500;
+  padding-bottom: 0.9rem;
+}
+
 [data-dark-mode] body .alert-primary {
-  background-color: #962d2d;
+  background-color: #ff5500;
   color: white;
 
   a {
     color: white;
+  }
+}
+
+.form-control,
+.comment-form input[type='text'],
+.comment-form input[type='email'],
+.comment-form input[type='url'],
+.comment-form textarea,
+.search-form .search-field {
+  &.is-search:focus {
+    border-color: #ff5500;
+  }
+}
+
+a {
+  color: #005986;
+
+  &:hover,
+  &:focus {
+    color: #006ca3;
   }
 }
 
@@ -109,7 +134,7 @@ h5,
 }
 
 #toc a.active {
-  color: #b53636;
+  color: #db4900;
 
   [data-dark-mode] & {
     color: #f4b73d;
@@ -120,7 +145,7 @@ main > nav {
   margin-bottom: 1rem;
 
   h3 {
-    color: #b53636;
+    color: #db4900;
 
     [data-dark-mode] & {
       color: #f4b73d;
@@ -149,7 +174,7 @@ main > nav {
       border-radius: 3px / 5px;
       width: 3px;
       height: 100%;
-      background-color: #b53636;
+      background-color: #ff5500;
 
       [data-dark-mode] & {
         background-color: #f4b73d;
@@ -159,7 +184,9 @@ main > nav {
 }
 
 .header-bar {
-  border-image-source: linear-gradient(90deg, #b53636, #f4b73d 50%, #b53636);
+  border: none;
+  height: 4px;
+  background-color: #ff5500;
 }
 
 body .btn {
@@ -170,28 +197,36 @@ body .btn {
   }
 }
 
-@include light-and-dark {
-  body .page-links li:not(:first-child) {
-    border: none;
-  }
+:root {
+  --main-btn-color: #ff5500;
+  --main-btn-text: white;
+}
 
-  .section .btn {
-    border: 2px solid #f4b73d;
-    color: #f4b73d;
+[data-dark-mode] {
+  --main-btn-color: #f4b73d;
+  --main-btn-text: black;
+}
 
-    &.btn-primary {
-      &,
-      &:visited {
-        background-color: #f4b73d;
-        border-color: #f4b73d;
-        color: black;
-      }
+body .page-links li:not(:first-child) {
+  border: none;
+}
 
-      &:hover,
-      &:focus {
-        background-color: #f0a818;
-        border-color: #f0a818;
-      }
+.section .btn {
+  border: 2px solid var(--main-btn-color);
+  color: var(--main-btn-color) !important;
+
+  &.btn-primary {
+    &,
+    &:visited {
+      background-color: var(--main-btn-color);
+      border-color: var(--main-btn-color);
+      color: var(--main-btn-text) !important;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: var(--main-btn-color);
+      border-color: var(--main-btn-color);
     }
   }
 }
@@ -200,7 +235,7 @@ body .btn-toggle-nav a.active,
 body .offcanvas .nav-link.active,
 body .offcanvas .banner .nav a.active,
 .banner .nav body .offcanvas a.active {
-  color: #b53636;
+  color: #db4900;
 }
 
 [data-dark-mode] body {
