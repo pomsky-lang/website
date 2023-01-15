@@ -68,6 +68,10 @@ samp {
   }
 }
 
+hr {
+  margin: 1.5rem 0;
+}
+
 .alert {
   font-family: var(--bs-font-sans-serif);
   font-size: 0.95rem;
@@ -269,4 +273,14 @@ li {
 
 .example-heading {
   margin-top: 0;
+}
+
+.alert-dismissible .btn-close {
+  filter: none;
+  opacity: 0.9;
+
+  &:hover,
+  &:focus {
+    opacity: 1;
+  }
 }
