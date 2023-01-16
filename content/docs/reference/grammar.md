@@ -76,7 +76,7 @@ An expression which can have a prefix or suffix.
 ```pomsky
 let FixExpression =
     | LookaroundPrefix Expression
-    | AtomExpression RepetitionSuffix*;
+    | AtomExpression RepetitionSuffix?;
 ```
 
 ### Lookaround
