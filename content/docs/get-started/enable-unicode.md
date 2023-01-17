@@ -15,7 +15,7 @@ toc: true
 
 Pomsky has good Unicode support, but you might still have to enable Unicode support in your regex engine. This document explains how to do that for various regex engines.
 
-If some information here is missing, outdated or needs clarification, I would greatly appreciate your help! You can [edit this file](https://github.com/rulex-rs/website/tree/main/content/docs/get-started/enable-unicode.md) on GitHub.
+If some information here is missing, outdated or needs clarification, I would greatly appreciate your help! You can [edit this file](https://github.com/pomsky-lang/website/tree/main/content/docs/get-started/enable-unicode.md) on GitHub.
 
 ## Rust
 

@@ -54,7 +54,7 @@ take only a small fraction of the time required for parsing.
 The new parser doesn't use any libraries. It has all the flexibility I need, and turned out to be
 much faster. I haven't even started to optimize it, and it's already outperforming the previous
 parser by **up to 500%** according to my
-[benchmarks](https://github.com/rulex-rs/pomsky/tree/main/benchmark).
+[benchmarks](https://github.com/pomsky-lang/pomsky/tree/main/benchmark).
 
 So how did the code change? It became slightly longer, but in exchange, control flow is much more
 explicit, so it's easier to reason about the code.

@@ -71,4 +71,4 @@ Ludwig
 [jade-pug]: https://github.com/pugjs/pug/issues/2184
 [chomsky]: https://en.wikipedia.org/wiki/Noam_Chomsky
 [chomskys-hierarchy]: https://www.freecodecamp.org/news/exploring-the-linguistics-behind-regular-expressions-596fab41146/
-[renaming-roadmap]: https://github.com/rulex-rs/pomsky/issues/40
+[renaming-roadmap]: https://github.com/pomsky-lang/pomsky/issues/40

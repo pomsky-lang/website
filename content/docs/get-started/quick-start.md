@@ -26,7 +26,7 @@ The CLI allows you to compile pomsky expressions to regexes in the command line.
 ### Use pre-built binaries
 
 Binaries are available for Windows, Linux and macOS. Download them from the
-[releases page](https://github.com/rulex-rs/pomsky/releases).
+[releases page](https://github.com/pomsky-lang/pomsky/releases).
 
 ### Use AUR package
 

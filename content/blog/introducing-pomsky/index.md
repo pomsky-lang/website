@@ -133,15 +133,15 @@ Ludwig
 
 [homepage]: /#examples
 [hn]: https://news.ycombinator.com/item?id=31690878
-[security-advisories]: https://github.com/rulex-rs/pomsky/security/advisories?state=published
+[security-advisories]: https://github.com/pomsky-lang/pomsky/security/advisories?state=published
 [evanrichter]: https://github.com/evanrichter/
 [renaming-rulex]: /blog/renaming-rulex/
-[changelog]: https://github.com/rulex-rs/pomsky/blob/main/CHANGELOG.md
+[changelog]: https://github.com/pomsky-lang/pomsky/blob/main/CHANGELOG.md
 [monaco-editor]: https://microsoft.github.io/monaco-editor/
 [regexr]: https://regexr.com/
 [variables]: /docs/language-tour/variables/
 [ranges]: /docs/language-tour/ranges/
 [references]: /docs/language-tour/references/
 [built-ins]: /docs/reference/built-in-variables/
-[general-feedback]: https://github.com/rulex-rs/pomsky/issues/42
+[general-feedback]: https://github.com/pomsky-lang/pomsky/issues/42
 [mail]: mailto:feedback@pomsky-lang.org

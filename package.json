@@ -5,7 +5,7 @@
   "browserslist": [
     "defaults"
   ],
-  "repository": "https://github.com/rulex-rs/website",
+  "repository": "https://github.com/pomsky-lang/website",
   "license": "MIT OR Apache-2.0",
   "publishConfig": {
     "access": "public"

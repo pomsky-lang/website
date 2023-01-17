@@ -63,7 +63,7 @@ alertText = 'Pomsky 0.9 now available! <a class="alert-link stretched-link" href
 
 # Edit Page
 repoHost = "GitHub"
-docsRepo = "https://github.com/rulex-rs/website"
+docsRepo = "https://github.com/pomsky-lang/website"
 docsRepoBranch = "main"
 docsRepoSubPath = ""
 editPage = false

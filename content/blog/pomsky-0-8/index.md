@@ -84,11 +84,11 @@ For this release we improved our testing and fuzzing infrastructure. We have a t
 
 So to increase our confidence in Pomsky's correctness, we started to compile regexes produced by Pomksy with the respective regex engine. For now, we only do this in the Rust and PCRE flavors, but we plan to compile more regex flavors in the future. This still doesn't guarantee that the output is correct, but at least it checks if the output is syntactically valid. With this change, the fuzzer was able to find a few bugs during code generation.
 
-We also started measuring test coverage and uploading it to [coveralls.io](https://coveralls.io/github/rulex-rs/pomsky?branch=main). Looking at the reports helped us identify parts that needed more tests, and improving our test coverage. Unfortunately, the data isn't as reliable as we'd hoped: Coveralls highlights many struct definitions and enum variants as "untested", which is inaccurate. Measuring test coverage is still a net win, just don't read too much into the numbers 😉
+We also started measuring test coverage and uploading it to [coveralls.io](https://coveralls.io/github/pomsky-lang/pomsky?branch=main). Looking at the reports helped us identify parts that needed more tests, and improving our test coverage. Unfortunately, the data isn't as reliable as we'd hoped: Coveralls highlights many struct definitions and enum variants as "untested", which is inaccurate. Measuring test coverage is still a net win, just don't read too much into the numbers 😉
 
 ## Auditable binaries
 
-The binaries [published on GitHub](https://github.com/rulex-rs/pomsky/releases) and the [AUR](https://aur.archlinux.org/packages/pomsky-bin) are now built with `cargo audit`, so we can be sure there are no known vulnerabilites when we publish a new version. Additionally, the list of dependencies is embedded in the binaries, so you can check with `cargo audit bin <PATH_TO_BINARY>` if any vulnerabilities were found since then. [cargo-audit](https://github.com/rustsec/rustsec) is a tool that scans libraries for advisories reported in the [rustsec advisory DB](https://rustsec.org/).
+The binaries [published on GitHub](https://github.com/pomsky-lang/pomsky/releases) and the [AUR](https://aur.archlinux.org/packages/pomsky-bin) are now built with `cargo audit`, so we can be sure there are no known vulnerabilites when we publish a new version. Additionally, the list of dependencies is embedded in the binaries, so you can check with `cargo audit bin <PATH_TO_BINARY>` if any vulnerabilities were found since then. [cargo-audit](https://github.com/rustsec/rustsec) is a tool that scans libraries for advisories reported in the [rustsec advisory DB](https://rustsec.org/).
 
 ## CLI changes
 

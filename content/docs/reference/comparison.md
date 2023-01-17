@@ -16,12 +16,12 @@ toc: true
 [This wiki](https://github.com/oilshell/oil/wiki/Alternative-Regex-Syntax) has a list of projects
 with similar goals to Pomsky. Here's a list of the most popular projects:
 
-{{< alert icon="⚠️" text="Disclaimer that as the maintainer of Pomsky, I am obviously biased. If you find any incorrect or misleading information, please <a href='https://github.com/rulex-rs/website/issues'>open an issue</a>." />}}
+{{< alert icon="⚠️" text="Disclaimer that as the maintainer of Pomsky, I am obviously biased. If you find any incorrect or misleading information, please <a href='https://github.com/pomsky-lang/website/issues'>open an issue</a>." />}}
 
 | Project                                  | Types                            | GitHub                                                |
 | ---------------------------------------- | -------------------------------- | ----------------------------------------------------- |
 | [Melody]                                 | _Transpiled_                     | {{<gh-stars yoav-lavi melody >}}                      |
-| [Pomsky]                                 | _Transpiled_                     | {{<gh-stars rulex-rs pomsky >}}                       |
+| [Pomsky]                                 | _Transpiled_                     | {{<gh-stars pomsky-lang pomsky >}}                    |
 | [Egg Expressions][egg-expressions]       | _Transpiled_<br>_App_: Oil shell |
 | [Rx Expressions][emacs-rx]               | _Transpiled_<br>_App_: Emacs     |
 | [Raku Grammars][raku-grammars]           | _App_: Raku                      |
@@ -263,5 +263,5 @@ regex engine.
 
 Found a mistake? Please [fix it on GitHub][edit-on-github].
 
-[edit-on-github]: https://github.com/rulex-rs/website/blob/main/content/docs/reference/comparison.md
+[edit-on-github]: https://github.com/pomsky-lang/website/blob/main/content/docs/reference/comparison.md
 [oil-bug]: https://github.com/oilshell/oil/issues/1224

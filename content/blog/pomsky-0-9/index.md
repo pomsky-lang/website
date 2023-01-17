@@ -36,7 +36,7 @@ This is a small release focusing on maintenance and fixing bugs. The only user-f
 
 The other new feature is that Pomsky can now return all output as JSON with the `--json` flag, which will be important for tools and IDE integrations. Someone is currently working on an IntelliJ plugin, which they plan to release in a few weeks. It already offers many nice features, and I'm excited to announce it once the initial version is ready! If you're using VS Code or another editor, please be patient. In the meantime, you can always use the [online playground](https://playground.pomsky-lang.org/), which offers syntax highlighting, auto-completion and inline diagnostics.
 
-If you want to contribute to Pomsky, we now have a [contributor's guide](https://github.com/rulex-rs/pomsky/blob/main/CONTRIBUTING.md) to help you get off the ground. It includes an architectural overview and explains how Pomsky is tested. If something is missing, please reach out.
+If you want to contribute to Pomsky, we now have a [contributor's guide](https://github.com/pomsky-lang/pomsky/blob/main/CONTRIBUTING.md) to help you get off the ground. It includes an architectural overview and explains how Pomsky is tested. If something is missing, please reach out.
 
 ## More testing improvements
 
@@ -50,7 +50,7 @@ My solution was to spawn long-running processes that communicate via stdin and s
 
 When I started fuzzing with regex testing for Java, JavaScript, Python, Ruby, Rust and PCRE, it took only a few seconds for the fuzzer to spit out the first error. In total, it found 12 bugs, 10 of which are fixed in this release. Fixing the other bugs will require more work.
 
-You can find the complete changelog [here](https://github.com/rulex-rs/pomsky/blob/v0.9/CHANGELOG.md#090---2023-01-14).
+You can find the complete changelog [here](https://github.com/pomsky-lang/pomsky/blob/v0.9/CHANGELOG.md#090---2023-01-14).
 
 ## Roadmap
 
