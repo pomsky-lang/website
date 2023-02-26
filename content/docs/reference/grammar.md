@@ -24,7 +24,7 @@ which should be enough to read the grammar:
 - Verbatim text is wrapped in double quotes ({{<po>}}""{{</po>}}) or single quotes
   ({{<po>}}''{{</po>}}).
 
-- A {{<po>}}*{{</po>}} after a rule indicates that it repeats 0 or more times.
+- A {{<po>}}\*{{</po>}} after a rule indicates that it repeats 0 or more times.
 
 - A {{<po>}}+{{</po>}} after a rule indicates that it repeats 1 or more times.
 
@@ -132,6 +132,19 @@ let GroupKind =
     | ':' Name?
     | 'atomic';
 ```
+
+**Note**: A group name must be ASCII-only and may not contain underscores. Furthermore, a group name
+must be no longer than 32 characters. For example:
+
+```pomsky
+:underscores_are_invalid()  :äöéŧûøIsInvalid()
+:thisGroupNameIsTooLongUnfortunately()
+
+:thisIsAllowed()
+```
+
+These restrictions exist because of Java. To make Pomsky behave consistently across regex flavors,
+we have to use the most restrictive rules for all flavors.
 
 ### CharacterSet
 
@@ -254,6 +267,8 @@ kebab-case  42  👍‍
 ```
 
 A letter is any code point with the `Alphabetic` property, which can be matched in most regex flavors with `\p{Alpha}`. A digit is any code point from the `Number` general categories, which can be matched in most regex flavors with `\pN`.
+
+Note that group names have more restrictions than variable names, [see above](#group).
 
 ### Number
 
