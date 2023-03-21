@@ -12,6 +12,7 @@ hljs.registerLanguage('pomsky', function (hljs) {
   return {
     name: 'pomsky',
     aliases: ['pomsky'],
+    unicodeRegex: true,
     contains: [
       hljs.HASH_COMMENT_MODE,
       {
@@ -19,27 +20,76 @@ hljs.registerLanguage('pomsky', function (hljs) {
         variants: [
           {
             begin: /"/,
-            contains: [{ begin: /\\./, className: 'keyword' }],
+            contains: [
+              { begin: /\\[\\"]/, className: 'keyword' },
+              { begin: /\\./, className: 'illegal' },
+            ],
             end: /"/,
           },
           { begin: /'/, end: /'/ },
         ],
       },
       {
-        className: 'keyword',
-        beginKeywords: 'let lazy greedy range base atomic enable disable if else recursion regex',
+        scope: 'codepoint',
+        className: 'literal',
+        begin: /\bU\s*\+\s*[\p{Alpha}\d_]+/,
+        returnBegin: true,
+        contains: [
+          { begin: /\bU\s*\+\s*/ },
+          {
+            // 0-D7FF
+            begin:
+              /\b0*(0|[1-9a-cA-C][0-9a-fA-F]{0,3}|[dD](?:[0-7][0-9a-fA-F]{0,2}|[8-9a-fA-F][0-9a-fA-F]?)?|[e-fE-F][0-9a-fA-F]{0,2})\b/,
+            endsParent: true,
+          },
+          {
+            // E000-10FFFF
+            begin:
+              /\b0*(1(?:0[0-9a-fA-F]{3,4}|[1-9a-fA-F][0-9a-fA-F]{3})|[2-9a-dA-D][0-9a-fA-F]{4}|[e-fE-F][0-9a-fA-F]{3,4})\b/,
+            endsParent: true,
+          },
+          {
+            className: 'illegal',
+            begin: /\b[\p{Alpha}\d_]+\b/,
+            endsParent: true,
+          },
+        ],
       },
       {
         className: 'keyword',
-        begin: /::?\s*[+-]?[A-Za-z0-9]*/,
+        beginKeywords:
+          'U let lazy greedy range base atomic enable disable if else recursion regex test',
       },
       {
-        className: 'literalx',
-        begin: /U\+[0-9a-fA-F]+|<%|%>|%|\^|\$/,
+        className: 'keyword',
+        begin: /::?\s*[+-]?[\p{Alpha}\d_]*/,
+        returnBegin: true,
+        contains: [
+          {
+            // number backreference
+            begin: /::\s*[+-]?(0|[1-9][0-9]*)\b/,
+            endsParent: true,
+          },
+          {
+            // named capturing group or named backreference
+            begin: /::?\s*[a-zA-Z][a-zA-Z0-9]{0,31}\b/,
+            endsParent: true,
+          },
+          { begin: /::?\s*/ },
+          { begin: /\b[a-zA-Z][a-zA-Z0-9]{0,31}/ },
+          {
+            className: 'illegal',
+            begin: /[\p{Alpha}\d_]/,
+          },
+        ],
       },
       {
-        className: 'titlex',
-        begin: /\b[A-Za-z_][A-Za-z0-9_]*\b|\./,
+        className: 'literal',
+        begin: /[%^$]/,
+      },
+      {
+        className: 'title',
+        begin: /\b[\p{Alpha}_][\p{Alpha}\d_]*\b|\./,
       },
       {
         className: 'keyword',
@@ -51,9 +101,21 @@ hljs.registerLanguage('pomsky', function (hljs) {
       },
       {
         className: 'number',
-        variants: [
+        begin: /\b\d[\d_.]*\b/,
+        returnBegin: true,
+        contains: [
           {
-            begin: /\b\d+\b/,
+            begin: /\b(0|[1-9][0-9]*)(?!\.)\b/,
+            endsParent: true,
+          },
+          {
+            className: 'illegal',
+            begin: /\b0+(?=[\d_])/,
+          },
+          { begin: /\d/ },
+          {
+            className: 'illegal',
+            begin: /[._]/,
           },
         ],
       },

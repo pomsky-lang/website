@@ -57,16 +57,16 @@ pomsky --help
 
 ## Node module
 
-Pomsky can be used with the `pomsky-wasm` npm module. Install with
+Pomsky can be used with the `@pomsky-lang/compiler-web` npm module. Install with
 
 ```sh
-$ npm install pomsky-wasm   # yarn add pomsky-wasm
+$ npm i -s @pomsky-lang/compiler-web   # yarn add @pomsky-lang/compiler-web
 ```
 
 Then import and use it like this:
 
 ```js
-import init, { compile } from 'pomsky-wasm'
+import init, { compile } from '@pomsky-lang/compiler-web'
 
 init().then(() => {
   const input = `^ ('test' '!'+)? $`
@@ -75,8 +75,7 @@ init().then(() => {
 })
 ```
 
-It currently works in browsers, but not in Node. If you use `vite` for bundling, you need to
-**disable optimizations** for `pomsky-wasm` in development mode:
+It currently works in browsers, but not in Node. If you use `vite` for bundling, you need to **disable optimizations** for `@pomsky-lang/compiler-web` in development mode:
 
 ```js
 // vite.config.js
@@ -84,7 +83,7 @@ import { defineConfig } from 'vite'
 
 export default defineConfig((config) => ({
   optimizeDeps: {
-    exclude: config.mode === 'production' ? [] : ['pomsky-wasm'],
+    exclude: config.mode === 'production' ? [] : ['@pomsky-lang/compiler-web'],
   },
 }))
 ```

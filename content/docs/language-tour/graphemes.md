@@ -18,8 +18,7 @@ comes closest to what we perceive as a character. It can consist of more than on
 For example, emojis with modifiers (such as different skin tones, genders, etc.) usually consist of
 multiple code points.
 
-In pomsky, matching a grapheme cluster is done with {{<po>}}Grapheme{{</po>}}. For example,
-to match a text with at most 400 characters, you can write
+In Pomsky, matching a grapheme cluster is done with {{<po>}}Grapheme{{</po>}} (abbreviated as {{<po>}}G{{</po>}}). For example, to match a text with at most 400 characters, you can write
 
 ```pomsky
 Grapheme{0,400}

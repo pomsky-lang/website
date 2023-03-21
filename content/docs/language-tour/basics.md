@@ -18,7 +18,7 @@ First, let's get familiar with the basic building blocks of the language.
 Pomsky expressions describe the syntactical structure of a text. There are several kinds of
 expressions, which will be explained now.
 
-In pomsky, whitespace is insignificant, except between quotes. This means that we can add spaces
+In Pomsky, whitespace is insignificant, except between quotes. This means that we can add spaces
 and line breaks to make the code look clearer. We can also add comments to explain what the
 expressions are doing. They start with a `#` and span until the end of the line:
 
@@ -29,16 +29,17 @@ expressions are doing. They start with a `#` and span until the end of the line:
 
 ## Strings
 
-In pomsky, characters that should be matched as-is, are always wrapped in quotes. We can use
-double quotes ({{<po>}}""{{</po>}}) or single quotes ({{<po>}}''{{</po>}}). Text
-wrapped in quotes we call a _string_. It matches the exact content of the string:
+In Pomsky, characters that should be matched as-is are always wrapped in quotes. We can use
+double quotes ({{<po>}}""{{</po>}}) or single quotes ({{<po>}}''{{</po>}}). We call text
+wrapped in quotes a _string_. It matches the exact content of the string:
 
 ```pomsky
 "test"
 ```
 
 In double quoted strings ({{<po>}}"..."{{</po>}}), double quotes can be escaped by
-prepending a backslash. Backslashes also must be escaped:
+prepending a backslash. Strings in single quotes are "raw strings" and do not support backslash
+escapes:
 
 ```pomsky
 "\"C:\\windows\""
@@ -52,19 +53,21 @@ Pomsky consists of _expressions_. For example, a string is an expression. If we 
 expressions in a row, they are matched one after the other:
 
 ```pomsky
-'hello' 'world' '!'     # matches the string "helloworld!"
+'hello' 'world' '!'
+# is equivalent to
+'helloworld!'
 ```
 
 ## Alternatives
 
-What if we want to match multiple strings? In a regex, we can enumerate multiple alternatives,
+What if we want to match one of several strings? In a regex, we can enumerate multiple alternatives,
 divided by a {{<po>}}|{{</po>}}:
 
 ```regexp
 one|two|three|four|five
 ```
 
-The same works in pomsky:
+The same works in Pomsky:
 
 ```pomsky
 'one' | 'two' | 'three' | 'four' | 'five'

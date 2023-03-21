@@ -66,7 +66,7 @@
   color: #004d90;
 }
 
-.hljs .hljs-titlex {
+.hljs .hljs-title {
   color: #004d90;
 }
 
@@ -80,7 +80,7 @@
   font-weight: normal;
 }
 
-.hljs .hljs-literalx {
+.hljs .hljs-literal {
   color: #99008c;
   font-weight: normal;
 }
@@ -99,7 +99,7 @@
   color: #ffbb63;
 }
 
-[data-dark-mode] body .hljs .hljs-titlex {
+[data-dark-mode] body .hljs .hljs-title {
   color: #ffbb63;
 }
 
@@ -107,13 +107,13 @@
 [data-dark-mode] body .hljs .hljs-meta,
 [data-dark-mode] body .hljs .hljs-builtin-name,
 [data-dark-mode] body .hljs .hljs-literal,
-[data-dark-mode] body .hljs .hljs-literalx,
+[data-dark-mode] body .hljs .hljs-literal,
 [data-dark-mode] body .hljs .hljs-type,
 [data-dark-mode] body .hljs .hljs-params {
   color: #ffa6f6;
 }
 
-[data-dark-mode] body .hljs .hljs-literalx {
+[data-dark-mode] body .hljs .hljs-literal {
   color: #ffa6f6;
 }
 
@@ -125,10 +125,20 @@ body .hljs .hljs-diff-del {
   background-color: #ffbebe;
 }
 
+body .hljs .hljs-illegal {
+  color: #a80b0b;
+  text-decoration: underline;
+  text-decoration-style: wavy;
+}
+
 [data-dark-mode] body .hljs .hljs-diff-add {
   background-color: #064d00;
 }
 
 [data-dark-mode] body .hljs .hljs-diff-del {
   background-color: #4f0000;
+}
+
+[data-dark-mode] body .hljs .hljs-illegal {
+  color: #ff7272;
 }

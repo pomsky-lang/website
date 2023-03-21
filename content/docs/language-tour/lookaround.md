@@ -36,6 +36,6 @@ Note that lookbehind isn't supported everywhere, for example in Safari.
 
 Lookaround makes it possible to match a string in multiple ways. For example,
 {{<po>}}(!>> ('_' | 'for' | 'while' | 'if') %) [w]+ %{{</po>}} matches a string consisting
-of word characters, but not one of the keywords `_`, `for`, `while`and`if`. Be careful when using
+of word characters, but not one of the keywords `_`, `for`, `while` and `if`. Be careful when using
 this technique, because the lookahead might not match the same length as the expression after it.
 Here, we ensured that both match until the end of the word with {{<po>}}%{{</po>}}.

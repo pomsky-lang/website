@@ -3,7 +3,7 @@ title: 'Pomsky 0.9 and our roadmap'
 description: 'I just released pomsky 0.8 with a new, much faster parser.'
 excerpt: ''
 date: 2023-01-15T00:00:00
-lastmod: 2023-12-15T00:00:00
+lastmod: 2023-01-15T00:00:00
 contributors: ['Ludwig Stecher']
 draft: false
 images: ['cover.jpg']

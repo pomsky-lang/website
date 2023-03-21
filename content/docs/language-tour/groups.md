@@ -25,7 +25,7 @@ This matches the words _tangible_, _tangent_ and _tango_.
 ## Capturing groups
 
 Groups can also be used to _capture_ their content, for example to replace it with something else.
-In a regex, every group is a capturing group by default. This is not the case in pomsky: Capturing
+In a regex, every group is a capturing group by default. This is not the case in Pomsky: Capturing
 groups must be prefixed with `:`.
 
 ```pomsky
@@ -46,7 +46,7 @@ The first group, containing the name, has index **1**, the third group with the 
 ## Named capturing groups
 
 Because groups are non-capturing by default, you can add parentheses freely without accidentally
-changing the capturing group numbers. However, it's usually better to use _named capturing groups_,
+changing the capturing group indices. However, it's usually better to use _named capturing groups_,
 so you don't need to count groups and instead refer to each group by a name:
 
 ```pomsky
@@ -55,7 +55,7 @@ so you don't need to count groups and instead refer to each group by a name:
 :adverb('asleep' | 'awake')
 ```
 
-Now, the first group is named `name` and the third group is named `adverb`.
+Now, the capturing groups are named `name` and `adverb`.
 
 ## Atomic groups
 

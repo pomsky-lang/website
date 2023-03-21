@@ -32,4 +32,18 @@ For some regex engines, Unicode-aware matching has to be enabled first
 ([see here](../../get-started/enable-unicode)).
 
 In JavaScript, {{<po>}}%{{</po>}} and {{<po>}}!%{{</po>}} is _never_ Unicode-aware, even when
-the `u` flag is set. [See here](../../get-started/enable-unicode#javascript) for more information.
+the `u` flag is set. That's why Unicode must be disabled to use them:
+
+```pomsky
+disable unicode;
+
+% 'Pomsky' %
+```
+
+Note that a `disable` statement can be nested within a group:
+
+```pomsky
+(disable unicode; %) 'Pomsky' (disable unicode; %)
+```
+
+This can be useful when you want to only disable Unicode for part of an expression.

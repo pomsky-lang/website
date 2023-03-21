@@ -3,7 +3,7 @@ title: 'Comparison with other projects'
 description: 'See how pomsky compares to similar projects'
 excerpt: ''
 date: 2022-07-10T16:21:58+00:00
-lastmod: 2022-07-10T16:21:58+00:00
+lastmod: 2023-03-21T20:29:00+00:00
 draft: false
 images: []
 menu:
@@ -102,7 +102,7 @@ with several other flavors.
 
 - **ECMAScript** is the syntax used in JavaScript and related languages (TypeScript, Elm, Dart, etc.) that are compiled to JS.
 
-- **PCRE** (an acronym for "Perl compatible regular expression") is the syntax used by the PCRE(2) regex engine, which is the default in at least Crystal, Delphi, Elixir, Erlang, Hack, Julia, PHP, R and Vala. It's also a popular choice in other languages like C and C++ and is used in many applications such as the Apache server, nginx, MariaDB, MongoDB, and optionally in GNU `grep`.
+- **PCRE** (an acronym for "Perl compatible regular expression") is the syntax used by the PCRE2 regex engine, which is the default in at least Crystal, Delphi, Elixir, Erlang, Hack, Julia, PHP, R and Vala. It's also a popular choice in other languages like C and C++ and is used in many applications such as the Apache server, nginx, MariaDB, MongoDB, and optionally in GNU `grep`.
 
 - **.NET** refers to the `Regex` class in .NET languages such as C# and F#.
 
@@ -217,47 +217,55 @@ regex engine.
 
 ## Tooling
 
-| Tool               | Melody | Pomsky | Egg Expr. | Rx Expr. |
-| ------------------ | :----: | :----: | :-------: | :------: |
-| CLI                |   ✅   |   ✅   |           |
-| REPL               |   ✅   |        |    ✅     |
-| Online playground  |   ✅   |   ✅   |
-| VS Code extension  |   ✅   |        |
-| IntelliJ extension |   ✅   |        |
-| Babel plugin       |   ✅   |        |
-| Rust macro         |        |   ✅   |
-| Linter             |        |        |
-| Formatter          |        |        |
+| Tool               | Melody |                 Pomsky                  | Egg Expr. | Rx Expr. |
+| ------------------ | :----: | :-------------------------------------: | :-------: | :------: |
+| CLI                |   ✅   |                   ✅                    |           |
+| REPL               |   ✅   |                                         |    ✅     |
+| Online playground  |   ✅   |                   ✅                    |
+| VSCode extension   |   ✅   |                                         |
+| IntelliJ extension |   ✅   |                                         |
+| JavaScript bunder  | Babel  | Vite,<br>Rollup,<br>ESBuild,<br>Webpack |
+| Rust macro         |        |                   ✅                    |
+| Linter             |        |                                         |
+| Formatter          |        |                                         |
+
+## Language integrations
 
 ## Packages
 
-| Tool                              | Melody | Pomsky |
-| --------------------------------- | :----: | :----: |
-| Brew package                      |   ✅   |        |
-| AUR package                       |   ✅   |   ✅   |
-| Nix flake                         |   ✅   |        |
-| GitHub release binary for Apple   |   ✅   |   ✅   |
-| GitHub release binary for Windows |        |   ✅   |
-| GitHub release binary for Linux   |        |   ✅   |
-| Node module                       |   ✅   |   ✅   |
-| Python module                     |   ✅   |        |
+| Tool                            | Melody | Pomsky |
+| ------------------------------- | :----: | :----: |
+| Homebrew                        |   ✅   |   ✅   |
+| AUR                             |   ✅   |   ✅   |
+| Nix                             |   ✅   |   ✅   |
+| GitHub release binary (Apple)   |   ✅   |   ✅   |
+| GitHub release binary (Windows) |        |   ✅   |
+| GitHub release binary (Linux)   |        |   ✅   |
+| Node module                     |   ✅   |   ✅   |
+| Python module                   |   ✅   |        |
 
 ## IDE features
 
-| Feature                       | Melody (VS&nbsp;Code) | Melody (playground) | Pomsky (playground) |
-| ----------------------------- | :-------------------: | :-----------------: | :-----------------: |
-| Syntax highlighting           |          ✅           |         ✅          |         ✅          |
-| Error highlighting            |                       |                     |         ✅          |
-| Code folding                  |          ✅           |         ✅          |         ✅          |
-| Auto indentation              |          ✅           |         ✅          |         ✅          |
-| Matching brackets and quotes  |          ✅           |                     |         ✅          |
-| Keyword autocomplete          |          ✅           |                     |         ✅          |
-| Variable autocomplete         |                       |                     |         ✅          |
-| Character class autocomplete  |                       |                     |         ✅          |
-| Unicode property autocomplete |                       |                     |         ✅          |
-| Hover tooltips                |                       |                     |                     |
-| Apply suggestions             |                       |                     |                     |
-| Share link                    |                       |         ✅          |         ✅          |
+| Feature                       |     Melody     |     Pomsky     |
+| ----------------------------- | :------------: | :------------: |
+| Syntax highlighting           |       ✅       |       ✅       |
+| Error highlighting            |                |       ✅       |
+| Code folding                  | ✅<sup>1</sup> | ✅<sup>1</sup> |
+| Auto indentation              |       ✅       |       ✅       |
+| Snippets                      |       ✅       |       ✅       |
+| Matching brackets and quotes  | ✅<sup>2</sup> |       ✅       |
+| Keyword autocomplete          | ✅<sup>2</sup> |       ✅       |
+| Variable autocomplete         |                | ✅<sup>3</sup> |
+| Backreference autocomplete    |                |                |
+| Character class autocomplete  |                |       ✅       |
+| Unicode property autocomplete |                |       ✅       |
+| Hover tooltips                |                |                |
+| Apply suggestions             |                |                |
+| Share link (playground)       |       ✅       |       ✅       |
+
+<sup>1</sup> indentation based\
+<sup>2</sup> works in playground VSCode, but not in the playground\
+<sup>3</sup> does not take scopes into account
 
 ---
 

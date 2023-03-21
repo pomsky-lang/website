@@ -270,6 +270,23 @@ A letter is any code point with the `Alphabetic` property, which can be matched 
 
 Note that group names have more restrictions than variable names, [see above](#group).
 
+Identifiers may not be one of the following reserved words:
+
+- `U`
+- `let`
+- `lazy`
+- `greedy`
+- `range`
+- `base`
+- `atomic`
+- `enable`
+- `disable`
+- `if`
+- `else`
+- `recursion`
+- `regex`
+- `test`
+
 ### Number
 
 A whole number without a sign and without leading zeros. For example:
@@ -291,8 +308,12 @@ escapes are supported: For example:
 ```pomsky
 # valid strings
 'test'  "test"  "C:\\User\\Dwayne \"The Rock\" Johnson"  'C:\User\Dwayne "The Rock" Johnson'
+
 'this is a
 multiline string'
+
+"this is a
+multiline string"
 
 # invalid strings
 "\n"  "\uFFFF"  '\''
@@ -305,18 +326,19 @@ grapheme.
 
 ### CodePoint
 
-A code point consists of `U+` followed by 1 to 6 hexadecimal digits (0-9, a-f, A-F). It must
-represent a valid Unicode code point. For example:
+A codepoint consists of `U+` followed by 1 to 6 hexadecimal digits (0-9, a-f, A-F). It must
+represent a valid Unicode scalar value. This means that it must be a valid codepoint, but not a
+UTF-16 surrogate. For example:
 
 ```pomsky
-# valid code points
-U+0  U+10  U+FFF  U+10FFFF
+# valid codepoints
+U+0  U+00000001  U+10  U+FFF  U+10FFFF  U +  FF
 
-# invalid code points
-U+30000  U+100000000  U+FGHI
+# invalid codepoints
+U+300000  U+100000000  U+D800  U+FGHI
 ```
 
-Note that the `+` is not required, mainly to be compatible with Rust tokenization.
+Note that the `+` may be surrounded by spaces.
 
 ## Note about this grammar
 

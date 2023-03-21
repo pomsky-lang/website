@@ -32,8 +32,11 @@ specify a lower and upper bound for the number of repetitions:
 
 ## Greedy and lazy matching
 
-This matches at least 3 times and at most 9 times. The default repetition mode in pomsky is _greedy_,
-like regexes. This means that pomsky always tries to match an expression as many times as possible.
+The above matches at least 3 times and at most 9 times. By default, repetition is _greedy_.
+This means that Pomsky always tries to match an expression as many times as possible. For example,
+the expression above matches the string `rwxr-xr--` entirely. Even though it could stop after the
+third repetition (the lower bound), it continues to try and match more, until the upper bound is
+reached.
 
 In situations where this is not desired, you can opt into non-greedy matching with the `lazy`
 keyword, for example:
@@ -43,9 +46,9 @@ keyword, for example:
 '--'
 ```
 
-When given the string `rwxr--r--`, pomsky will first repeat the group 3 times (the minimum number of
-repetitions). Since there aren't two dashes after 3 characters, it is forced to repeat a 4th time.
-`rwxr` is followed by two dashes, so pomsky finds the match `rwxr--` and returns. The other possible
+When given the string `rwxr--r--`, Pomsky will first repeat the group 3 times (the lower bound).
+Since there aren't two dashes after 3 characters, it is forced to repeat a fourth time. `rwxr` is
+followed by two dashes, so Pomsky returns the match `rwxr--` and stops. The other possible
 match, which is the entire string, isn't found, because the repetition is "too lazy".
 
 ## Variants of repetition

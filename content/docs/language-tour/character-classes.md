@@ -1,6 +1,6 @@
 ---
 title: 'Character Classes'
-description: 'Matching a code point with certain properties'
+description: 'Matching a codepoint with certain properties'
 excerpt: ''
 date: 2022-05-17T13:55:00+00:00
 lastmod: 2022-05-17T13:55:00+00:00
@@ -28,8 +28,8 @@ so what to do instead? We can simply enumerate the characters and repeat them:
 )+
 ```
 
-But this very verbose and still only matches lowercase letters. We programmers tend to be lazy, so
-there must be a more convenient solution!
+But this is very verbose and still only matches lowercase letters. We programmers tend to be lazy,
+so there must be a more convenient solution!
 
 ## Character ranges
 
@@ -39,10 +39,10 @@ This expression matches words that can contain uppercase and lowercase letters:
 ['a'-'z' 'A'-'Z']+
 ```
 
-What is this? The square brackets indicate that this is a _character class_. A character class
-always matches exactly 1 character (more precisely, a Unicode code point). This character class
-contains two ranges, one for lowercase letters and one for uppercase letters. Together, this
-matches any character that is either a lowercase or uppercase letter.
+The square brackets indicate that this is a _character class_. A character class always matches
+exactly 1 character (more precisely, a Unicode codepoint). This character class contains two
+ranges, one for lowercase letters and one for uppercase letters. Together, this matches any
+character that is either a lowercase or uppercase letter.
 
 It's also possible to add single characters, for example:
 
@@ -62,7 +62,7 @@ and may be more efficient.
 
 ### Character ranges and Unicode
 
-{{< alert icon="👉" text="You can <a href=\"#unicode-properties\">skip this section</a> if you know how the Unicode character set works." />}}
+{{< alert icon="👉" text="You can <a href=\"#unicode-properties\">skip this section</a> if you are already familiar with Unicode." />}}
 
 What is a range, exactly? Let's see with an example:
 
@@ -70,15 +70,16 @@ What is a range, exactly? Let's see with an example:
 ['0'-'z']
 ```
 
-This doesn't seem to make sense, but does work. If you compile it to a regex and
-[try it out](https://regexr.com/6hagq), you'll notice that it matches numbers, lowercase and
-uppercase letters. However, it also matches a few other characters, e.g. the question mark `?`.
+This doesn't seem to make sense, but does work. If you
+[try it out](https://playground.pomsky-lang.org/?text=%5B%270%27-%27z%27%5D), you'll notice that it
+matches numbers, lowercase and uppercase letters. However, it also matches a few other characters,
+e.g. the question mark `?`.
 
-The reason is that pomsky uses Unicode, a standard that assigns every character a numeric value.
-When we write {{<po>}}'0'-'z'{{</po>}}, pomsky assumes that we want to match any character
+The reason is that Pomsky uses Unicode, a standard that assigns every character a numeric value.
+When we write {{<po>}}'0'-'z'{{</po>}}, Pomsky assumes that we want to match any character
 whose numeric value is somewhere between the value of {{<po>}}'0'{{</po>}} and the value
 of {{<po>}}'z'{{</po>}}. This works well for letters (e.g. {{<po>}}'a'-'Z'{{</po>}})
-and numbers ({{<po>}}'0'-'9'{{</po>}}), because these have consecutive numbers in Unicode.
+and numbers ({{<po>}}'0'-'9'{{</po>}}), because these have consecutive values in Unicode.
 However, there are some special characters between digits, uppercase letters and lowercase letters:
 
 <div class="small-table">
@@ -119,38 +120,49 @@ Why, you might ask? This is for [historical](https://en.wikipedia.org/wiki/ASCII
 ### Unicode properties
 
 The reason why Unicode was invented is that most people in the world don't speak English, and many
-of them use languages with different alphabets. To support them, Unicode includes 144,697 characters
+of them use languages with different alphabets. To support them, Unicode includes 144,697 codepoints
 covering 159 different scripts. Since we have a standard that makes it really easy to support
 different languages, there's no excuse for not using it.
 
 The character class {{<po>}}['a'-'z' 'A'-'Z']{{</po>}} only recognizes Latin characters.
 What should we do instead? We should use a
-[Unicode category](https://en.wikipedia.org/wiki/Unicode_character_property#General_Category).
-In this case, `Letter` seems like an obvious candidate. Pomsky makes it very easy to use Unicode
-categories:
+[general category](https://en.wikipedia.org/wiki/Unicode_character_property#General_Category).
+In this case, `Letter` seems like a good candidate. Pomsky makes it easy to use Unicode categories:
 
 ```pomsky
 [Letter]
 ```
 
-That's it. This matches any letter from all 159 scripts! It's also possible to match any character
-in a specific script:
+That's it. This matches any letter from all 159 scripts! It's also possible to match any codepoint
+in a certain script:
 
 ```pomsky
 [Cyrillic Hebrew]
 ```
 
-This matches a Cyrillic or Hebrew character. Not sure why you'd want to do that.
+This matches a Cyrillic or Hebrew codepoint.
 
-Some regex engines can also match Unicode properties other than categories and scripts. Probably
-the most useful ones are
+Most regex engines can also match Unicode properties other than categories and scripts. Useful
+properties include
 
-- `Alphabetic` (includes letters and marks that can appear in a word)
-- `White_Space`
-- `Uppercase`, `Lowercase`
+- `Alpha` (letters and marks that can appear in a word)
+- `Upper`, `Lower` (uppercase or lowercase letters)
 - `Emoji`
+- `Math` (mathematical symbols)
 
 You can see the full list of Unicode properties [here](../../reference/unicode-properties).
+
+## What's a codepoint?
+
+A Unicode codepoint _usually_, but not always, represents a character. Exceptions are
+composite characters like `ć` (which may consist of a `´` and a `c` when it isn't normalized).
+Composite characters are common in many scripts, including Japanese, Indian and Arabic scripts.
+Also, an emoji can consist of multiple codepoints, e.g. when it has a gender or skin tone modifier.
+
+Most regex engines look at one codepoint at a time. This means that {{<po>}}[Letter]{{</po>}}
+matches exactly one codepoint. The exception is .NET, which does not properly support Unicode, and
+character classes in .NET can only match codepoints from the
+[Basic Multilingual Plane](<https://en.wikipedia.org/wiki/Plane_(Unicode)#Basic_Multilingual_Plane>).
 
 ## Negation
 
@@ -158,18 +170,36 @@ Character classes are negated by putting a {{<po>}}!{{</po>}} in front of it. Fo
 {{<po>}}!['a'-'f']{{</po>}} matches anything except a letter in the range from `a` to `f`.
 
 It's also possible to negate Unicode properties individually. For example,
-{{<po>}}[Latin !Alphabetic]{{</po>}} matches a code point that is either in the Latin script,
+{{<po>}}[Latin !Alpha]{{</po>}} matches a codepoint that is either in the Latin script,
 or is not alphabetic.
 
 ## Dot
 
-You can use the dot (`.`) to match any code point, except line breaks. For example:
+You can use the dot (`.`) to match any codepoint, except line breaks. For example:
 
 ```pomsky
-...  # 3 code points
+...  # 3 codepoints (except line breaks)
 ```
 
-Be careful when repeating the dot. My personal recommendation is to _never repeat the dot_, unless it's absolutely necessary. Let's see why:
+Most regex engines have a "singleline" option that changes the behavior of `.`. When enabled,
+`.` matches everything, even line breaks. Usually, the dot does not match `\n` (line feed)
+and possibly more line break characters depending on the regex flavor.
+
+If you want to match any character, without having to enable the "singleline" option, Pomsky also
+offers the variable `C` (or `Codepoint`):
+
+```pomsky
+C C C  # 3 codepoints
+```
+
+Note that the number of codepoints is not always the number of visible characters. Also note that
+.NET does not properly support Unicode, and matches _UTF-16 code units_ instead of codepoints. This
+means that when encountering a codepoint outside of the BMP, .NET matches each UTF-16 surrogate
+individually, so one `.` or `C` may match only half a codepoint in .NET.
+
+## Repeating the dot
+
+Be careful when repeating `C` or `.`. My personal recommendation is to _never repeat them_. Let's see why:
 
 ```pomsky
 '{' .* '}'
@@ -183,10 +213,16 @@ We can fix this by making the repetition lazy:
 '{' .* lazy '}'
 ```
 
-However, it is arguably better to restrict which characters can be repeated:
+However, if the expression is followed by anything else, the dot may still consume curly braces. For example:
 
 ```pomsky
-'{' !['}']* '}'
+'{' .* lazy '};'
 ```
 
-Now the curly braces can contain anything except `}`, so we know that the repetition will end when a `}` is encountered.
+This expression will match the text `{foo}}}};`, which may not be desired. So it is usually better to restrict which characters can be repeated:
+
+```pomsky
+'{' !['{}']* '};'
+```
+
+Now the curly braces can contain anything except `{` and `}`, so we know that it will stop repeating when a brace is encountered, and fail if there's no `};`.
