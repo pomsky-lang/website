@@ -2,8 +2,8 @@
 title: 'Pomsky 0.10 released with new tools'
 description: 'See what’s new in Pomsky 0.10, and how to it from JavaScript!'
 excerpt: ''
-date: 2023-03-17T00:00:00
-lastmod: 2023-03-17T00:00:00
+date: 2023-03-22T00:00:00
+lastmod: 2023-03-22T00:00:00
 contributors: ['Ludwig Stecher']
 draft: false
 images: ['cover.jpg']
@@ -95,7 +95,7 @@ test {
 
 These tests not only give you immediate feedback if the expression is incorrect, they also document the code so that a reader can see examples of what the expression does or does not match. Unit tests will probably land in Pomsky 0.11, but the syntax is not fully fleshed out yet. [Let me know](https://github.com/pomsky-lang/pomsky/issues/75#issuecomment-1461616716) what you think!
 
-You can find the full list of changes in the [changelog](https://github.com/pomsky-lang/pomsky/blob/main/CHANGELOG.md).
+You can find the full list of changes in the [changelog](https://github.com/pomsky-lang/pomsky/blob/main/CHANGELOG.md#0100---2023-03-21).
 
 ## A glimpse into the crystal ball
 
