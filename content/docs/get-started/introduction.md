@@ -17,7 +17,7 @@ Pomsky is a language that compiles to regular expressions. It is currently in an
 
 ## Usage
 
-Pomsky can be used with a CLI or a Rust macro. See
+Pomsky can be used with a CLI, a JavaScript plugin, or a Rust macro. See
 [installation instructions](/docs/get-started/quick-start).
 
 You should also enable Unicode support in your regex engine if it isn't supported by default.
