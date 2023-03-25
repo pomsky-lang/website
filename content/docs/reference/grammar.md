@@ -24,7 +24,7 @@ which should be enough to read the grammar:
 - Verbatim text is wrapped in double quotes ({{<po>}}""{{</po>}}) or single quotes
   ({{<po>}}''{{</po>}}).
 
-- A {{<po>}}\*{{</po>}} after a rule indicates that it repeats 0 or more times.
+- A {{<po>}}*{{</po>}} after a rule indicates that it repeats 0 or more times.
 
 - A {{<po>}}+{{</po>}} after a rule indicates that it repeats 1 or more times.
 
@@ -56,7 +56,9 @@ let ModifierKeyword =
     | 'enable'
     | 'disable';
 
-let BooleanSetting = 'lazy';
+let BooleanSetting =
+    | 'lazy'
+    | 'unicode';
 ```
 
 ### OrExpression
