@@ -25,6 +25,6 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           token: ${{ secrets.WEBSITE_PUBLISH_TOKEN }}
-          repository-name: website-next-branch
+          repository-name: pomsky-lang/website-next-branch
           branch: main
           folder: public
