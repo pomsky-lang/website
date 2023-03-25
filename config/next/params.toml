@@ -1,0 +1,5 @@
+
+# Alert
+alert = true
+alertDismissable = false
+alertText = 'You are viewing the <b>next</b> version of this website. <a href="https://pomsky-lang.org">See current version</a>'
