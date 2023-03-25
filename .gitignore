@@ -1,4 +1,5 @@
 node_modules
 public
+dist
 resources
 .hugo_build.lock
