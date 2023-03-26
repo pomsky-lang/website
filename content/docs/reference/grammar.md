@@ -328,16 +328,16 @@ grapheme.
 
 ### CodePoint
 
-A codepoint consists of `U+` followed by 1 to 6 hexadecimal digits (0-9, a-f, A-F). It must
+A codepoint consists of `U`, `+`, and 1 to 6 hexadecimal digits (0-9, a-f, A-F). It must
 represent a valid Unicode scalar value. This means that it must be a valid codepoint, but not a
 UTF-16 surrogate. For example:
 
 ```pomsky
 # valid codepoints
-U+0  U+00000001  U+10  U+FFF  U+10FFFF  U +  FF
+U+0  U+10  U+FFF  U+10FFFF  U + FF
 
 # invalid codepoints
-U+300000  U+100000000  U+D800  U+FGHI
+U+300000  U+00000001  U+D800  U+FGHI
 ```
 
 Note that the `+` may be surrounded by spaces.
