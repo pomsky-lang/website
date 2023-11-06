@@ -1,5 +1,5 @@
 ---
-title: 'Inline regular expressions'
+title: 'Inline Regexes'
 description: 'Insert text in the output regex with no escaping'
 excerpt: ''
 date: 2022-09-20T13:55:00+00:00
@@ -9,13 +9,13 @@ images: []
 menu:
   docs:
     parent: 'language-tour'
-weight: 212
+weight: 7016
 toc: true
 ---
 
-Although Pomsky on its own is very powerful, there might be situations where its syntax is not expressive
-enough. In these rare situations, Pomsky has an escape hatch: The `regex` keyword allows specifying
-an expression that is embedded in the output verbatim, without escaping:
+Although Pomsky on its own is very powerful, there might be situations where its syntax is not
+expressive enough. In these rare situations, Pomsky has an escape hatch: The `regex` keyword allows
+specifying an expression that is embedded in the output verbatim, without escaping:
 
 ```pomsky
 regex 'hello|world?'
@@ -27,56 +27,17 @@ This emits the following regular expression:
 hello|world?
 ```
 
-Note that this is **dangerous** and should be used only when absolutely necessary. Pomsky does not parse
-the content of `regex` expressions, so it cannot ensure that it is valid.
+{{<alert icon="⚠️" text="This is <strong>dangerous</strong> and should only be used as a last resort. Pomsky does not parse the content of <code>regex</code> expressions, so it cannot ensure that the output is valid." />}}
 
-## Regex expressions containing pipes
-
-Pomsky doesn't know whether a `regex` expression contains pipes, and whether it is necessary to wrap it in
-a group when embedding it in a larger pomsky expression. For example:
+For example, this is how you could use subroutines (which are not officially supported by Pomsky):
 
 ```pomsky
-'a' regex 'b|c'
+:octet(range '0'-'255') ('.' regex '\g<octet>'){3}
 ```
 
-What do you expect the output to be? If you think that this should produce `a(?:b|c)`, you are mistaken.
-The output is:
+Note that Pomsky wraps a `regex` expression in a non-capturing group if it is followed by a
+repetition or surrounded by parentheses.
 
-```regexp
-ab|c
-```
+## Finish line
 
-To get the expected output, a group must be added:
-
-```pomsky
-'a' regex '(?:b|c)'
-```
-
-The same can be achieved by adding parentheses outside like this:
-
-```pomsky
-'a' (regex 'a|b')
-```
-
-Although Pomsky usually removes redundant parentheses, these parentheses are not removed because Pomsky
-can't tell if they're needed, so it trusts you to add them only when required.
-
-## Repeated `regex` expressions
-
-Pomsky wraps a `regex` expression in a group if it is followed by a repetition. For example:
-
-```pomsky
-regex 'test.'?
-```
-
-This returns:
-
-```regexp
-(?:test.)?
-```
-
-If this is not desired, include the repetition in the string literal:
-
-```pomsky
-regex 'test.?'
-```
+This concludes the language tour! I hope

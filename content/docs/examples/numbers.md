@@ -9,7 +9,7 @@ images: []
 menu:
   docs:
     parent: 'examples'
-weight: 401
+weight: 9001
 toc: true
 ---
 
@@ -20,7 +20,7 @@ with optional separating commas:
 [-+]??\b(?:0|[1-9](?:,??[0-9])*)(?:\.[0-9]+)?\b
 ```
 
-Equivalent pomsky expression:
+Equivalent Pomsky expression:
 
 ```pomsky
 ['-+']?

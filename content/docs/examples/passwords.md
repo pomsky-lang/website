@@ -9,7 +9,7 @@ images: []
 menu:
   docs:
     parent: 'examples'
-weight: 402
+weight: 9002
 toc: true
 ---
 
@@ -20,7 +20,7 @@ lowercase letter, digit and punctuation/symbol code point, and is at least 8 cod
 ^(?=[\S\s]*?\d)(?=[\S\s]*?\p{Ll})(?=[\S\s]*?\p{Lu})(?=[\S\s]*?[\pP\pS])[\S\s]{8}
 ```
 
-Equivalent pomsky expression:
+Equivalent Pomsky expression:
 
 ```pomsky
 ^

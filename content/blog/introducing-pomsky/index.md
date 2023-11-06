@@ -34,7 +34,7 @@ A lot has happened since then, so I wanted to give an update. First, the summary
 
 Regular expressions are a very widespread language; it has implementations in just about every programming language. They're also very powerful and can come in handy in a variety of situations. Yet, many people dread writing them. Furthermore, decyphering a regex beyond a certain length and complexity is very difficult due to its dense and ambiguous syntax.
 
-Pomsky attempts to solve all the issues that regexes suffer from. Writing pomsky expressions should be fun and not turn into a maintenance burden. I'll explain how Pomsky achieves that, but note that pomsky is _not_ a regex engine. Pomsky is just an alternative syntax that you can use with your regex engine of choice. This has the advantage that pomsky can be used with all the existing programming languages and APIs that use regexes.
+Pomsky attempts to solve all the issues that regexes suffer from. Writing Pomsky expressions should be fun and not turn into a maintenance burden. I'll explain how Pomsky achieves that, but note that Pomsky is _not_ a regex engine. Pomsky is just an alternative syntax that you can use with your regex engine of choice. This has the advantage that Pomsky can be used with all the existing programming languages and APIs that use regexes.
 
 ### Free-spacing mode
 
@@ -42,17 +42,17 @@ Pomsky attempts to solve all the issues that regexes suffer from. Writing pomsky
 
 The biggest problem with regular expressions is that you have to write everything in a single line without any white space. However, some regex engines have a free-spacing mode, enabled with `(?x)`. In free-spacing mode, spaces and line breaks are ignored, and you can add comments. This is really helpful to make regexes more readable.
 
-Pomsky goes one step further: In pomsky, free-spacing is the default, and it's supported for all regex engines, even JavaScript.
+Pomsky goes one step further: In Pomsky, free-spacing is the default, and it's supported for all regex engines, even JavaScript.
 
 ### No backslash escapes
 
-In theory, the syntax of regexes is quite simple. However, there is one thing that regularly trips people up: There's a myriad of characters that need to be escaped, and forgetting to escape a character leads to subtle bugs. That's why pomsky doesn't have character escapes. Instead, strings are written in quotes, and you can decide if you prefer double or single quotes.
+In theory, the syntax of regexes is quite simple. However, there is one thing that regularly trips people up: There's a myriad of characters that need to be escaped, and forgetting to escape a character leads to subtle bugs. That's why Pomsky doesn't have character escapes. Instead, strings are written in quotes, and you can decide if you prefer double or single quotes.
 
 ### Compatibility and Unicode support
 
 Even though regex engines such as Java, PCRE or EcmaScript use a similar syntax, there are enough differences that writing portable regexes is difficult. If you want to use the same regex in different engines, you can't use any of the more advanced features, such as named backreferences or lookbehind, because they either aren't universally supported, or their behavior or syntax differs slightly between engines.
 
-Pomsky can't solve this problem entirely. For example, when a regex engine doesn't support lookbehind, there's nothing we can do about it. However, pomsky is able to polyfill some features, so they can be used in regex engines where they aren't natively supported. For example, Pomsky polyfills named backreferences and proper Unicode support in JavaScript. When using an unsupported feature that Pomsky can't polyfill, it will show an error message, so you don't waste time trying it out.
+Pomsky can't solve this problem entirely. For example, when a regex engine doesn't support lookbehind, there's nothing we can do about it. However, Pomsky is able to polyfill some features, so they can be used in regex engines where they aren't natively supported. For example, Pomsky polyfills named backreferences and proper Unicode support in JavaScript. When using an unsupported feature that Pomsky can't polyfill, it will show an error message, so you don't waste time trying it out.
 
 ### A modern, reimagined syntax
 
@@ -86,7 +86,7 @@ I want to thank [Evan Richter][evanrichter] for setting up the fuzzer, disclosin
 
 ## Renaming Rulex
 
-![Pomsky](pomsky.jpg)
+![Pomsky](Pomsky.jpg)
 
 As announced in [my previous post][renaming-rulex], I had to rename Rulex to Pomsky. Read the announcement to find out the reasons, and why I chose the name "Pomsky".
 

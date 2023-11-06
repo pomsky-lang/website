@@ -4,7 +4,7 @@
 title = "Pomsky"
 titleSeparator = "-"
 titleAddition = "Home"
-description = "A portable, modern regular expression language"
+description = "Next Level Regular Expressions"
 favicon = "images/favicon.svg"
 
 ## Documentation
@@ -14,7 +14,7 @@ favicon = "images/favicon.svg"
 images = ["images/favicon.png"]
 ogLocale = "en_US"
 domainTLD = "pomsky-lang.org"
-titleHome = "pomsky"
+titleHome = "Pomsky"
 
 ## JSON-LD
 # schemaType = "Person"

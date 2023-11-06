@@ -9,41 +9,42 @@ images: []
 menu:
   docs:
     parent: 'language-tour'
-weight: 205
+weight: 7006
 toc: true
 ---
 
-There are a few _shorthand character classes_: `word`, `digit`, `space`, `horiz_space` and
-`vert_space`. They can be abbreviated with their first letter: `w`, `d`, `s`, `h` and `v`. Like
-Unicode properties, they must appear in square brackets.
+There are abbreviations, called _shorthands_, for often needed character sets:
 
-- `word` matches a _word character_, i.e. a letter, digit or underscore. It's equivalent to
-  {{<po>}}[Alphabetic Mark Decimal_Number Connector_Punctuation Join_Control]{{</po>}}.
-- `digit` matches a digit. It's equivalent to `Decimal_Number`.
-- `space` matches whitespace. It's equivalent to `White_Space`.
-- `horiz_space` matches horizontal whitespace (tabs and spaces). It's equivalent to
-  {{<po>}}[U+09 Space_Separator]{{</po>}}.
-- `vert_space` matches vertical whitespace. It's equivalent to
-  {{<po>}}[U+0A-U+0D U+85 U+2028 U+2029]{{</po>}}.
+- `[digit]` or `[d]` matches a **decimal number**. It is similar to {{<po>}}['0'-'9']{{</po>}},
+  except that it is Unicode aware.
+
+- `[word]` or `[w]` matches a **word character**, i.e. a letter, digit or underscore. It's similar
+  to {{<po>}}['0'-'9' 'a'-'z' 'A'-'Z' '_']{{</po>}}, except that it is Unicode aware. It matches all
+  codepoints in the _Alphabetic, Mark, Decimal_Number, Connector_Punctuation,_ and _Join_Control_
+  Unicode categories.
+
+- `[space]` or `[s]` matches **whitespace**. It is equivalent to the _White_Space_ category.
+
+- `[horiz_space]` or `[h]` matches **horizontal whitespace**, e.g. tabs und spaces.
+
+- `[vert_space]` or `[v]` matches **vertical whitespace**, e.g. line breaks.
+
+These can be combined as well:
+
+```pomsky
+[d s '.']   # match digits, spaces, and dots
+```
 
 Note that `word`, `digit` and `space` only match ASCII characters, if the regex engine isn't
 configured to be Unicode-aware. How to enable Unicode support is
-[described here](../../get-started/enable-unicode).
-
-If you want to match _any_ code point, you can use `Codepoint`, or `C` for short. This does not
-require brackets, because it is a [built-in variable](../../reference/built-in-variables).
-For example, this matches a double-quoted string:
-
-```pomsky
-'"' Codepoint* lazy '"'
-```
+[described here](/docs/get-started/enable-unicode).
 
 ## What if I don't need Unicode?
 
-You don't have to use Unicode-aware character classes such as {{<po>}}[word]{{</po>}} if you
+You don't have to use Unicode-aware character sets such as {{<po>}}[digit]{{</po>}} if you
 know that the input is only ASCII. Unicode-aware matching can be considerably slower. For example,
 the {{<po>}}[word]{{</po>}} character class includes more than 100,000 code points, so
-matching a {{<po>}}[ascii_word]{{</po>}}, which includes only 63 code points, is faster.
+matching a {{<po>}}[ascii_word]{{</po>}} (which includes only 63 code points) is faster.
 
 Pomsky supports a number of ASCII-only shorthands:
 
@@ -76,16 +77,18 @@ example, you may write {{<po>}}U+FEFF{{</po>}} to match the
 
 There are also 6 non-printable characters with a name:
 
-- {{<po>}}[n]{{</po>}} is equivalent to {{<po>}}[U+0A]{{</po>}}, the `\n` line feed.
-- {{<po>}}[r]{{</po>}} is equivalent to {{<po>}}[U+0D]{{</po>}}, the `\r` carriage
-  return.
-- {{<po>}}[f]{{</po>}} is equivalent to {{<po>}}[U+0C]{{</po>}}, the `\f` form feed.
-- {{<po>}}[a]{{</po>}} is equivalent to {{<po>}}[U+07]{{</po>}}, the "alert" or "bell"
-  control character.
-- {{<po>}}[e]{{</po>}} is equivalent to {{<po>}}[U+0B]{{</po>}}, the "escape" control
-  character.
+- {{<po>}}[n]{{</po>}} matches the `\n` line feed.
+- {{<po>}}[r]{{</po>}} matches the `\r` carriage return.
+- {{<po>}}[f]{{</po>}} matches the `\f` form feed.
+- {{<po>}}[a]{{</po>}} matches the "alert" or "bell" control character.
+- {{<po>}}[e]{{</po>}} matches the "escape" control character.
 
-Other characters have to be written in their hexadecimal form. Note that you don't need to write
-leading zeroes, i.e. {{<po>}}U+0{{</po>}} is just as ok as {{<po>}}U+0000{{</po>}}.
-However, it is conventional to write ASCII characters with two digits and non-ASCII characters
-with 4, 5 or 6 digits depending on their length.
+Other characters have to be written in their hexadecimal form:
+
+```pomsky
+[U+10-U+30 U+FEFF]
+```
+
+Note that you don't need to write leading zeroes, i.e. {{<po>}}U+0{{</po>}} is just as ok as
+{{<po>}}U+0000{{</po>}}. However, it is conventional to write ASCII characters with two digits and
+non-ASCII characters with 4, 5 or 6 digits depending on their length.

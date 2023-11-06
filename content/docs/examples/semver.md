@@ -9,7 +9,7 @@ images: []
 menu:
   docs:
     parent: 'examples'
-weight: 406
+weight: 9006
 toc: true
 ---
 
@@ -31,7 +31,7 @@ And in free-spacing mode:
 )?
 ```
 
-Here's an equivalent pomsky expression:
+Here's an equivalent Pomsky expression:
 
 ```pomsky
 let number = [digit]+;

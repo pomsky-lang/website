@@ -9,7 +9,7 @@ images: []
 menu:
   docs:
     parent: 'get-started'
-weight: 103
+weight: 6004
 toc: true
 ---
 
@@ -25,19 +25,19 @@ The Rust `regex` crate is Unicode-aware by default. There's nothing you need to 
 
 In JavaScript, set the `u` flag, for example {{<regexp>}}/[\w\s]/u{{</regexp>}}. This makes it possible to use Unicode properties ({{<regexp>}}\p{...}{{</regexp>}}) and code points outside of the BMP ({{<regexp>}}\u{...}{{</regexp>}}).
 
-Since `\w` and `\d` are _not_ Unicode aware even when the `u` flag is enabled, pomsky polyfills them. However, word boundaries aren't Unicode aware, and there's no straightforward solution for this. To make word boundaries behave correctly, you can use the following insteand of {{<po>}}%{{</po>}} and {{<po>}}!%{{</po>}}:
+Since `\w` and `\d` are _not_ Unicode aware even when the `u` flag is enabled, Pomsky polyfills them. However, word boundaries aren't Unicode aware, so you need to disable Unicode to use them or use lookarounds.
 
 ```pomsky
-let wstart  = (!<< [w]) (>> [w]);  # start of a word
-let wend    = (<< [w]) (!>> [w]);  # end of a word
-let wbound  = wstart | wend;       # word boundary (%, but Unicode aware)
-
-let wmid    = (<< [w]) (>> [w]);   # middle of a word
-let wout    = (!<< [w]) (!>> [w]); # outside of a word
-let nwbound = wmid | wout          # not a word boundary (!%, but Unicode aware)
+disable unicode;
+<'test'>
 ```
 
-This is not used by default because it makes the generated output much bigger.
+If you need Unicode-aware word boundaries, you can use the following instead of the {{<po>}}<{{</po>}} and {{<po>}}>{{</po>}} word boundaries:
+
+```pomsky
+let wstart = (!<< [w]) (>> [w]);  # start of a word
+let wend   = (<< [w]) (!>> [w]);  # end of a word
+```
 
 ## PHP
 

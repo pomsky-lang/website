@@ -1,6 +1,6 @@
 ---
 title: 'Pomsky 0.8 released'
-description: 'I just released pomsky 0.8 with a new, much faster parser.'
+description: 'I just released Pomsky 0.8 with a new, much faster parser.'
 excerpt: ''
 date: 2022-12-22T12:00:00
 lastmod: 2022-12-22T12:00:00
@@ -15,15 +15,15 @@ toc: true
 
 > The new logo: A pomeranian husky wearing orange glasses, created with the help of [DALL·E 2](https://openai.com/dall-e-2/)
 
-## What is pomsky?
+## What is Pomsky?
 
 Pomsky is a portable, modern syntax for regular expressions. It has powerful features, such as
 variables, and a much more readable syntax. Check out the
 [language tour](https://pomsky-lang.org/docs/language-tour/basics/) to quickly get familiar with
-pomsky, or the [examples](https://pomsky-lang.org/docs/examples/) to see some real pomsky
+Pomsky, or the [examples](https://pomsky-lang.org/docs/examples/) to see some real Pomsky
 expressions.
 
-Pomsky is _not_ a regex engine. Instead, a pomsky expression is transpiled to a normal RegExp,
+Pomsky is _not_ a regex engine. Instead, a Pomsky expression is transpiled to a normal RegExp,
 compatible with many RegExp engines, including JavaScript, Java, PCRE, Ruby, Python, Rust and .NET.
 
 ## Announcement

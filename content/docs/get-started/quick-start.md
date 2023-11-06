@@ -1,7 +1,7 @@
 ---
 title: 'Quick Start'
-description: 'Summary of how to start using pomsky.'
-excerpt: 'Summary of how to start using pomsky.'
+description: 'Summary of how to start using Pomsky.'
+excerpt: 'Summary of how to start using Pomsky.'
 date: 2022-05-17T13:55:00+00:00
 lastmod: 2022-05-17T13:55:00+00:00
 draft: false
@@ -9,32 +9,27 @@ images: []
 menu:
   docs:
     parent: 'get-started'
-weight: 102
+weight: 6003
 toc: true
 ---
 
-## Playground
+Go to...
 
-Using [the playground](https://playground.pomsky-lang.org/) is the easiest and most convenient
-way to get started using pomsky. It supports syntax highlighting and shows errors directly in your
-code.
+<a href="https://playground.pomsky-lang.org/" class="large-action-btn" target="_blank">Playground</a>
+<a href="#cli" class="large-action-btn">CLI</a>
+<a href="#javascript-plugin" class="large-action-btn">JavaScript</a>
+<a href="#rust" class="large-action-btn">Rust</a>
 
 ## CLI
 
-The CLI allows you to compile pomsky expressions to regexes in the command line.
+The CLI allows you to compile Pomsky expressions in the command line.
 
-### Use pre-built binaries
+Pre-built binaries are available for Windows, Linux and macOS. Download them from the
+**[releases page](https://github.com/pomsky-lang/pomsky/releases)**.
 
-Binaries are available for Windows, Linux and macOS. Download them from the
-[releases page](https://github.com/pomsky-lang/pomsky/releases).
+Pomsky is also packaged for some package managers:
 
-### Use AUR package
-
-On Arch Linux, you can use the [AUR package](https://aur.archlinux.org/packages/pomsky-bin) with
-
-```sh
-yay -S pomsky-bin
-```
+[![Packaging status](https://repology.org/badge/vertical-allrepos/pomsky.svg)](https://repology.org/project/pomsky/versions)
 
 ### Install from source
 
@@ -55,44 +50,40 @@ To find out how to use the CLI, run
 pomsky --help
 ```
 
-## Node module
+## JavaScript plugin
 
-Pomsky can be used with the `@pomsky-lang/compiler-web` npm module. Install with
+Pomsky can be used with the npm module [`@pomsky-lang/unplugin`](https://www.npmjs.com/package/@pomsky-lang/unplugin). This is a compiler plugin, usable with Vite / Rollup / Webpack / ESBuild / ESM.
 
-```sh
-$ npm i -s @pomsky-lang/compiler-web   # yarn add @pomsky-lang/compiler-web
-```
-
-Then import and use it like this:
+If you're using Vite, add it to your config like this:
 
 ```js
-import init, { compile } from '@pomsky-lang/compiler-web'
+import { defineConfig } from 'vite'
+import pomsky from '@pomsky-lang/unplugin'
 
-init().then(() => {
-  const input = `^ ('test' '!'+)? $`
-  const { output } = compile(input, 'js')
-  console.log(output)
+export default defineConfig({
+  plugins: [pomsky()],
 })
 ```
 
-It currently works in browsers, but not in Node. If you use `vite` for bundling, you need to **disable optimizations** for `@pomsky-lang/compiler-web` in development mode:
+Then you can import `*.pom` files from JavaScript/TypeScript:
 
 ```js
-// vite.config.js
-import { defineConfig } from 'vite'
+import myRegex from './myRegex.pom'
 
-export default defineConfig((config) => ({
-  optimizeDeps: {
-    exclude: config.mode === 'production' ? [] : ['@pomsky-lang/compiler-web'],
-  },
-}))
+myRegex().test('does this string match?')
 ```
 
-The `compile` function throws an exception if compilation fails.
+or declare Pomsky expressions with the built-in `pomsky$` macro:
+
+```js
+const myRegex = pomsky$(`% [word]{5} %`)
+
+myRegex().test('does this string match?')
+```
 
 ## Rust macro
 
-If you want to write a pomsky expression directly in your Rust source code, the
+If you want to write a Pomsky expression directly in your Rust source code, the
 [pomsky-macro](https://crates.io/crates/pomsky-macro) got you covered. Run this command:
 
 ```sh

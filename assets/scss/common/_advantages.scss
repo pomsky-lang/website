@@ -1,39 +1,45 @@
-.advantages-row {
+.advantages {
+  gap: 1.25rem;
+  margin: 0 0 2rem 0;
+
+  p {
+    margin-bottom: 1.25rem;
+  }
+
   > div {
-    margin: 2.5rem 0 0 0;
+    border: 2px solid #77777722;
+    border-radius: 1rem;
 
     > :not(img) {
-      margin-left: 130px;
+      margin-left: 65px;
     }
 
     img {
-      width: 96px;
+      width: 48px;
       height: auto;
       float: left;
-      margin-right: 34px;
+      margin-right: 17px;
     }
   }
 
-  h2 {
-    margin-top: 0;
+  h2,
+  img {
+    margin-top: 1.25rem;
   }
 
   @media (min-width: 992px) {
     margin-bottom: 3rem;
 
     > div {
-      margin: 1rem 0 0 0;
-      text-align: center;
-
       > :not(img) {
         margin-left: 0;
       }
 
       img {
-        width: 144px;
+        width: 72px;
         float: none;
         margin-right: 0;
-        margin-top: 1rem;
+        margin-top: 1.25rem;
       }
     }
 

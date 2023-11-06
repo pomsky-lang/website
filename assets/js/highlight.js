@@ -3,10 +3,12 @@ import hljs from 'highlight.js/lib/core'
 import rust from 'highlight.js/lib/languages/rust'
 import javascript from 'highlight.js/lib/languages/javascript'
 import ini from 'highlight.js/lib/languages/ini'
+import json from 'highlight.js/lib/languages/json'
 
 hljs.registerLanguage('rust', rust)
 hljs.registerLanguage('javascript', javascript)
 hljs.registerLanguage('toml', ini)
+hljs.registerLanguage('json', json)
 
 hljs.registerLanguage('pomsky', function (hljs) {
   return {
@@ -85,7 +87,7 @@ hljs.registerLanguage('pomsky', function (hljs) {
       },
       {
         className: 'literal',
-        begin: /[%^$]/,
+        begin: /[%^$<>]+/,
       },
       {
         className: 'title',
@@ -93,7 +95,7 @@ hljs.registerLanguage('pomsky', function (hljs) {
       },
       {
         className: 'keyword',
-        begin: /[+*?{}!<>-]+/,
+        begin: /[+*?{}!-]+/,
       },
       {
         className: 'punctuation',
@@ -129,26 +131,50 @@ hljs.registerLanguage('regexp', function () {
     begin: /\\[pP]\w/,
   }
   const P_BRACED = {
-    className: 'literalx',
+    className: 'punctuation',
     begin: /\\[pP]\{/,
     end: /\}/,
     contains: [
       {
-        className: 'titlex',
+        className: 'title',
         begin: /[\w\-&.]+/,
       },
     ],
   }
   const LITERAL = {
-    className: 'literalx',
+    className: 'literal',
     begin: /\\x\w\w|\\u\w\w\w\w|\\[xu]\{[\w.]+\}/,
   }
+  const CHAR_RANGE = {
+    begin: [/[^\\\]]/, /-/, /[^\\\]]/],
+    beginScope: {
+      1: 'string',
+      2: 'keyword',
+      3: 'string',
+    },
+  }
   const SPECIAL_ESCAPE = {
-    className: 'literalx',
+    className: 'punctuation',
     begin: /\\[.?+*^|\-(){}[\]\\]/,
   }
+  const GK_ESCAPE = {
+    begin: [/\\[gk]</, /.*?/, />/],
+    beginScope: {
+      1: 'punctuation',
+      2: 'keyword',
+      3: 'punctuation',
+    },
+  }
+  const WORD_BOUNDARY = {
+    className: 'literal',
+    begin: /\\[bB]/,
+  }
+  const BACKREF_NUMBER = {
+    className: 'keyword',
+    begin: /\\[0-9]+/,
+  }
   const CHAR_ESCAPE = {
-    className: 'titlex',
+    className: 'title',
     begin: /\\./,
   }
 
@@ -159,24 +185,58 @@ hljs.registerLanguage('regexp', function () {
       {
         // modes, e.g. '(?s)'
         className: 'keyword',
-        begin: /\(\?\w\)/,
+        begin: /\(\?\w+\)/,
+      },
+      {
+        // capturing group start
+        begin: [/\(\?P?</, /\w+/, />/],
+        beginScope: {
+          1: 'punctuation',
+          2: 'keyword',
+          3: 'punctuation',
+        },
+      },
+      {
+        // negative lookaround start
+        begin: [/\(/, /\?<?/, /!/],
+        beginScope: {
+          1: 'punctuation',
+          2: 'literal',
+          3: 'keyword',
+        },
+      },
+      {
+        // positive lookaround start
+        begin: [/\(/, /\?<?=/],
+        beginScope: {
+          1: 'punctuation',
+          2: 'literal',
+        },
       },
       {
         // special group start
         className: 'punctuation',
-        begin: /\((\?:|\?<\w+>|\?=|\?!|\?<=|\?<!)/,
+        begin: /\(\?([:>]|[a-z-]+:)/,
+      },
+      {
+        className: 'comment',
+        begin: /\(\?#.*?\)/,
       },
       {
         className: 'punctuation',
         begin: /[|()]/,
       },
       {
-        className: 'literalx',
+        className: 'literal',
         begin: /[\^$]/,
       },
       {
         className: 'keyword',
-        begin: /[+*?.]+/,
+        begin: /[+*?]+/,
+      },
+      {
+        className: 'title',
+        begin: /\./,
       },
       {
         className: 'keyword',
@@ -197,16 +257,26 @@ hljs.registerLanguage('regexp', function () {
       P_SINGLE,
       LITERAL,
       SPECIAL_ESCAPE,
+      GK_ESCAPE,
+      WORD_BOUNDARY,
+      BACKREF_NUMBER,
       CHAR_ESCAPE,
       {
-        className: 'punctuation',
-        begin: /\[\^?/,
+        begin: [/\[/, /\^?/],
+        beginScope: {
+          1: 'punctuation',
+          2: 'keyword',
+        },
         end: /\]/,
         contains: [
           P_BRACED,
           P_SINGLE,
           LITERAL,
+          CHAR_RANGE,
           SPECIAL_ESCAPE,
+          GK_ESCAPE,
+          WORD_BOUNDARY,
+          BACKREF_NUMBER,
           CHAR_ESCAPE,
           {
             // make sure the above isn't triggered after a nested '['

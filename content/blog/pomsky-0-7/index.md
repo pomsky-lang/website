@@ -1,6 +1,6 @@
 ---
 title: 'Pomsky 0.7 released'
-description: 'I just released pomsky 0.7 with a new, much faster parser.'
+description: 'I just released Pomsky 0.7 with a new, much faster parser.'
 excerpt: ''
 date: 2022-09-10T18:16:11+00:00
 lastmod: 2022-09-10T18:16:11+00:00
@@ -11,19 +11,19 @@ weight: 998
 toc: true
 ---
 
-> I just released pomsky 0.7 with a new, much faster parser.
+> I just released Pomsky 0.7 with a new, much faster parser.
 
 ![Pomsky](pomsky.jpg)
 
-## What is pomsky?
+## What is Pomsky?
 
 Pomsky is a portable, modern syntax for regular expressions. It has powerful features, such as
 variables, and a much more readable syntax. Check out the
 [language tour](https://pomsky-lang.org/docs/language-tour/basics/) to quickly get familiar with
-pomsky, or the [examples](https://pomsky-lang.org/docs/examples/) to see some real pomsky
+Pomsky, or the [examples](https://pomsky-lang.org/docs/examples/) to see some real Pomsky
 expressions.
 
-Pomsky is _not_ a regex engine. Instead, a pomsky expression is transpiled to a normal RegExp,
+Pomsky is _not_ a regex engine. Instead, a Pomsky expression is transpiled to a normal RegExp,
 compatible with many RegExp engines, including JavaScript, Java, PCRE, Ruby, Python, Rust and .NET.
 
 ## Summary of the changes
@@ -35,9 +35,9 @@ a summary:
 >
 > - Pomsky is now published as WASM module to npm
 >
-> - Some syntax additions make writing pomsky expressions more fun
+> - Some syntax additions make writing Pomsky expressions more fun
 >
-> - Diagnostics were improved again. Most importantly, pomsky now detects typos and suggests the
+> - Diagnostics were improved again. Most importantly, Pomsky now detects typos and suggests the
 >   correct spelling!
 >
 > - The binary size has been significantly decreased
@@ -48,7 +48,7 @@ The biggest change in this release is that the parser was rewritten from scratch
 [nom](https://docs.rs/nom/latest/nom/) parser combinators, but over time it became evident that
 nom isn't well suited for my use case. It made me jump through hoops to get decent error messages,
 and performance was less than ideal. I considered optimizing other parts of the compiler, but it
-turns out that parsing is the only performance bottleneck in pomsky; all other compiler passes
+turns out that parsing is the only performance bottleneck in Pomsky; all other compiler passes
 take only a small fraction of the time required for parsing.
 
 The new parser doesn't use any libraries. It has all the flexibility I need, and turned out to be
@@ -59,7 +59,7 @@ parser by **up to 500%** according to my
 So how did the code change? It became slightly longer, but in exchange, control flow is much more
 explicit, so it's easier to reason about the code.
 
-During the rewrite, I was glad that pomsky has a variety of integration tests that cover both valid
+During the rewrite, I was glad that Pomsky has a variety of integration tests that cover both valid
 and invalid inputs. Once the code compiled again, I ran the test suite to identify bugs. When all
 the bugs I found were fixed and all 200 tests were green, I had much more confidence that my code
 was correct.
@@ -109,7 +109,7 @@ In the last two releases, there were a few syntax changes:
 
 - You can now use the `^` and `$` anchors instead of `Start` and `End`. These symbols are
   well-known, not only because of regular expressions, but also because vim uses them.
-  This should make your pomsky expressions more concise.
+  This should make your Pomsky expressions more concise.
 
 - Pomsky now supports atomic groups!
 
@@ -150,7 +150,7 @@ diagnostics that I want to highlight here:
   group, Pomsky will suggest the correct spelling.
 
 - Many regex syntax diagnostics were added. Pomsky now recognizes most regex syntax and suggests
-  the equivalent pomsky syntax.
+  the equivalent Pomsky syntax.
 
   For example, trying to compile `(?<grp> "test")` will produce an error with this help message:
 
@@ -163,7 +163,7 @@ diagnostics that I want to highlight here:
 
 I put some work into reducing the binary size. The first step was to strip debug symbols. I
 previously didn't strip them because I wanted to have useful backtraces in case of a panic. However,
-I'm now confident enough in pomsky's stability that I think we don't need them. And if you find a
+I'm now confident enough in Pomsky's stability that I think we don't need them. And if you find a
 panic, it should be reproducible with the same input.
 
 Stripping the binary decreased the CLI's binary size on Linux from **3.24 MiB** to **1.39 MiB**.

@@ -1,6 +1,6 @@
 {
   "name": "pomsky-hugo",
-  "description": "pomsky website",
+  "description": "Pomsky website",
   "version": "0.1.0",
   "browserslist": [
     "defaults"

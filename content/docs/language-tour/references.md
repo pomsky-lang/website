@@ -9,23 +9,22 @@ images: []
 menu:
   docs:
     parent: 'language-tour'
-weight: 209
+weight: 7015
 toc: true
 ---
 
-Sometimes it's useful to match the same text as we matched before. For example, to match strings
-in single or double quotes, we can write
+Sometimes it's useful to match the same text as we matched before. For example, let's try to match
+Rust's raw strings, which look like `r#"..."#` or `r###"..."###`. They can have an arbitrary number
+of `#` characters, but must have the same number of `#`s at each end:
 
 ```pomsky
-:(['"' "'"]) !['"' "'"]* ::1
+'r' :('#'*) '"' C* lazy '"' ::1
 ```
 
-This consists of three parts: First, there's a capturing group matching a quote. We then match an
-arbitrary number of characters that aren't quotes. Finally, there's a {{<po>}}::1{{</po>}}
-reference. This matches the same text as was captured in capturing group number 1. In other words,
-if the string started with {{<po>}}"{{</po>}}, it also has to end with
-{{<po>}}"{{</po>}}, and if it started with {{<po>}}'{{</po>}}, it has to end with
-{{<po>}}'{{</po>}}.
+There are three important parts: First, there's a capturing group matching any number of `#`s. We
+then match an arbitrary number of characters surrounded by quotes. Finally, there's a
+{{<po>}}::1{{</po>}} reference. This matches the same text as was captured in capturing group 1. In
+other words, if the string started with `##`, it also has to end with `##`.
 
 Another application is XML tags:
 

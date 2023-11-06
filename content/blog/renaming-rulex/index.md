@@ -1,6 +1,6 @@
 ---
 title: 'Renaming Rulex'
-description: 'Rulex will be renamed to pomsky.'
+description: 'Rulex will be renamed to Pomsky.'
 excerpt: ''
 date: 2022-07-01T13:06:32+00:00
 lastmod: 2022-07-01T13:06:32+00:00
@@ -34,10 +34,10 @@ also name my project, like pug, after a dog breed.
 
 The breed I settled on is the **Pomsky**, a hybrid of a Siberian Husky and a Pomeranian. I think
 this is a great name for several reasons. First, it's short, only 1 letter longer than rulex.
-There is no company or registered trademark named "pomsky". And the best part, our project now has
+There is no company or registered trademark named "Pomsky". And the best part, our project now has
 a really cute mascot 😀
 
-It's also nice that pomsky rhymes with [Noam Chomsky][chomsky], a famous linguist. Chomsky
+It's also nice that Pomsky rhymes with [Noam Chomsky][chomsky], a famous linguist. Chomsky
 influenced the field of linguistics like no other, and he has also worked with formal languages and
 formal grammars. He came up with [Chomsky’s hierarchy][chomskys-hierarchy], which categorizes
 formal languages by the strictness of their grammar:
@@ -48,11 +48,11 @@ formal languages by the strictness of their grammar:
 4. Unrestricted
 
 Regular grammars are the most strict, and can always be parsed with a regular expression. And this
-makes Chomsky's work relevant for rulex -- errrr, pomsky!
+makes Chomsky's work relevant for rulex -- errrr, Pomsky!
 
 ## The roadmap
 
-Renaming rulex to pomsky is quite a bit of work, and can be [tracked here][renaming-roadmap]. The
+Renaming rulex to Pomsky is quite a bit of work, and can be [tracked here][renaming-roadmap]. The
 name appears in a lot of different places, and during the migration we have to be careful not to
 break anyone's workflow or invalidate the old website URLs. The `rulex-rs.github.io` subdomain will
 redirect to the new website. Furthermore, crates on crates.io are immutable and can't be renamed,

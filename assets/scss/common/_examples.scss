@@ -23,7 +23,7 @@
 
       &.active {
         font-weight: 600 !important;
-        color: #ffbb63;
+        color: var(--theme-color);
       }
     }
 

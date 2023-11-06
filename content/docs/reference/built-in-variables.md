@@ -1,6 +1,6 @@
 ---
-title: 'Built-in variables'
-description: 'Variables provided by pomsky out of the box'
+title: 'Built-in variables (moved)'
+description: 'Variables provided by Pomsky out of the box'
 excerpt: ''
 date: 2022-06-19T13:50:00+00:00
 lastmod: 2022-06-19T13:50:00+00:00
@@ -9,18 +9,9 @@ images: []
 menu:
   docs:
     parent: 'reference'
-weight: 303
+weight: 111111
 toc: true
+headExt: '<meta http-equiv="refresh" content="0; url=/docs/reference/constructs/variables/#built-in-variables" />'
 ---
 
-There are currently 6 built-in variables:
-
-- `Grapheme` matches a single extended grapheme cluster. It compiles to the regex
-  {{<regexp>}}\X{{</regexp>}}.
-  Note that this functionality is not available in all regex flavors.
-- `G` is an alias for `Grapheme`
-- `Codepoint` matches a single Unicode code point. It compiles to the regex
-  {{<regexp>}}[\s\S]{{</regexp>}}.
-- `C` is an alias for `Codepoint`
-- `Start`: Matches the start of the string. Equivalent to `^`.
-- `End`: Matches the end of the string. Equivalent to `$`.
+This page was moved [here](/docs/reference/constructs/variables/#built-in-variables).

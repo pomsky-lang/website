@@ -9,33 +9,77 @@ images: []
 menu:
   docs:
     parent: 'language-tour'
-weight: 207
+weight: 7012
 toc: true
 ---
 
-Lookarounds provide the ability to see if the characters before or after the current position
-match a certain expression. There are four variants:
+Lookarounds allow you to see if the characters before or after the current position
+match a certain expression. Lookarounds are _assertions_, meaning that they have a length of 0,
+much like anchors and word boundaries.
 
-- {{<po>}}>>{{</po>}}, a positive lookahead. For example, {{<po>}}(>> [w]){{</po>}}
-  matches if the position is followed by a word character. That character isn't included in the
-  match.
+## Example
 
-- {{<po>}}<<{{</po>}}, a positive lookbehind. For example, {{<po>}}(<< [w]){{</po>}}
-  matches if the position is directly after a word character.
+Let's say we want to match all keys in a JSON file. JSON is a simple, structured text format, e.g.
 
-- {{<po>}}!>>{{</po>}}, a negative lookahead. For example {{<po>}}(!>> [w]){{</po>}}
-  matches if the position is _not_ followed by a word character. Note that this also matches at
-  the end of the string, so it's not the same as {{<po>}}(>> ![w]){{</po>}}, which would
-  require that the position is followed by at least one character.
+```json
+{
+  "languages": [
+    {
+      "name": "Pomsky",
+      "proficiency": "expert",
+      "open_source": true
+    }
+  ]
+}
+```
 
-- {{<po>}}!<<{{</po>}}, a negative lookbehind. For example {{<po>}}(!<< [w]){{</po>}}
-  matches if the position is _not_ directly after a word character. This also matches at the start
-  of the string, so it's not the same as {{<po>}}(<< ![w]){{</po>}}.
+To match all keys, we need to look for strings followed by a `:`. However, we don't want the colon
+to be part of our match; we just want to check that it's there! Here's a possible solution:
 
-Note that lookbehind isn't supported everywhere, for example in Safari.
+```pomsky
+'"' !['"']* '"'  (>> [space]* ':')
+```
 
-Lookaround makes it possible to match a string in multiple ways. For example,
-{{<po>}}(!>> ('_' | 'for' | 'while' | 'if') %) [w]+ %{{</po>}} matches a string consisting
-of word characters, but not one of the keywords `_`, `for`, `while` and `if`. Be careful when using
-this technique, because the lookahead might not match the same length as the expression after it.
-Here, we ensured that both match until the end of the word with {{<po>}}%{{</po>}}.
+The {{<po>}}>>{{</po>}} introduces a _lookahead assertion_. It checks that the `"` is followed by
+a `:`, possibly with spaces in between. The contents of the lookahead are not included in the match.
+
+But what if there's a key containing escaped quotes, e.g. `"foo \"bar\" baz"`? To handle this, we
+need to allow escape sequences in the string:
+
+```pomsky
+'"' (!['\"'] | '\\' | '\"')* '"'  (>> [space]* ':')
+```
+
+There's just one piece missing: The first quote should not be preceded by a backslash, so we need
+another assertion:
+
+```pomsky
+(!<< '\')  '"' (!['\"'] | '\\' | '\"')* '"'  (>> [space]* ':')
+```
+
+This is a _negative lookbehind assertion_. It asserts that the string is _not_ preceded by the
+contained expression.
+
+In total, there are 4 kinds of lookaround assertions:
+
+- {{<po>}}>>{{</po>}} (positive lookahead)
+- {{<po>}}<<{{</po>}} (positive lookbehind)
+- {{<po>}}!>>{{</po>}} (negative lookahead)
+- {{<po>}}!<<{{</po>}} (negative lookbehind)
+
+Note that lookbehind isn't supported everywhere. In Safari, support was added recently, but older
+versions of Safari don't support lookbehind. Rust supports neither lookbehind nor lookahead.
+
+## Intersection expressions
+
+Lookaround makes it possible to simultaneously match a string in multiple ways. For example:
+
+```pomsky
+< (!>> ('_' | 'for' | 'while' | 'if') >) [word]+ >
+```
+
+This matches a string consisting of word characters, but not one of the keywords `_`, `for`,
+`while` and `if`.
+
+Be careful when using this technique, because the lookahead might not match the same length as the
+expression after it. Here, we ensured that both match until the word end with {{<po>}}>{{</po>}}.

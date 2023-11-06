@@ -4,17 +4,17 @@
   <div data-title="Basic" data-result="Hello\s+(?:world|pomsky)">
     'Hello' [space]+ ('world' | 'pomsky')
   </div>
-  <div data-title="Boundaries" data-result="^ +| +$|\b +\b">^ ' '+ | ' '+ $ | % ' '+ %</div>
-  <div data-title="Repetition" data-result="(?:hello){1,5}(?:world)*?">
-    'hello'{1,5} 'world'* lazy
+  <div data-title="Boundaries" data-result="^\bfoo\b$">^ % 'foo' % $</div>
+  <div data-title="Repetition" data-result="(?:hello){1,5}(?:world)*">
+    'hello'{1,5} 'world'*
   </div>
   <div data-title="Character classes" data-result="[acd[\]p-s\d][^\^]">
 ['acd[]' 'p'-'s' digit]
 !['^']  # negated
   </div>
   <div data-title="Unicode" data-result="[\s\x15\uFEFF\p{Greek}]">[s U+15 U+FEFF Greek]</div>
-  <div data-title="Capturing groups" data-result="(\s)(?<named>.)\2">
-    :([space]) :named(.) ::named
+  <div data-title="Capturing groups" data-result="(\s)(?<named>.)">
+    :([space]) :named(.)
   </div>
   <div data-title="Lookaround" data-result="(?<=foo|bar)(?!foo|bar)">
     (<< 'foo' | 'bar') (!>> 'foo' | 'bar')

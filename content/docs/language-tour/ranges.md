@@ -9,34 +9,24 @@ images: []
 menu:
   docs:
     parent: 'language-tour'
-weight: 208
+weight: 7014
 toc: true
 ---
 
-Writing a regex matching a number in a certain range can be quite difficult. For example, the
-following regex matches a number between 0 and 255:
-
-```regexp
-(?:2(?:5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])
-```
-
-This has many downsides:
-
-- It's not readable
-- It's difficult to come up with
-- It's easy to make a mistake somewhere
-- It's inefficient; a typical regex engine needs to backtrack in several places
-
-Pomsky solves these problems with its `range` syntax:
+When you need to match a range of numbers, the `range` syntax is your best friend. Character ranges
+(e.g. {{<po>}}['0'-'7']{{</po>}}) are only able to match a single digit; the `range` syntax has no
+such limitation:
 
 ```pomsky
-range '0'-'255'
+let octet = range '0'-'255';
+
+# ipv4 address
+octet ('.' octet){3}
 ```
 
-Pomsky creates a **DFA** (deterministic finite automaton) from this, so the generated regex is
-optimal in terms of matching performance. Since the algorithm for creating this regex is extensively
-tested, you can also rely on it's correctness. Here's the regex generated from
-{{<po>}}range '0'-'255'{{</po>}}:
+This generates a regular expression that is both correct and as efficient as possible, since it
+never requires backtracking. If you're curious, here's the regex the
+{{<po>}}range '0'-'255'{{</po>}} compiles to:
 
 ```regexp
 0|1[0-9]{0,2}|2(?:[0-4][0-9]?|5[0-5]?|[6-9])?|[3-9][0-9]?
@@ -51,14 +41,9 @@ range, you might write:
 range '10F'-'FFFF' base 16
 ```
 
-This generates this regex:
-
-```regexp
-1(?:0(?:[0-9a-eA-E][0-9a-fA-F]|[fF][0-9a-fA-F]?)|[1-9a-fA-F][0-9a-fA-F]{1,2})|[2-9a-fA-F][0-9a-fA-F]{2,3}
-```
-
 ## Leading zeroes
 
+<!-- prettier-ignore -->
 If you wish to support leading zeros, this is easy to achieve by putting {{<po>}}'0'*{{</po>}}
 in front:
 
@@ -66,7 +51,7 @@ in front:
 '0'* range '0'-'1024'
 ```
 
-If the number should have a certain length, with leading zeroes added when necessary, pomsky has a
+If the number should have a certain length, with leading zeroes added when necessary, Pomsky has a
 special syntax for this:
 
 ```pomsky

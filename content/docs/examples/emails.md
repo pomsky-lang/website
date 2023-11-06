@@ -9,7 +9,7 @@ images: []
 menu:
   docs:
     parent: 'examples'
-weight: 404
+weight: 9004
 toc: true
 ---
 
@@ -60,7 +60,7 @@ be written like this:
 )
 ```
 
-Here's a straightforward translation into pomsky:
+Here's a straightforward translation into Pomsky:
 
 ```pomsky
 (
@@ -95,7 +95,7 @@ Here's a straightforward translation into pomsky:
 ```
 
 Notice how the complex logic for matching a number between '0' and '255' is replaced by a simple
-`range` expression in pomsky.
+`range` expression in Pomsky.
 
 We can also write the above as follows using variables:
 

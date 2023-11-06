@@ -9,7 +9,7 @@ images: []
 menu:
   docs:
     parent: 'examples'
-weight: 403
+weight: 9003
 toc: true
 ---
 
@@ -25,7 +25,7 @@ With abbreviations:
 [\p{Pc}\p{Sc}\p{M}\p{Alpha}][\p{Pc}\p{Sc}\p{M}\p{Alpha}\p{Numeric}]*
 ```
 
-And as a pomsky:
+And as a Pomsky:
 
 ```pomsky
 [Pc Sc M Alpha]

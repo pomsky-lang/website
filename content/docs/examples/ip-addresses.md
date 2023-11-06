@@ -9,7 +9,7 @@ images: []
 menu:
   docs:
     parent: 'examples'
-weight: 405
+weight: 9005
 toc: true
 ---
 
@@ -46,7 +46,7 @@ Here's the same regexp in free-spacing mode with some comments added:
 )$
 ```
 
-And the equivalent pomsky expression:
+And the equivalent Pomsky expression:
 
 ```pomsky
 # segment in an IPv4 address
