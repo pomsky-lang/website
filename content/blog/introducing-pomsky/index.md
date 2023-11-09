@@ -142,6 +142,6 @@ Ludwig
 [variables]: /docs/language-tour/variables/
 [ranges]: /docs/language-tour/ranges/
 [references]: /docs/language-tour/references/
-[built-ins]: /docs/reference/built-in-variables/
+[built-ins]: /docs/reference/constructs/variables/#built-in-variables
 [general-feedback]: https://github.com/pomsky-lang/pomsky/issues/42
 [mail]: mailto:feedback@pomsky-lang.org

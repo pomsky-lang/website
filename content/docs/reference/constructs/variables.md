@@ -91,8 +91,7 @@ let b = 'test';
 a
 ```
 
-There are a few [built-in variables](/docs/reference/built-in-variables/). These can also be
-shadowed.
+There are a few built-in variables. These can also be shadowed.
 
 ### Built-in variables
 
