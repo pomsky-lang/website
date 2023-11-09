@@ -7,8 +7,17 @@
   }
 
   > div {
+    flex: 1 1 30%;
     border: 2px solid #77777722;
     border-radius: 1rem;
+
+    @media (max-width: 1400px) {
+      flex: 1 1 45%;
+    }
+
+    @media (max-width: 992px) {
+      flex: 1 1 90%;
+    }
 
     > :not(img) {
       margin-left: 65px;

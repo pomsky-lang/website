@@ -11,26 +11,28 @@ hljs.registerLanguage('toml', ini)
 hljs.registerLanguage('json', json)
 
 hljs.registerLanguage('pomsky', function (hljs) {
+  const STRING = {
+    className: 'string',
+    variants: [
+      {
+        begin: /"/,
+        contains: [
+          { begin: /\\[\\"]/, className: 'keyword' },
+          { begin: /\\./, className: 'illegal' },
+        ],
+        end: /"/,
+      },
+      { begin: /'/, end: /'/ },
+    ],
+  }
+
   return {
     name: 'pomsky',
     aliases: ['pomsky'],
     unicodeRegex: true,
     contains: [
       hljs.HASH_COMMENT_MODE,
-      {
-        className: 'string',
-        variants: [
-          {
-            begin: /"/,
-            contains: [
-              { begin: /\\[\\"]/, className: 'keyword' },
-              { begin: /\\./, className: 'illegal' },
-            ],
-            end: /"/,
-          },
-          { begin: /'/, end: /'/ },
-        ],
-      },
+      STRING,
       {
         scope: 'codepoint',
         className: 'literal',
@@ -54,6 +56,41 @@ hljs.registerLanguage('pomsky', function (hljs) {
             className: 'illegal',
             begin: /\b[\p{Alpha}\d_]+\b/,
             endsParent: true,
+          },
+        ],
+      },
+      {
+        scope: 'test',
+        begin: [/\btest/, /\s*/, /\{/],
+        beginScope: {
+          1: 'keyword',
+          3: 'punctuation',
+        },
+        end: /\}/,
+        endScope: 'punctuation',
+        contains: [
+          hljs.HASH_COMMENT_MODE,
+          STRING,
+          {
+            className: 'keyword',
+            begin: /\b(match|reject|as|in)\b/,
+          },
+          {
+            className: 'punctuation',
+            begin: /\{/,
+            end: /\}/,
+            contains: [
+              hljs.HASH_COMMENT_MODE,
+              STRING,
+              {
+                className: 'title',
+                begin: /\b[a-zA-Z]\w*\b/,
+              },
+              {
+                className: 'number',
+                begin: /\d+/,
+              },
+            ],
           },
         ],
       },

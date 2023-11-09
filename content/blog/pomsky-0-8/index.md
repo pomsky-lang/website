@@ -36,13 +36,17 @@ All sponsors will receive monthly updates on what I am working on, as I want to 
 
 This release focuses on stability, but also brings a few new features:
 
-> - Inline regexes landed, allowing you to use regex features not yet supported by Pomsky
->
-> - Pomsky now supports the dot, matching any code point
->
-> - An optimization pass that tries to make the generated regex smaller
->
-> - Many bugs were fixed
+<div class="big-list">
+
+- [Inline regexes](#inline-regexes) landed, allowing you to use regex features not yet supported by Pomsky
+
+- Pomsky now supports the [dot](#the-dot), matching any code point
+
+- An [optimization pass](#optimizations) that tries to make the generated regex smaller
+
+- Many bugs were fixed
+
+</div>
 
 ## Inline regexes
 

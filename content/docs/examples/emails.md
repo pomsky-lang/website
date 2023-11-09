@@ -100,34 +100,28 @@ Notice how the complex logic for matching a number between '0' and '255' is repl
 We can also write the above as follows using variables:
 
 ```pomsky
-let char_before_at = ['a'-'z' '0'-'9' "!#$%&'*+/=?^_`{|}~-"];
-let quoted_char_before_at = [U+01-U+08 U+0b U+0c U+0e-U+1f U+21 U+23-U+5b U+5d-U+7f];
-let escaped_char_before_at = '\' [U+01-U+09 U+0b U+0c U+0e-U+7f];
+let before_at = ['a'-'z' '0'-'9' "!#$%&'*+/=?^_`{|}~-"];
+let escaped = '\' [U+01-U+09 U+0b U+0c U+0e-U+7f];
+let quoted_before_at = [U+01-U+08 U+0b U+0c U+0e-U+1f U+21 U+23-U+5b U+5d-U+7f];
+let port_digit = [U+01-U+08 U+0b U+0c U+0e-U+1f U+21-U+5a U+53-U+7f];
 
 let lower_digit = ['a'-'z' '0'-'9'];
 let lower_digit_dash = ['a'-'z' '0'-'9' '-'];
 
-let port_digit = [U+01-U+08 U+0b U+0c U+0e-U+1f U+21-U+5a U+53-U+7f];
-let escaped_port_char = '\' [U+01-U+09 U+0b U+0c U+0e-U+7f];
-
+let domain_label = lower_digit (lower_digit_dash* lower_digit)?;
 
 (
-  | char_before_at+ ('.' char_before_at+)*
-  | '"' (quoted_char_before_at | escaped_char_before_at)* '"'
+  | before_at+ ('.' before_at+)*
+  | '"' (quoted_before_at | escaped)* '"'
 )
 '@'
 (
-  | (lower_digit (lower_digit_dash* lower_digit)? '.')+
-    lower_digit
-    (lower_digit_dash* lower_digit)?
+  | (domain_label '.')+ domain_label
   | '['
     (:(range '0'-'255') '.'){3}
     (
       | :(range '0'-'255')
-      | lower_digit_dash*
-        lower_digit
-        ':'
-        (port_digit | escaped_port_char)+
+      | lower_digit_dash* lower_digit ':' (port_digit | escaped)+
     )
     ']'
 )

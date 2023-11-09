@@ -9,7 +9,7 @@ images: []
 menu:
   docs:
     parent: 'reference'
-weight: 1
+weight: 8001
 toc: true
 ---
 
@@ -107,10 +107,11 @@ let AtomExpression =
     | Reference
     | NumberRange
     | Variable
-    | Dot;
+    | Dot
+    | Recursion;
 ```
 
-See _[String], [CodePoint], [Group], [CharacterSet], [InlineRegex], [Boundary], [Reference], [NumberRange], [Dot]_.
+See _[String], [CodePoint], [Group], [CharacterSet], [InlineRegex], [Boundary], [Reference], [NumberRange], [Dot], [Recursion]_.
 
 [String]: /docs/reference/tokens/#string
 [CodePoint]: /docs/reference/tokens/#codepoint
@@ -121,3 +122,4 @@ See _[String], [CodePoint], [Group], [CharacterSet], [InlineRegex], [Boundary], 
 [Reference]: /docs/reference/constructs/reference
 [NumberRange]: /docs/reference/constructs/number-range
 [Dot]: /docs/reference/constructs/dot
+[Recursion]: /docs/reference/constructs/recursion
