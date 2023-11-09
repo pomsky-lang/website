@@ -21,6 +21,9 @@ jobs:
       - name: 📦 Build website
         run: npm run build -- -v --environment=next
 
+      - name: Fix CNAME url
+        run: echo 'next.pomsky-lang.org' > public/CNAME
+
       - name: 🚀 Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
