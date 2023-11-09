@@ -19,7 +19,7 @@ jobs:
         run: npm ci
 
       - name: 📦 Build website
-        run: npm run build -- -b / -v --environment=next
+        run: npm run build -- -v --environment=next
 
       - name: 🚀 Deploy
         uses: JamesIves/github-pages-deploy-action@v4
