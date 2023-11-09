@@ -54,8 +54,7 @@ but the inner variable is only accessible within the group in which it was decla
 does not matter. Notably, a variable can be used before it was declared:</p><pre><code class=language-pomsky>let a = b b;
 let b = 'test';
 a
-</code></pre><p>There are a few <a href=/docs/reference/built-in-variables/>built-in variables</a>. These can also be
-shadowed.</p><h3 id=built-in-variables>Built-in variables <a href=#built-in-variables class=anchor aria-hidden=true>#</a></h3><p>There are 6 built-in variables:</p><ul><li><code>Grapheme</code> matches a single extended grapheme cluster. It compiles to the regex
+</code></pre><p>There are a few built-in variables. These can also be shadowed.</p><h3 id=built-in-variables>Built-in variables <a href=#built-in-variables class=anchor aria-hidden=true>#</a></h3><p>There are 6 built-in variables:</p><ul><li><code>Grapheme</code> matches a single extended grapheme cluster. It compiles to the regex
 <code class=language-regexp>\X</code>.
 Note that this functionality is not available in all regex flavors.</li><li><code>G</code> is an alias for <code>Grapheme</code></li><li><code>Codepoint</code> matches a single Unicode code point. It compiles to the regex
 <code class=language-regexp>[\s\S]</code>.</li><li><code>C</code> is an alias for <code>Codepoint</code></li><li><code>Start</code>: Matches the start of the string. Equivalent to <code>^</code>.</li><li><code>End</code>: Matches the end of the string. Equivalent to <code>$</code>.</li></ul><h2 id=compilation>Compilation <a href=#compilation class=anchor aria-hidden=true>#</a></h2><p>Compilation works by recursively substituting variables with the expression in their declaration.
