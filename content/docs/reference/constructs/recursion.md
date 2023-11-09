@@ -26,7 +26,7 @@ let Recursion = 'recursion';
 One can parse mathematical terms with the following:
 
 ```pomsky
-let op = ['+-*/'];
+let op = ['+-/*'];
 let num = [digit]+;
 
 '-'? (num | '(' recursion ')') atomic(op recursion)*
