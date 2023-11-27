@@ -36,7 +36,7 @@
     "deploy": "git switch stable && git pull && git merge main --ff-only && git push && git switch main"
   },
   "devDependencies": {
-    "@babel/cli": "^7.23.0",
+    "@babel/cli": "^7.23.4",
     "@babel/core": "^7.23.3",
     "@babel/preset-env": "^7.23.3",
     "@fullhuman/postcss-purgecss": "^5.0.0",
