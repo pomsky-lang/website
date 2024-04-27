@@ -86,7 +86,7 @@ I want to thank [Evan Richter][evanrichter] for setting up the fuzzer, disclosin
 
 ## Renaming Rulex
 
-![Pomsky](Pomsky.jpg)
+![Pomsky](pomsky.jpg)
 
 As announced in [my previous post][renaming-rulex], I had to rename Rulex to Pomsky. Read the announcement to find out the reasons, and why I chose the name "Pomsky".
 
