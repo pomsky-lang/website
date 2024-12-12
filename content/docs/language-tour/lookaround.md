@@ -67,8 +67,7 @@ In total, there are 4 kinds of lookaround assertions:
 - {{<po>}}!>>{{</po>}} (negative lookahead)
 - {{<po>}}!<<{{</po>}} (negative lookbehind)
 
-Note that lookbehind isn't supported everywhere. In Safari, support was added recently, but older
-versions of Safari don't support lookbehind. Rust supports neither lookbehind nor lookahead.
+Note that lookbehind isn't supported everywhere. Rust supports neither lookbehind nor lookahead.
 
 ## Intersection expressions
 

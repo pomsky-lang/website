@@ -646,19 +646,9 @@ It is almost always better to use the script rather than the block, but Pomsky s
 
 | PCRE | JavaScript | Java | Ruby | Rust | .NET | Python |
 | :--: | :--------: | :--: | :--: | :--: | :--: | :----: |
-|  ✅  |     ⛔     |  ✅  |  ✅  |  ✅  |  ✅  |   ⛔   |
+|  ⛔  |     ⛔     |  ✅  |  ✅  |  ⛔  |  ✅  |   ⛔   |
 
-Java doesn't support the following blocks:
-
-- `Arabic_Extended_C`
-- `CJK_Unified_Ideographs_Extension_H`
-- `Combining_Diacritical_Marks_For_Symbols`
-- `Cyrillic_Extended_D`
-- `Cyrillic_Supplementary`
-- `Devanagari_Extended_A`
-- `Greek_And_Coptic`
-- `Kaktovik_Numerals`
-- `No_Block`
+Java doesn't support the block `No_Block`.
 
 Ruby doesn't support the following blocks:
 
@@ -667,8 +657,6 @@ Ruby doesn't support the following blocks:
 - `Cyrillic_Extended_D`
 - `Devanagari_Extended_A`
 - `Kaktovik_Numerals`
-
-PCRE and Rust both support all blocks as of Unicode 15.0.
 
 ## Other properties
 
