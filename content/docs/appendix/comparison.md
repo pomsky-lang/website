@@ -231,7 +231,7 @@ More optimizations are planned.
 | CLI                |   ✅   |                   ✅                    |           |
 | REPL               |   ✅   |                                         |    ✅     |
 | Online playground  |   ✅   |                   ✅                    |
-| VSCode extension   |   ✅   |                                         |
+| VSCode extension   |   ✅   |                   ✅                    |
 | IntelliJ extension |   ✅   |                                         |
 | JavaScript bunder  | Babel  | Vite,<br>Rollup,<br>ESBuild,<br>Webpack |
 | Rust macro         |        |                   ✅                    |
