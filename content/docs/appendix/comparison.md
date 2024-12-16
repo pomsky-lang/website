@@ -90,30 +90,32 @@ Let's see what Regex flavors are supported by transpiled languages.
 | Ruby       | ✅<sup>\*</sup> |   ✅   |
 | Python     |                 |   ✅   |
 | Rust       |                 |   ✅   |
+| RE2        |                 |   ✅   |
 
 <sup>\*</sup>Melody can only emit ECMAScript regexes, but they also happen to be compatible
 with several other flavors.
 
 ### Explanation of the flavors
 
-- **ERE** (extended regular expressions) are used by tools such as GNU `grep` and `awk`.
+- **ERE** (extended regular expressions) are used by tools such as GNU **grep** and **awk**.
   Because ERE supports only the most basic features, it is _mostly_ forward compatible with other
   regex flavors.
 
-- **ECMAScript** is the syntax used in JavaScript and related languages (TypeScript, Elm, Dart, etc.) that are compiled to JS.
+- **ECMAScript** is the syntax used in **JavaScript** and related languages (**TypeScript**, **Elm**, **Dart**, etc.) that are compiled to JS.
 
-- **PCRE** (an acronym for "Perl compatible regular expression") is the syntax used by the PCRE2 regex engine, which is the default in at least Crystal, Delphi, Elixir, Erlang, Hack, Julia, PHP, R and Vala. It's also a popular choice in other languages like C and C++ and is used in many applications such as the Apache server, nginx, MariaDB, MongoDB, and optionally in GNU `grep`.
+- **PCRE** (an acronym for "Perl compatible regular expression") is the syntax used by the PCRE2 regex engine, which is the default in at least **Crystal**, **Delphi**, **Elixir**, **Erlang**, **Hack**, **Julia**, **PHP**, **R**, and **Vala**. It's also a popular choice in other languages like **C** and **C++** and is used in many applications such as the **Apache server**, **nginx**, **MariaDB**, **MongoDB**, and optionally in GNU **grep**.
 
-- **.NET** refers to the `Regex` class in .NET languages such as C# and F#.
+- **.NET** refers to the [.NET regular expressions](https://learn.microsoft.com/en-us/dotnet/standard/base-types/regular-expressions), used by languages such as **C#** and **F#**.
 
-- **Java** refers to the `Pattern` class in Java's standard library. Equivalent to Kotlin's and
-  Scala's regular expressions.
+- **Java** refers to the [Pattern](https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/util/regex/Pattern.html) class in the **Java** standard library. Also used in **Kotlin** and **Scala**.
 
-- **Ruby** refers to built-in regular expressions in Ruby.
+- **Ruby** refers to built-in regular expressions in Ruby (using the [oniguruma](https://github.com/kkos/oniguruma) regex library).
 
-- **Python** refers to Pythons `re` module. Note that Python 3 is required for good Unicode support.
+- **Python** refers to Python's [re](https://docs.python.org/3/library/re.html) module. Note that Python 3 is required for good Unicode support.
 
-- **Rust** refers to Rust's popular `regex` crate (used by `ripgrep`)
+- **Rust** refers to Rust's popular [regex](https://docs.rs/regex/latest/regex/) crate (used by **ripgrep**)
+
+- **RE2** refers to Google's [re2](https://github.com/google/re2) library; this flavor is also compatible with **Go**'s [regexp](https://pkg.go.dev/regexp) package.
 
 Many more flavors exist, which are not (or only partially) supported by Pomsky and other languages.
 
@@ -172,15 +174,14 @@ a few special characters.
 | [Relative backreference][relative-ref]      |                     |         ✅          |
 | [Unicode category][category]                |         ✅          |         ✅          |
 | [Unicode script][script]/[block]            |                     |         ✅          |                     |       partly        |
+| [Unicode script extensions][scx]            |                     |         ✅          |                     |                     |
 | [Other Unicode property][unicode]           |                     |         ✅          |
 | [Any code point][built-in-vars]             | partly<sup>\*</sup> |         ✅          | partly<sup>\*</sup> | partly<sup>\*</sup> |
 | [Any grapheme][built-in-vars]               |                     |         ✅          |
 | [Atomic group][atomic]                      |                     |         ✅          |                     |
-| [Character set intersection][charintersect] |                     |                     |                     |         ✅          |
-| [Character set subtraction][charsubtract]   |                     |                     |                     |
-| [Possessive quantifier][possessive]         |                     |                     |                     |
+| [Character set intersection][charintersect] |                     |         ✅          |                     |         ✅          |
 | [Conditional]                               |                     |                     |                     |
-| [Recursion]                                 |                     |                     |                     |
+| [Recursion]                                 |                     |         ✅          |                     |
 | [Modifier]                                  |                     |                     |                     |
 | [Inline regex][inline-regex]                |         ✅          |         ✅          |                     |
 | Optimization                                |                     | some<sup>\*\*</sup> |                     |
@@ -196,6 +197,7 @@ a few special characters.
 [backreference]: https://www.regular-expressions.info/backref.html
 [category]: https://www.regular-expressions.info/unicode.html#category
 [script]: https://www.regular-expressions.info/unicode.html#script
+[scx]: https://www.unicode.org/L2/L2011/11406-script-ext.html
 [block]: https://www.regular-expressions.info/unicode.html#block
 [unicode]: https://www.regular-expressions.info/unicode.html
 [built-in-vars]: https://pomsky-lang.org/docs/reference/built-in-variables/
@@ -213,7 +215,14 @@ Note that Melody and Pomsky support inline regexes. Because of this, all Regex f
 <sup>\*</sup>All languages can match a code point with the dot, if multiline mode is enabled in the
 regex engine.
 
-<sup>\*\*</sup>Pomsky can currently optimize repetitions, remove redundant or empty groups and deduplicate code points in character sets. More optimizations are planned.
+<sup>\*\*</sup>Pomsky can currently
+
+- optimize repetitions
+- remove redundant or empty groups
+- in character sets, deduplicate code points and merge overlapping ranges
+- merge single-character alternations into character sets
+
+More optimizations are planned.
 
 ## Tooling
 

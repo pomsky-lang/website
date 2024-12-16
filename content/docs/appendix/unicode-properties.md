@@ -17,13 +17,30 @@ Pomsky supports the following kinds of Unicode properties:
 
 - General categories
 - Scripts
+- Script extensions
 - Blocks
 - Other boolean properties
 
 However, not all regex engines support all of them. In particular, _blocks_ and _other properties_
 are poorly supported.
 
-## Categories
+## Prefixes
+
+You may add a prefix to properties to indicate what kind of property it is:
+
+- `gc:` or `general_category:` indicates a general category
+- `script:` or `sc:` indicates a script
+- `script_extensions:` or `scx:` indicates script extensions
+- `block:` or `blk:` indicates a block
+
+```pomsky
+[gc:Letter]   # the "Letter" general category
+[scx:Greek]   # the "Greek" script extensions
+```
+
+Except for blocks, these prefixes are optional, so you can write `[Letter]` and `[Greek]` if you prefer.
+
+## General Categories
 
 Every Unicode code point is in one of the following _General Categories_:
 
@@ -52,54 +69,56 @@ Using the abbreviations, the above can be written as
 <details>
 <summary><b>Show all 38 categories</b></summary>
 
-| Abbr | Long                    | Description                                          |
-| ---- | ----------------------- | ---------------------------------------------------- |
-| `Lu` | `Uppercase_Letter`      | an uppercase letter                                  |
-| `Ll` | `Lowercase_Letter`      | a lowercase letter                                   |
-| `Lt` | `Titlecase_Letter`      | a digraphic character, with first part uppercase     |
-| `LC` | `Cased_Letter`          | `Lu` \| `Ll` \| `Lt`                                 |
-| `Lm` | `Modifier_Letter`       | a modifier letter                                    |
-| `Lo` | `Other_Letter`          | other letters, including syllables and ideographs    |
-| `L`  | `Letter`                | `Lu` \| `Ll` \| `Lt` \| `Lm` \| `Lo`                 |
-| `Mn` | `Nonspacing_Mark`       | a nonspacing combining mark (zero advance width)     |
-| `Mc` | `Spacing_Mark`          | a spacing combining mark (positive advance width)    |
-| `Me` | `Enclosing_Mark`        | an enclosing combining mark                          |
-| `M`  | `Mark`                  | `Mn` \| `Mc` \| `Me`                                 |
-| `Nd` | `Decimal_Number`        | a decimal digit                                      |
-| `Nl` | `Letter_Number`         | a letterlike numeric character                       |
-| `No` | `Other_Number`          | a numeric character of other type                    |
-| `N`  | `Number`                | `Nd` \| `Nl` \| `No`                                 |
-| `Pc` | `Connector_Punctuation` | a connecting punctuation mark, like a tie            |
-| `Pd` | `Dash_Punctuation`      | a dash or hyphen punctuation mark                    |
-| `Ps` | `Open_Punctuation`      | an opening punctuation mark (of a pair)              |
-| `Pe` | `Close_Punctuation`     | a closing punctuation mark (of a pair)               |
-| `Pi` | `Initial_Punctuation`   | an initial quotation mark                            |
-| `Pf` | `Final_Punctuation`     | a final quotation mark                               |
-| `Po` | `Other_Punctuation`     | a punctuation mark of other type                     |
-| `P`  | `Punctuation`           | `Pc` \| `Pd` \| `Ps` \| `Pe` \| `Pi` \| `Pf` \| `Po` |
-| `Sm` | `Math_Symbol`           | a symbol of mathematical use                         |
-| `Sc` | `Currency_Symbol`       | a currency sign                                      |
-| `Sk` | `Modifier_Symbol`       | a non-letterlike modifier symbol                     |
-| `So` | `Other_Symbol`          | a symbol of other type                               |
-| `S`  | `Symbol`                | `Sm` \| `Sc` \| `Sk` \| `So`                         |
-| `Zs` | `Space_Separator`       | a space character (of various non-zero widths)       |
-| `Zl` | `Line_Separator`        | U+2028 LINE SEPARATOR only                           |
-| `Zp` | `Paragraph_Separator`   | U+2029 PARAGRAPH SEPARATOR only                      |
-| `Z`  | `Separator`             | `Zs` \| `Zl` \| `Zp`                                 |
-| `Cc` | `Control`               | a C0 or C1 control code                              |
-| `Cf` | `Format`                | a format control character                           |
-| `Cs` | `Surrogate`             | a surrogate code point<br />⚠️ not supported in Rust |
-| `Co` | `Private_Use`           | a private-use character                              |
-| `Cn` | `Unassigned`            | a reserved unassigned code point or a noncharacter   |
-| `C`  | `Other`                 | `Cc` \| `Cf` \| `Cs` \| `Co` \| `Cn`                 |
+| Abbr | Long                    | Description                                              |
+| ---- | ----------------------- | -------------------------------------------------------- |
+| `Lu` | `Uppercase_Letter`      | an uppercase letter                                      |
+| `Ll` | `Lowercase_Letter`      | a lowercase letter                                       |
+| `Lt` | `Titlecase_Letter`      | a [digraphic] character (e.g. ‘ǅ’), first part uppercase |
+| `LC` | `Cased_Letter`          | `Lu` \| `Ll` \| `Lt`                                     |
+| `Lm` | `Modifier_Letter`       | a modifier letter                                        |
+| `Lo` | `Other_Letter`          | other letters, including syllables and ideographs        |
+| `L`  | `Letter`                | `Lu` \| `Ll` \| `Lt` \| `Lm` \| `Lo`                     |
+| `Mn` | `Nonspacing_Mark`       | a nonspacing combining mark (zero advance width)         |
+| `Mc` | `Spacing_Mark`          | a spacing combining mark (positive advance width)        |
+| `Me` | `Enclosing_Mark`        | an enclosing combining mark                              |
+| `M`  | `Mark`                  | `Mn` \| `Mc` \| `Me`                                     |
+| `Nd` | `Decimal_Number`        | a decimal digit                                          |
+| `Nl` | `Letter_Number`         | a letterlike numeric character                           |
+| `No` | `Other_Number`          | a numeric character of other type                        |
+| `N`  | `Number`                | `Nd` \| `Nl` \| `No`                                     |
+| `Pc` | `Connector_Punctuation` | a connecting punctuation mark, like a tie                |
+| `Pd` | `Dash_Punctuation`      | a dash or hyphen punctuation mark                        |
+| `Ps` | `Open_Punctuation`      | an opening punctuation mark (of a pair)                  |
+| `Pe` | `Close_Punctuation`     | a closing punctuation mark (of a pair)                   |
+| `Pi` | `Initial_Punctuation`   | an initial quotation mark                                |
+| `Pf` | `Final_Punctuation`     | a final quotation mark                                   |
+| `Po` | `Other_Punctuation`     | a punctuation mark of other type                         |
+| `P`  | `Punctuation`           | `Pc` \| `Pd` \| `Ps` \| `Pe` \| `Pi` \| `Pf` \| `Po`     |
+| `Sm` | `Math_Symbol`           | a symbol of mathematical use                             |
+| `Sc` | `Currency_Symbol`       | a currency sign                                          |
+| `Sk` | `Modifier_Symbol`       | a non-letterlike modifier symbol                         |
+| `So` | `Other_Symbol`          | a symbol of other type                                   |
+| `S`  | `Symbol`                | `Sm` \| `Sc` \| `Sk` \| `So`                             |
+| `Zs` | `Space_Separator`       | a space character (of various non-zero widths)           |
+| `Zl` | `Line_Separator`        | U+2028 LINE SEPARATOR only                               |
+| `Zp` | `Paragraph_Separator`   | U+2029 PARAGRAPH SEPARATOR only                          |
+| `Z`  | `Separator`             | `Zs` \| `Zl` \| `Zp`                                     |
+| `Cc` | `Control`               | a C0 or C1 control code                                  |
+| `Cf` | `Format`                | a format control character                               |
+| `Cs` | `Surrogate`             | a surrogate code point<br />⚠️ not supported in Rust     |
+| `Co` | `Private_Use`           | a private-use character                                  |
+| `Cn` | `Unassigned`            | a reserved unassigned code point or a noncharacter       |
+| `C`  | `Other`                 | `Cc` \| `Cf` \| `Cs` \| `Co` \| `Cn`                     |
+
+[digraphic]: https://en.wikipedia.org/wiki/Digraph_(orthography)
 
 </details>
 
 ### Support
 
-| PCRE | JavaScript | Java | Ruby | Rust | .NET | Python |
-| :--: | :--------: | :--: | :--: | :--: | :--: | :----: |
-|  ✅  |     ✅     |  ✅  |  ✅  |  ✅  |  ✅  |   ⛔   |
+| PCRE | JS  | Java | Ruby | Rust | .NET | Python | RE2 |
+| :--: | :-: | :--: | :--: | :--: | :--: | :----: | :-: |
+|  ✅  | ✅  |  ✅  |  ✅  |  ✅  |  ✅  |   ⛔   | ✅  |
 
 Rust does not support the `Surrogate` category, because it is always Unicode aware and UTF-16 surrogates are not valid Unicode scalar values.
 
@@ -107,191 +126,201 @@ Rust does not support the `Surrogate` category, because it is always Unicode awa
 
 A script is a collection of code points used to represent textual information in one or more writing systems.
 
-As with categories, code points can only be assigned to a single script. Code points used in multiple scripts are therefore assigned to the special script `Common`. More information on [Wikipedia](<https://en.wikipedia.org/wiki/Script_(Unicode)>).
+As with categories, code points can only be assigned to a single script. Code points used in multiple scripts are therefore assigned to the special `Common` or `Inherited` scripts. More information on [Wikipedia](<https://en.wikipedia.org/wiki/Script_(Unicode)>).
 
 <details>
 <summary><b>Show all 164 scripts</b></summary>
 
-| Abbr   | Long / Notes                                                |
-| ------ | ----------------------------------------------------------- |
-| `Adlm` | `Adlam`                                                     |
-| `Aghb` | `Caucasian_Albanian`                                        |
-| `Ahom` | `Ahom`                                                      |
-| `Arab` | `Arabic`                                                    |
-| `Armi` | `Imperial_Aramaic`                                          |
-| `Armn` | `Armenian`                                                  |
-| `Avst` | `Avestan`                                                   |
-| `Bali` | `Balinese`                                                  |
-| `Bamu` | `Bamum`                                                     |
-| `Bass` | `Bassa_Vah`                                                 |
-| `Batk` | `Batak`                                                     |
-| `Beng` | `Bengali`                                                   |
-| `Bhks` | `Bhaiksuki`                                                 |
-| `Bopo` | `Bopomofo`                                                  |
-| `Brah` | `Brahmi`                                                    |
-| `Brai` | `Braille`                                                   |
-| `Bugi` | `Buginese`                                                  |
-| `Buhd` | `Buhid`                                                     |
-| `Cakm` | `Chakma`                                                    |
-| `Cans` | `Canadian_Aboriginal`                                       |
-| `Cari` | `Carian`                                                    |
-| `Cham` | `Cham`                                                      |
-| `Cher` | `Cherokee`                                                  |
-| `Chrs` | `Chorasmian`                                                |
-| `Copt` | `Coptic`, `Qaac`                                            |
-| `Cpmn` | `Cypro_Minoan`                                              |
-| `Cprt` | `Cypriot`                                                   |
-| `Cyrl` | `Cyrillic`                                                  |
-| `Deva` | `Devanagari`                                                |
-| `Diak` | `Dives_Akuru`                                               |
-| `Dogr` | `Dogra`                                                     |
-| `Dsrt` | `Deseret`                                                   |
-| `Dupl` | `Duployan`                                                  |
-| `Egyp` | `Egyptian_Hieroglyphs`                                      |
-| `Elba` | `Elbasan`                                                   |
-| `Elym` | `Elymaic`                                                   |
-| `Ethi` | `Ethiopic`                                                  |
-| `Geor` | `Georgian`                                                  |
-| `Glag` | `Glagolitic`                                                |
-| `Gong` | `Gunjala_Gondi`                                             |
-| `Gonm` | `Masaram_Gondi`                                             |
-| `Goth` | `Gothic`                                                    |
-| `Gran` | `Grantha`                                                   |
-| `Grek` | `Greek`                                                     |
-| `Gujr` | `Gujarati`                                                  |
-| `Guru` | `Gurmukhi`                                                  |
-| `Hang` | `Hangul`                                                    |
-| `Hani` | `Han`                                                       |
-| `Hano` | `Hanunoo`                                                   |
-| `Hatr` | `Hatran`                                                    |
-| `Hebr` | `Hebrew`                                                    |
-| `Hira` | `Hiragana`                                                  |
-| `Hluw` | `Anatolian_Hieroglyphs`                                     |
-| `Hmng` | `Pahawh_Hmong`                                              |
-| `Hmnp` | `Nyiakeng_Puachue_Hmong`                                    |
-| `Hung` | `Old_Hungarian`                                             |
-| `Ital` | `Old_Italic`                                                |
-| `Java` | `Javanese`                                                  |
-| `Kali` | `Kayah_Li`                                                  |
-| `Kana` | `Katakana`                                                  |
-| `Kawi` | `Kawi`<br />⚠️ not supported by PCRE, Java and Ruby         |
-| `Khar` | `Kharoshthi`                                                |
-| `Khmr` | `Khmer`                                                     |
-| `Khoj` | `Khojki`                                                    |
-| `Kits` | `Khitan_Small_Script`                                       |
-| `Knda` | `Kannada`                                                   |
-| `Kthi` | `Kaithi`                                                    |
-| `Lana` | `Tai_Tham`                                                  |
-| `Laoo` | `Lao`                                                       |
-| `Latn` | `Latin`                                                     |
-| `Lepc` | `Lepcha`                                                    |
-| `Limb` | `Limbu`                                                     |
-| `Lina` | `Linear_A`                                                  |
-| `Linb` | `Linear_B`                                                  |
-| `Lisu` | `Lisu`                                                      |
-| `Lyci` | `Lycian`                                                    |
-| `Lydi` | `Lydian`                                                    |
-| `Mahj` | `Mahajani`                                                  |
-| `Maka` | `Makasar`                                                   |
-| `Mand` | `Mandaic`                                                   |
-| `Mani` | `Manichaean`                                                |
-| `Marc` | `Marchen`                                                   |
-| `Medf` | `Medefaidrin`                                               |
-| `Mend` | `Mende_Kikakui`                                             |
-| `Merc` | `Meroitic_Cursive`                                          |
-| `Mero` | `Meroitic_Hieroglyphs`                                      |
-| `Mlym` | `Malayalam`                                                 |
-| `Modi` | `Modi`                                                      |
-| `Mong` | `Mongolian`                                                 |
-| `Mroo` | `Mro`                                                       |
-| `Mtei` | `Meetei_Mayek`                                              |
-| `Mult` | `Multani`                                                   |
-| `Mymr` | `Myanmar`                                                   |
-| `Nagm` | `Nag_Mundari`<br /> ⚠️ not supported by PCRE, Java and Ruby |
-| `Nand` | `Nandinagari`                                               |
-| `Narb` | `Old_North_Arabian`                                         |
-| `Nbat` | `Nabataean`                                                 |
-| `Newa` | `Newa`                                                      |
-| `Nkoo` | `Nko`                                                       |
-| `Nshu` | `Nushu`                                                     |
-| `Ogam` | `Ogham`                                                     |
-| `Olck` | `Ol_Chiki`                                                  |
-| `Orkh` | `Old_Turkic`                                                |
-| `Orya` | `Oriya`                                                     |
-| `Osge` | `Osage`                                                     |
-| `Osma` | `Osmanya`                                                   |
-| `Ougr` | `Old_Uyghur`                                                |
-| `Palm` | `Palmyrene`                                                 |
-| `Pauc` | `Pau_Cin_Hau`                                               |
-| `Perm` | `Old_Permic`                                                |
-| `Phag` | `Phags_Pa`                                                  |
-| `Phli` | `Inscriptional_Pahlavi`                                     |
-| `Phlp` | `Psalter_Pahlavi`                                           |
-| `Phnx` | `Phoenician`                                                |
-| `Plrd` | `Miao`                                                      |
-| `Prti` | `Inscriptional_Parthian`                                    |
-| `Rjng` | `Rejang`                                                    |
-| `Rohg` | `Hanifi_Rohingya`                                           |
-| `Runr` | `Runic`                                                     |
-| `Samr` | `Samaritan`                                                 |
-| `Sarb` | `Old_South_Arabian`                                         |
-| `Saur` | `Saurashtra`                                                |
-| `Sgnw` | `SignWriting`                                               |
-| `Shaw` | `Shavian`                                                   |
-| `Shrd` | `Sharada`                                                   |
-| `Sidd` | `Siddham`                                                   |
-| `Sind` | `Khudawadi`                                                 |
-| `Sinh` | `Sinhala`                                                   |
-| `Sogd` | `Sogdian`                                                   |
-| `Sogo` | `Old_Sogdian`                                               |
-| `Sora` | `Sora_Sompeng`                                              |
-| `Soyo` | `Soyombo`                                                   |
-| `Sund` | `Sundanese`                                                 |
-| `Sylo` | `Syloti_Nagri`                                              |
-| `Syrc` | `Syriac`                                                    |
-| `Tagb` | `Tagbanwa`                                                  |
-| `Takr` | `Takri`                                                     |
-| `Tale` | `Tai_Le`                                                    |
-| `Talu` | `New_Tai_Lue`                                               |
-| `Taml` | `Tamil`                                                     |
-| `Tang` | `Tangut`                                                    |
-| `Tavt` | `Tai_Viet`                                                  |
-| `Telu` | `Telugu`                                                    |
-| `Tfng` | `Tifinagh`                                                  |
-| `Tglg` | `Tagalog`                                                   |
-| `Thaa` | `Thaana`                                                    |
-| `Thai` | `Thai`                                                      |
-| `Tibt` | `Tibetan`                                                   |
-| `Tirh` | `Tirhuta`                                                   |
-| `Tnsa` | `Tangsa`                                                    |
-| `Toto` | `Toto`                                                      |
-| `Ugar` | `Ugaritic`                                                  |
-| `Vaii` | `Vai`                                                       |
-| `Vith` | `Vithkuqi`                                                  |
-| `Wara` | `Warang_Citi`                                               |
-| `Wcho` | `Wancho`                                                    |
-| `Xpeo` | `Old_Persian`                                               |
-| `Xsux` | `Cuneiform`                                                 |
-| `Yezi` | `Yezidi`                                                    |
-| `Yiii` | `Yi`                                                        |
-| `Zanb` | `Zanabazar_Square`                                          |
-| `Zinh` | `Inherited`                                                 |
-| `Zyyy` | `Common`                                                    |
-| `Zzzz` | `Unknown`<br /> ⚠️ not supported by Rust                    |
+| Abbr   | Long / Notes                             |
+| ------ | ---------------------------------------- |
+| `Adlm` | `Adlam`                                  |
+| `Aghb` | `Caucasian_Albanian`                     |
+| `Ahom` | `Ahom`                                   |
+| `Arab` | `Arabic`                                 |
+| `Armi` | `Imperial_Aramaic`                       |
+| `Armn` | `Armenian`                               |
+| `Avst` | `Avestan`                                |
+| `Bali` | `Balinese`                               |
+| `Bamu` | `Bamum`                                  |
+| `Bass` | `Bassa_Vah`                              |
+| `Batk` | `Batak`                                  |
+| `Beng` | `Bengali`                                |
+| `Bhks` | `Bhaiksuki`                              |
+| `Bopo` | `Bopomofo`                               |
+| `Brah` | `Brahmi`                                 |
+| `Brai` | `Braille`                                |
+| `Bugi` | `Buginese`                               |
+| `Buhd` | `Buhid`                                  |
+| `Cakm` | `Chakma`                                 |
+| `Cans` | `Canadian_Aboriginal`                    |
+| `Cari` | `Carian`                                 |
+| `Cham` | `Cham`                                   |
+| `Cher` | `Cherokee`                               |
+| `Chrs` | `Chorasmian`                             |
+| `Copt` | `Coptic`, `Qaac`                         |
+| `Cpmn` | `Cypro_Minoan`                           |
+| `Cprt` | `Cypriot`                                |
+| `Cyrl` | `Cyrillic`                               |
+| `Deva` | `Devanagari`                             |
+| `Diak` | `Dives_Akuru`                            |
+| `Dogr` | `Dogra`                                  |
+| `Dsrt` | `Deseret`                                |
+| `Dupl` | `Duployan`                               |
+| `Egyp` | `Egyptian_Hieroglyphs`                   |
+| `Elba` | `Elbasan`                                |
+| `Elym` | `Elymaic`                                |
+| `Ethi` | `Ethiopic`                               |
+| `Geor` | `Georgian`                               |
+| `Glag` | `Glagolitic`                             |
+| `Gong` | `Gunjala_Gondi`                          |
+| `Gonm` | `Masaram_Gondi`                          |
+| `Goth` | `Gothic`                                 |
+| `Gran` | `Grantha`                                |
+| `Grek` | `Greek`                                  |
+| `Gujr` | `Gujarati`                               |
+| `Guru` | `Gurmukhi`                               |
+| `Hang` | `Hangul`                                 |
+| `Hani` | `Han`                                    |
+| `Hano` | `Hanunoo`                                |
+| `Hatr` | `Hatran`                                 |
+| `Hebr` | `Hebrew`                                 |
+| `Hira` | `Hiragana`                               |
+| `Hluw` | `Anatolian_Hieroglyphs`                  |
+| `Hmng` | `Pahawh_Hmong`                           |
+| `Hmnp` | `Nyiakeng_Puachue_Hmong`                 |
+| `Hung` | `Old_Hungarian`                          |
+| `Ital` | `Old_Italic`                             |
+| `Java` | `Javanese`                               |
+| `Kali` | `Kayah_Li`                               |
+| `Kana` | `Katakana`                               |
+| `Kawi` | `Kawi`                                   |
+| `Khar` | `Kharoshthi`                             |
+| `Khmr` | `Khmer`                                  |
+| `Khoj` | `Khojki`                                 |
+| `Kits` | `Khitan_Small_Script`                    |
+| `Knda` | `Kannada`                                |
+| `Kthi` | `Kaithi`                                 |
+| `Lana` | `Tai_Tham`                               |
+| `Laoo` | `Lao`                                    |
+| `Latn` | `Latin`                                  |
+| `Lepc` | `Lepcha`                                 |
+| `Limb` | `Limbu`                                  |
+| `Lina` | `Linear_A`                               |
+| `Linb` | `Linear_B`                               |
+| `Lisu` | `Lisu`                                   |
+| `Lyci` | `Lycian`                                 |
+| `Lydi` | `Lydian`                                 |
+| `Mahj` | `Mahajani`                               |
+| `Maka` | `Makasar`                                |
+| `Mand` | `Mandaic`                                |
+| `Mani` | `Manichaean`                             |
+| `Marc` | `Marchen`                                |
+| `Medf` | `Medefaidrin`                            |
+| `Mend` | `Mende_Kikakui`                          |
+| `Merc` | `Meroitic_Cursive`                       |
+| `Mero` | `Meroitic_Hieroglyphs`                   |
+| `Mlym` | `Malayalam`                              |
+| `Modi` | `Modi`                                   |
+| `Mong` | `Mongolian`                              |
+| `Mroo` | `Mro`                                    |
+| `Mtei` | `Meetei_Mayek`                           |
+| `Mult` | `Multani`                                |
+| `Mymr` | `Myanmar`                                |
+| `Nagm` | `Nag_Mundari`                            |
+| `Nand` | `Nandinagari`                            |
+| `Narb` | `Old_North_Arabian`                      |
+| `Nbat` | `Nabataean`                              |
+| `Newa` | `Newa`                                   |
+| `Nkoo` | `Nko`                                    |
+| `Nshu` | `Nushu`                                  |
+| `Ogam` | `Ogham`                                  |
+| `Olck` | `Ol_Chiki`                               |
+| `Orkh` | `Old_Turkic`                             |
+| `Orya` | `Oriya`                                  |
+| `Osge` | `Osage`                                  |
+| `Osma` | `Osmanya`                                |
+| `Ougr` | `Old_Uyghur`                             |
+| `Palm` | `Palmyrene`                              |
+| `Pauc` | `Pau_Cin_Hau`                            |
+| `Perm` | `Old_Permic`                             |
+| `Phag` | `Phags_Pa`                               |
+| `Phli` | `Inscriptional_Pahlavi`                  |
+| `Phlp` | `Psalter_Pahlavi`                        |
+| `Phnx` | `Phoenician`                             |
+| `Plrd` | `Miao`                                   |
+| `Prti` | `Inscriptional_Parthian`                 |
+| `Rjng` | `Rejang`                                 |
+| `Rohg` | `Hanifi_Rohingya`                        |
+| `Runr` | `Runic`                                  |
+| `Samr` | `Samaritan`                              |
+| `Sarb` | `Old_South_Arabian`                      |
+| `Saur` | `Saurashtra`                             |
+| `Sgnw` | `SignWriting`                            |
+| `Shaw` | `Shavian`                                |
+| `Shrd` | `Sharada`                                |
+| `Sidd` | `Siddham`                                |
+| `Sind` | `Khudawadi`                              |
+| `Sinh` | `Sinhala`                                |
+| `Sogd` | `Sogdian`                                |
+| `Sogo` | `Old_Sogdian`                            |
+| `Sora` | `Sora_Sompeng`                           |
+| `Soyo` | `Soyombo`                                |
+| `Sund` | `Sundanese`                              |
+| `Sylo` | `Syloti_Nagri`                           |
+| `Syrc` | `Syriac`                                 |
+| `Tagb` | `Tagbanwa`                               |
+| `Takr` | `Takri`                                  |
+| `Tale` | `Tai_Le`                                 |
+| `Talu` | `New_Tai_Lue`                            |
+| `Taml` | `Tamil`                                  |
+| `Tang` | `Tangut`                                 |
+| `Tavt` | `Tai_Viet`                               |
+| `Telu` | `Telugu`                                 |
+| `Tfng` | `Tifinagh`                               |
+| `Tglg` | `Tagalog`                                |
+| `Thaa` | `Thaana`                                 |
+| `Thai` | `Thai`                                   |
+| `Tibt` | `Tibetan`                                |
+| `Tirh` | `Tirhuta`                                |
+| `Tnsa` | `Tangsa`                                 |
+| `Toto` | `Toto`                                   |
+| `Ugar` | `Ugaritic`                               |
+| `Vaii` | `Vai`                                    |
+| `Vith` | `Vithkuqi`                               |
+| `Wara` | `Warang_Citi`                            |
+| `Wcho` | `Wancho`                                 |
+| `Xpeo` | `Old_Persian`                            |
+| `Xsux` | `Cuneiform`                              |
+| `Yezi` | `Yezidi`                                 |
+| `Yiii` | `Yi`                                     |
+| `Zanb` | `Zanabazar_Square`                       |
+| `Zinh` | `Inherited`                              |
+| `Zyyy` | `Common`                                 |
+| `Zzzz` | `Unknown`<br /> ⚠️ not supported by Rust |
 
 </details>
 
 ### Support
 
-| PCRE | JavaScript | Java | Ruby | Rust | .NET | Python |
-| :--: | :--------: | :--: | :--: | :--: | :--: | :----: |
-|  ✅  |     ✅     |  ✅  |  ✅  |  ✅  |  ✅  |   ⛔   |
-
-`Kawi` and `Nag_Mundari`, added in Unicode 15.0, are not yet supported in PCRE, Java and Ruby.
+| PCRE | JS  | Java | Ruby | Rust | .NET | Python | RE2 |
+| :--: | :-: | :--: | :--: | :--: | :--: | :----: | :-: |
+|  ✅  | ✅  |  ✅  |  ✅  |  ✅  |  ⛔  |   ⛔   | ✅  |
 
 `Zzzz` (`Unknown`) is not supported in Rust.
 
-JavaScript supports all scripts as of Unicode 15.0.
+## Script Extensions
+
+Script extensions are similar to scripts; the difference is that script extensions can overlap, whereas scripts can not.
+
+For example, the code point `U+064B` is used both in the Arab and Syriac script, so it is matched by both `[scx:Arab]` and `[scx:Syriac]`. If your regex flavor supports script extensions, they should almost always be preferred over scripts.
+
+The list of script extensions is the same as the list of scripts.
+
+### Support
+
+| PCRE | JS  | Java | Ruby | Rust | .NET | Python | RE2 |
+| :--: | :-: | :--: | :--: | :--: | :--: | :----: | :-: |
+|  ✅  | ✅  |  ⛔  |  ⛔  |  ✅  |  ⛔  |   ⛔   | ⛔  |
 
 ## Blocks
 
@@ -299,10 +328,14 @@ The Unicode character set is divided into blocks of consecutive code points that
 
 There are often multiple blocks for a script. For example, there are 10 designated blocks for Latin code points: `Basic_Latin`, `Latin_1_Supplement`, `Latin_Extended_Additional`, and `Latin_Extended_A` through `Latin_Extended_G`. Furthermore, many blocks contain two or more scripts, which is not always clear from the name. For example, `Latin_Extended_E` includes a Greek code point.
 
-It is almost always better to use the script rather than the block, but Pomsky still supports blocks using the `In` prefix:
+Therefore, it is almost always better to use the script rather than the block, but Pomsky still supports blocks.
+
+Blocks have to be prefixed with `blk:` or `block:`. Originally, blocks were prefixed with `In`, but this might be deprecated in the future:
 
 ```pomsky
-# matches code points in the `Basic_Latin` block
+# matches code points in the `Basic_Latin` block:
+[blk:Basic_Latin]
+# equivalent, but not recommended:
 [InBasic_Latin]
 ```
 
@@ -644,9 +677,9 @@ It is almost always better to use the script rather than the block, but Pomsky s
 
 ### Support
 
-| PCRE | JavaScript | Java | Ruby | Rust | .NET | Python |
-| :--: | :--------: | :--: | :--: | :--: | :--: | :----: |
-|  ⛔  |     ⛔     |  ✅  |  ✅  |  ⛔  |  ✅  |   ⛔   |
+| PCRE | JS  | Java | Ruby | Rust | .NET | Python | RE2 |
+| :--: | :-: | :--: | :--: | :--: | :--: | :----: | :-: |
+|  ⛔  | ⛔  |  ✅  |  ✅  |  ⛔  | (✅) |   ⛔   | ⛔  |
 
 Java doesn't support the block `No_Block`.
 
@@ -658,7 +691,123 @@ Ruby doesn't support the following blocks:
 - `Devanagari_Extended_A`
 - `Kaktovik_Numerals`
 
-## Other properties
+.NET only supports blocks in the [Basic Multilingual Plane](<https://en.wikipedia.org/wiki/Plane_(Unicode)#Basic_Multilingual_Plane>) (BMP). And even in the BMP, not all blocks are supported:
+
+<details>
+<summary><b>Show 108 blocks supported by .NET</b></summary>
+
+- `Alphabetic_Presentation_Forms`
+- `Arabic`
+- `Arabic_PresentationForms_A`
+- `Arabic_PresentationForms_B`
+- `Armenian`
+- `Arrows`
+- `Basic_Latin`
+- `Bengali`
+- `Block_Elements`
+- `Bopomofo`
+- `Bopomofo_Extended`
+- `Box_Drawing`
+- `Braille_Patterns`
+- `Buhid`
+- `CJK_Compatibility`
+- `CJK_Compatibility_Forms`
+- `CJK_Compatibility_Ideographs`
+- `CJK_Radicals_Supplement`
+- `CJK_Symbols_And_Punctuation`
+- `CJK_Unified_Ideographs`
+- `CJK_Unified_Ideographs_Extension_A`
+- `Cherokee`
+- `Combining_Diacritical_Marks`
+- `Combining_Diacritical_Marks_For_Symbols`
+- `Combining_Half_Marks`
+- `Combining_Marks_For_Symbols`
+- `Control_Pictures`
+- `Currency_Symbols`
+- `Cyrillic`
+- `Cyrillic_Supplement`
+- `Devanagari`
+- `Dingbats`
+- `Enclosed_Alphanumerics`
+- `Enclosed_CJK_Letters_And_Months`
+- `Ethiopic`
+- `General_Punctuation`
+- `Geometric_Shapes`
+- `Georgian`
+- `Greek`
+- `Greek_Extended`
+- `Greek_And_Coptic`
+- `Gujarati`
+- `Gurmukhi`
+- `Halfwidth_And_Fullwidth_Forms`
+- `Hangul_Compatibility_Jamo`
+- `Hangul_Jamo`
+- `Hangul_Syllables`
+- `Hanunoo`
+- `Hebrew`
+- `High_Private_Use_Surrogates`
+- `High_Surrogates`
+- `Hiragana`
+- `IPA_Extensions`
+- `Ideographic_Description_Characters`
+- `Kanbun`
+- `Kangxi_Radicals`
+- `Kannada`
+- `Katakana`
+- `Katakana_Phonetic_Extensions`
+- `Khmer`
+- `Khmer_Symbols`
+- `Lao`
+- `Latin_1_Supplement`
+- `Latin_Extended_A`
+- `Latin_Extended_B`
+- `Latin_Extended_Additional`
+- `Letterlike_Symbols`
+- `Limbu`
+- `Low_Surrogates`
+- `Malayalam`
+- `Mathematical_Operators`
+- `Miscellaneous_Mathematical_Symbols_A`
+- `Miscellaneous_Mathematical_Symbols_B`
+- `Miscellaneous_Symbols`
+- `Miscellaneous_Symbols_And_Arrows`
+- `Miscellaneous_Technical`
+- `Mongolian`
+- `Myanmar`
+- `Number_Forms`
+- `Ogham`
+- `Optical_Character_Recognition`
+- `Oriya`
+- `Phonetic_Extensions`
+- `Private_Use`
+- `Private_Use_Area`
+- `Runic`
+- `Sinhala`
+- `Small_Form_Variants`
+- `Spacing_Modifier_Letters`
+- `Specials`
+- `Superscripts_And_Subscripts`
+- `Supplemental_Arrows_A`
+- `Supplemental_Arrows_B`
+- `Supplemental_Mathematical_Operators`
+- `Syriac`
+- `Tagalog`
+- `Tagbanwa`
+- `TaiLe`
+- `Tamil`
+- `Telugu`
+- `Thaana`
+- `Thai`
+- `Tibetan`
+- `Unified_Canadian_Aboriginal_Syllabics`
+- `Variation_Selectors`
+- `Yi_Radicals`
+- `Yi_Syllables`
+- `Yijing_Hexagram_Symbols`
+
+</details>
+
+## Boolean properties
 
 There are a number of boolean properties (meaning they are either `Yes` or `No`), which you can use in Pomsky by simply putting them in square brackets:
 
@@ -668,84 +817,93 @@ There are a number of boolean properties (meaning they are either `Yes` or `No`)
 ```
 
 <details>
-<summary><b>Show all 53 other properties</b></summary>
+<summary><b>Show all 53 boolean properties</b></summary>
 
-| Abbr       | Long                           |
-| ---------- | ------------------------------ |
-| `ASCII`    | `ASCII`                        |
-| `AHex`     | `ASCII_Hex_Digit`              |
-| `Alpha`    | `Alphabetic`                   |
-| `Any`      | `Any`                          |
-| `Assigned` | `Assigned`                     |
-| `Bidi_C`   | `Bidi_Control`                 |
-| `Bidi_M`   | `Bidi_Mirrored`                |
-| `CI`       | `Case_Ignorable`               |
-| `Cased`    | `Cased`                        |
-| `CWCF`     | `Changes_When_Casefolded`      |
-| `CWCM`     | `Changes_When_Casemapped`      |
-| `CWL`      | `Changes_When_Lowercased`      |
-| `CWKCF`    | `Changes_When_NFKC_Casefolded` |
-| `CWT`      | `Changes_When_Titlecased`      |
-| `CWU`      | `Changes_When_Uppercased`      |
-| `Dash`     | `Dash`                         |
-| `DI`       | `Default_Ignorable_Code_Point` |
-| `Dep`      | `Deprecated`                   |
-| `Dia`      | `Diacritic`                    |
-| `Emoji`    | `Emoji`                        |
-| `EComp`    | `Emoji_Component`              |
-| `EMod`     | `Emoji_Modifier`               |
-| `EBase`    | `Emoji_Modifier_Base`          |
-| `EPres`    | `Emoji_Presentation`           |
-| `ExtPict`  | `Extended_Pictographic`        |
-| `Ext`      | `Extender`                     |
-| `Gr_Base`  | `Grapheme_Base`                |
-| `Gr_Ext`   | `Grapheme_Extend`              |
-| `Hex`      | `Hex_Digit`                    |
-| `IDSB`     | `IDS_Binary_Operator`          |
-| `IDST`     | `IDS_Trinary_Operator`         |
-| `IDC`      | `ID_Continue`                  |
-| `IDS`      | `ID_Start`                     |
-| `Ideo`     | `Ideographic`                  |
-| `Join_C`   | `Join_Control`                 |
-| `LOE`      | `Logical_Order_Exception`      |
-| `Lower`    | `Lowercase`                    |
-| `Math`     | `Math`                         |
-| `NChar`    | `Noncharacter_Code_Point`      |
-| `Pat_Syn`  | `Pattern_Syntax`               |
-| `Pat_WS`   | `Pattern_White_Space`          |
-| `QMark`    | `Quotation_Mark`               |
-| `Radical`  | `Radical`                      |
-| `RI`       | `Regional_Indicator`           |
-| `STerm`    | `Sentence_Terminal`            |
-| `SD`       | `Soft_Dotted`                  |
-| `Term`     | `Terminal_Punctuation`         |
-| `UIdeo`    | `Unified_Ideograph`            |
-| `Upper`    | `Uppercase`                    |
-| `VS`       | `Variation_Selector`           |
-| `space`    | `White_Space`                  |
-| `XIDC`     | `XID_Continue`                 |
-| `XIDS`     | `XID_Start`                    |
+| Abbr       | Long                                                                    |
+| ---------- | ----------------------------------------------------------------------- |
+| `ASCII`    | `ASCII`                                                                 |
+| `AHex`     | `ASCII_Hex_Digit`                                                       |
+| `Alpha`    | `Alphabetic`                                                            |
+| `Any`      | `Any`                                                                   |
+| `Assigned` | `Assigned`<br />⚠️ not supported in PCRE                                |
+| `Bidi_C`   | `Bidi_Control`                                                          |
+| `Bidi_M`   | `Bidi_Mirrored`<br />⚠️ not supported in Ruby                           |
+| `CI`       | `Case_Ignorable`                                                        |
+| `Cased`    | `Cased`                                                                 |
+| `CWCF`     | `Changes_When_Casefolded`<br />⚠️ not supported in PCRE, Ruby, and Rust |
+| `CWCM`     | `Changes_When_Casemapped`                                               |
+| `CWL`      | `Changes_When_Lowercased`                                               |
+| `CWKCF`    | `Changes_When_NFKC_Casefolded`                                          |
+| `CWT`      | `Changes_When_Titlecased`                                               |
+| `CWU`      | `Changes_When_Uppercased`                                               |
+| `Dash`     | `Dash`                                                                  |
+| `DI`       | `Default_Ignorable_Code_Point`                                          |
+| `Dep`      | `Deprecated`                                                            |
+| `Dia`      | `Diacritic`                                                             |
+| `Emoji`    | `Emoji`                                                                 |
+| `EComp`    | `Emoji_Component`                                                       |
+| `EMod`     | `Emoji_Modifier`                                                        |
+| `EBase`    | `Emoji_Modifier_Base`                                                   |
+| `EPres`    | `Emoji_Presentation`                                                    |
+| `ExtPict`  | `Extended_Pictographic`                                                 |
+| `Ext`      | `Extender`                                                              |
+| `Gr_Base`  | `Grapheme_Base`                                                         |
+| `Gr_Ext`   | `Grapheme_Extend`                                                       |
+| `Hex`      | `Hex_Digit`                                                             |
+| `IDSB`     | `IDS_Binary_Operator`                                                   |
+| `IDST`     | `IDS_Trinary_Operator`                                                  |
+| `IDC`      | `ID_Continue`                                                           |
+| `IDS`      | `ID_Start`                                                              |
+| `Ideo`     | `Ideographic`                                                           |
+| `Join_C`   | `Join_Control`                                                          |
+| `LOE`      | `Logical_Order_Exception`                                               |
+| `Lower`    | `Lowercase`                                                             |
+| `Math`     | `Math`                                                                  |
+| `NChar`    | `Noncharacter_Code_Point`                                               |
+| `Pat_Syn`  | `Pattern_Syntax`                                                        |
+| `Pat_WS`   | `Pattern_White_Space`                                                   |
+| `QMark`    | `Quotation_Mark`                                                        |
+| `Radical`  | `Radical`                                                               |
+| `RI`       | `Regional_Indicator`                                                    |
+| `STerm`    | `Sentence_Terminal`                                                     |
+| `SD`       | `Soft_Dotted`                                                           |
+| `Term`     | `Terminal_Punctuation`                                                  |
+| `UIdeo`    | `Unified_Ideograph`                                                     |
+| `Upper`    | `Uppercase`                                                             |
+| `VS`       | `Variation_Selector`                                                    |
+| `space`    | `White_Space`                                                           |
+| `XIDC`     | `XID_Continue`                                                          |
+| `XIDS`     | `XID_Start`                                                             |
 
 </details>
 
 ### Support
 
-| PCRE | JavaScript | Java | Ruby | Rust | .NET | Python |
-| :--: | :--------: | :--: | :--: | :--: | :--: | :----: |
-|  ✅  |     ✅     |  ⛔  |  ✅  |  ✅  |  ✅  |   ⛔   |
+| PCRE | JS  | Java | Ruby | Rust | .NET | Python | RE2 |
+| :--: | :-: | :--: | :--: | :--: | :--: | :----: | :-: |
+|  ✅  | ✅  | (✅) |  ✅  |  ✅  |  ⛔  |   ⛔   | ⛔  |
 
-PCRE doesn't support the following blocks:
+PCRE, Ruby, and Rust don't support all properties – see the list.
 
+Java **only** supports the following 20 boolean properties:
+
+- `Alphabetic`
+- `Ideographic`
+- `Letter`
+- `Lowercase`
+- `Uppercase`
+- `Titlecase`
+- `Punctuation`
+- `Control`
+- `White_Space`
+- `Digit`
+- `Hex_Digit`
+- `Join_Control`
+- `Noncharacter_Code_Point`
 - `Assigned`
-- `Changes_When_NFKC_Casefolded`
-
-Ruby doesn't support the following blocks:
-
-- `Bidi_Mirrored`
-- `Changes_When_NFKC_Casefolded`
-
-Rust doesn't support the following blocks:
-
-- `Changes_When_NFKC_Casefolded`
-
-JavaScript supports all boolean properties as of Unicode 15.0.
+- `Emoji`
+- `Emoji_Presentation`
+- `Emoji_Modifier`
+- `Emoji_Modifier_Base`
+- `Emoji_Component`
+- `Extended_Pictographic`
