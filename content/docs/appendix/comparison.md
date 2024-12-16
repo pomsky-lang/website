@@ -238,8 +238,6 @@ More optimizations are planned.
 | Linter             |        |                                         |
 | Formatter          |        |                                         |
 
-## Language integrations
-
 ## Packages
 
 | Tool                            | Melody | Pomsky |
