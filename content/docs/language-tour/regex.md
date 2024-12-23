@@ -9,7 +9,7 @@ images: []
 menu:
   docs:
     parent: 'language-tour'
-weight: 7016
+weight: 7018
 toc: true
 ---
 
@@ -40,4 +40,4 @@ repetition or surrounded by parentheses.
 
 ## Finish line
 
-This concludes the language tour! I hope
+This concludes the language tour! If you have feedback, you can [open an issue](https://github.com/pomsky-lang/website/issues) or [write in our Discord channel](https://discord.gg/uwap2uxMFp).

@@ -76,3 +76,9 @@ You need to set the `unicode` and `ucp` options to make regexes Unicode aware. F
 PCRE supports Unicode, but to make {{<regexp>}}\w{{</regexp>}}, {{<regexp>}}\d{{</regexp>}},
 {{<regexp>}}\s{{</regexp>}} and {{<regexp>}}\b{{</regexp>}} Unicode-aware, you need to enable both
 `PCRE_UTF8` and `PCRE_UCP`.
+
+## RE2
+
+RE2 is Unicode-aware by default. There's nothing you need to do.
+
+Since `\w`, `\d`, `\s`, and `\b` are _not_ Unicode aware, you need to disable Unicode to use them.

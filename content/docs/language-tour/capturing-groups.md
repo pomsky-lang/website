@@ -9,7 +9,7 @@ images: []
 menu:
   docs:
     parent: 'language-tour'
-weight: 7010
+weight: 7011
 toc: true
 ---
 
@@ -67,4 +67,18 @@ function createVersionTag(version) {
   const { major, minor, patch } = versionRegex().exec(version).groups
   return `v${major}_${minor}_${patch}`
 }
+```
+
+## Testing capturing groups
+
+When writing unit tests, it might be important to test the contents of specific capturing groups:
+
+```pomsky
+test {
+  match '1.3.17' as { major: '1', minor: '3', patch: '17' };
+  # using indices:
+  match '1.3.17' as { 1: '1', 2: '3', 3: '17' };
+}
+
+:major([digit]+) '.' :minor([digit]+) '.' :patch([digit]+)
 ```

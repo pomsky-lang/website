@@ -691,7 +691,7 @@ Ruby doesn't support the following blocks:
 - `Devanagari_Extended_A`
 - `Kaktovik_Numerals`
 
-.NET only supports blocks in the [Basic Multilingual Plane](<https://en.wikipedia.org/wiki/Plane_(Unicode)#Basic_Multilingual_Plane>) (BMP). And even in the BMP, not all blocks are supported:
+.NET only supports blocks in the [Basic Multilingual Plane](<https://en.wikipedia.org/wiki/Plane_(Unicode)#Basic_Multilingual_Plane>) (BMP). And even in the BMP, not all blocks are supported. Here's the full list:
 
 <details>
 <summary><b>Show 108 blocks supported by .NET</b></summary>

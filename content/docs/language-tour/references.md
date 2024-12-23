@@ -3,7 +3,7 @@ title: 'References'
 description: 'Matching the same thing more than once'
 excerpt: ''
 date: 2022-05-17T13:55:00+00:00
-lastmod: 2022-05-17T13:55:00+00:00
+lastmod: 2024-12-22T22:26:00+00:00
 draft: false
 images: []
 menu:
@@ -18,7 +18,7 @@ Rust's raw strings, which look like `r#"..."#` or `r###"..."###`. They can have 
 of `#` characters, but must have the same number of `#`s at each end:
 
 ```pomsky
-'r' :('#'*) '"' C* lazy '"' ::1
+'r' :('#'*) '"' .* lazy '"' ::1
 ```
 
 There are three important parts: First, there's a capturing group matching any number of `#`s. We

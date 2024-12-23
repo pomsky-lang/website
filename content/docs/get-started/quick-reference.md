@@ -52,25 +52,27 @@ Variables are replaced with their content in the produced regex:
 
 ## Character sets
 
-| Pomsky                         | Explanation                         | Regex                                 |
-| ------------------------------ | ----------------------------------- | ------------------------------------- |
-| {{<po>}}[···]{{</po>}}         | character set                       | {{<regexp>}}[···]{{</regexp>}}        |
-| {{<po>}}![···]{{</po>}}        | negated character set               | {{<regexp>}}[^···]{{</regexp>}}       |
-| {{<po>}}[n t]{{</po>}}         | special characters (line feed, tab) | {{<regexp>}}[\n\t]{{</regexp>}}       |
-| {{<po>}}['a' 'd']{{</po>}}     | an 'a' or 'd'                       | {{<regexp>}}[ad]{{</regexp>}}         |
-| {{<po>}}['ad']{{</po>}}        | an 'a' or 'd'                       | {{<regexp>}}[ad]{{</regexp>}}         |
-| {{<po>}}['a'-'d']{{</po>}}     | code points 'a' through 'd'         | {{<regexp>}}[a-d]{{</regexp>}}        |
-| {{<po>}}[U+45 U+FFEF]{{</po>}} | code points U+0045 and U+FFEF       | {{<regexp>}}[\x45\uFFEF]{{</regexp>}} |
+| Pomsky                         | Explanation                         | Regex                                       |
+| ------------------------------ | ----------------------------------- | ------------------------------------------- |
+| {{<po>}}[···]{{</po>}}         | character set                       | {{<regexp>}}[···]{{</regexp>}}              |
+| {{<po>}}![···]{{</po>}}        | negated character set               | {{<regexp>}}[^···]{{</regexp>}}             |
+| {{<po>}}[n t]{{</po>}}         | special characters (line feed, tab) | {{<regexp>}}[\n\t]{{</regexp>}}             |
+| {{<po>}}['a' 'd']{{</po>}}     | an 'a' or 'd'                       | {{<regexp>}}[ad]{{</regexp>}}               |
+| {{<po>}}['ad']{{</po>}}        | an 'a' or 'd'                       | {{<regexp>}}[ad]{{</regexp>}}               |
+| {{<po>}}['a'-'d']{{</po>}}     | code points 'a' through 'd'         | {{<regexp>}}[a-d]{{</regexp>}}              |
+| {{<po>}}[U+45 U+FFEF]{{</po>}} | code points U+0045 and U+FFEF       | {{<regexp>}}[\x45\uFFEF]{{</regexp>}}       |
+| {{<po>}}[Greek] & [L]{{</po>}} | intersection of character sets      | {{<regexp>}}[\p{Greek}&&\p{L}]{{</regexp>}} |
 
 ## Built-in character classes
 
-| Pomsky                                        | Explanation                                   | Regex                               |
-| --------------------------------------------- | --------------------------------------------- | ----------------------------------- |
-| {{<po>}}[word]{{</po>}}, {{<po>}}[w]{{</po>}} | any 'word' code point (letter, digit, or `_`) | {{<regexp>}}\w{{</regexp>}}         |
-| {{<po>}}[Latin]{{</po>}}                      | any code point in the 'Latin' script          | {{<regexp>}}\p{Latin}{{</regexp>}}  |
-| {{<po>}}[Letter]{{</po>}}                     | any code point in the 'Letter' category       | {{<regexp>}}\p{Letter}{{</regexp>}} |
-| {{<po>}}[ascii_digit]{{</po>}}                | any ASCII digit                               | {{<regexp>}}[0-9]{{</regexp>}}      |
-| {{<po>}}[!word]{{</po>}}                      | any code point except 'word' code points      | {{<regexp>}}\W{{</regexp>}}         |
+| Pomsky                                        | Explanation                                     | Regex                                  |
+| --------------------------------------------- | ----------------------------------------------- | -------------------------------------- |
+| {{<po>}}[word]{{</po>}}, {{<po>}}[w]{{</po>}} | any 'word' code point (letter, digit, or `_`)   | {{<regexp>}}\w{{</regexp>}}            |
+| {{<po>}}[Letter]{{</po>}}                     | any code point in the 'Letter' category         | {{<regexp>}}\p{Letter}{{</regexp>}}    |
+| {{<po>}}[Latin]{{</po>}}                      | any code point in the 'Latin' script            | {{<regexp>}}\p{Latin}{{</regexp>}}     |
+| {{<po>}}[scx:Latin]{{</po>}}                  | any code point in the 'Latin' script extensions | {{<regexp>}}\p{scx=Latin}{{</regexp>}} |
+| {{<po>}}[ascii_digit]{{</po>}}                | any ASCII digit                                 | {{<regexp>}}[0-9]{{</regexp>}}         |
+| {{<po>}}[!word]{{</po>}}                      | any code point except 'word' code points        | {{<regexp>}}\W{{</regexp>}}            |
 
 See [all shorthand character classes](../../language-tour/shorthands) and [all supported Unicode properties](../../appendix/unicode-properties).
 

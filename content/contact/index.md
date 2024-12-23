@@ -9,7 +9,7 @@ draft: false
 images: []
 ---
 
-Pomsky is maintained by Ludwig Stecher. You can reach me via [email](mailto:ludwig.stecher@gmx.de). You can sponsor me via [GitHub sponsors](https://github.com/sponsors/Aloso).
+I'm Ludwig Stecher, Pomsky's main developer. You can reach me via [email](mailto:info@pomsky-lang.org). You can sponsor me via [GitHub sponsors](https://github.com/sponsors/Aloso).
 
 To report a problem with Pomsky or propose a new feature, [create an issue](https://github.com/pomsky-lang/pomsky/issues).
 

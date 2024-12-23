@@ -20,12 +20,10 @@ An alternation matches one of several alternatives.
 ```pomsky
 let Alternation = ('|'? Alternatives)?;
 
-let Alternatives = Alternative ('|' Alternative)*;
-
-let Alternative = FixExpression+;
+let Alternatives = Intersection ('|' Intersection)*;
 ```
 
-See _[FixExpression](/docs/reference/grammar/#fixexpression)_.
+See _[Intersection](/docs/reference/constructs/intersection)_.
 
 Note that an alternation may have a leading pipe. Also note that an alternative may not be empty,
 i.e. `| |` is not allowed. Use an empty string instead, e.g. {{<po>}}'foo' | '' | 'bar'{{</po>}}.

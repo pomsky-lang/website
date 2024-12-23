@@ -54,7 +54,7 @@ fillImage = "1270x"
 footer = 'Powered by <a class="text-muted" href="https://gohugo.io/">Hugo</a> and <a class="text-muted" href="https://getdoks.org/">Doks</a>'
 
 # Feed
-copyRight = "Copyright (c) 2022 Ludwig Stecher"
+copyRight = "Copyright (c) 2022 the Pomsky developers"
 
 # Alert
 alert = false

@@ -26,6 +26,69 @@ hljs.registerLanguage('pomsky', function (hljs) {
     ],
   }
 
+  const CODEPOINT = {
+    scope: 'codepoint',
+    className: 'literal',
+    begin: /\bU\s*\+\s*[\p{Alpha}\d_]+/,
+    returnBegin: true,
+    contains: [
+      { begin: /\bU\s*\+\s*/ },
+      {
+        // 0-D7FF
+        begin:
+          /\b0*(0|[1-9a-cA-C][0-9a-fA-F]{0,3}|[dD](?:[0-7][0-9a-fA-F]{0,2}|[8-9a-fA-F][0-9a-fA-F]?)?|[e-fE-F][0-9a-fA-F]{0,2})\b/,
+        endsParent: true,
+      },
+      {
+        // E000-10FFFF
+        begin:
+          /\b0*(1(?:0[0-9a-fA-F]{3,4}|[1-9a-fA-F][0-9a-fA-F]{3})|[2-9a-dA-D][0-9a-fA-F]{4}|[e-fE-F][0-9a-fA-F]{3,4})\b/,
+        endsParent: true,
+      },
+      {
+        className: 'illegal',
+        begin: /\b[\p{Alpha}\d_]+\b/,
+        endsParent: true,
+      },
+    ],
+  }
+
+  const TEST = {
+    scope: 'test',
+    begin: [/\btest/, /\s*/, /\{/],
+    beginScope: {
+      1: 'keyword',
+      3: 'punctuation',
+    },
+    end: /\}/,
+    endScope: 'punctuation',
+    contains: [
+      hljs.HASH_COMMENT_MODE,
+      STRING,
+      {
+        className: 'keyword',
+        begin: /\b(match|reject|as|in)\b/,
+      },
+      {
+        className: 'punctuation',
+        begin: /\{/,
+        end: /\}/,
+        contains: [
+          hljs.HASH_COMMENT_MODE,
+          STRING,
+          {
+            className: 'title',
+            begin: /\b[a-zA-Z]\w*\b/,
+          },
+          {
+            className: 'number',
+            begin: /\d+/,
+          },
+        ],
+      },
+    ],
+  }
+
   return {
     name: 'pomsky',
     aliases: ['pomsky'],
@@ -33,71 +96,12 @@ hljs.registerLanguage('pomsky', function (hljs) {
     contains: [
       hljs.HASH_COMMENT_MODE,
       STRING,
-      {
-        scope: 'codepoint',
-        className: 'literal',
-        begin: /\bU\s*\+\s*[\p{Alpha}\d_]+/,
-        returnBegin: true,
-        contains: [
-          { begin: /\bU\s*\+\s*/ },
-          {
-            // 0-D7FF
-            begin:
-              /\b0*(0|[1-9a-cA-C][0-9a-fA-F]{0,3}|[dD](?:[0-7][0-9a-fA-F]{0,2}|[8-9a-fA-F][0-9a-fA-F]?)?|[e-fE-F][0-9a-fA-F]{0,2})\b/,
-            endsParent: true,
-          },
-          {
-            // E000-10FFFF
-            begin:
-              /\b0*(1(?:0[0-9a-fA-F]{3,4}|[1-9a-fA-F][0-9a-fA-F]{3})|[2-9a-dA-D][0-9a-fA-F]{4}|[e-fE-F][0-9a-fA-F]{3,4})\b/,
-            endsParent: true,
-          },
-          {
-            className: 'illegal',
-            begin: /\b[\p{Alpha}\d_]+\b/,
-            endsParent: true,
-          },
-        ],
-      },
-      {
-        scope: 'test',
-        begin: [/\btest/, /\s*/, /\{/],
-        beginScope: {
-          1: 'keyword',
-          3: 'punctuation',
-        },
-        end: /\}/,
-        endScope: 'punctuation',
-        contains: [
-          hljs.HASH_COMMENT_MODE,
-          STRING,
-          {
-            className: 'keyword',
-            begin: /\b(match|reject|as|in)\b/,
-          },
-          {
-            className: 'punctuation',
-            begin: /\{/,
-            end: /\}/,
-            contains: [
-              hljs.HASH_COMMENT_MODE,
-              STRING,
-              {
-                className: 'title',
-                begin: /\b[a-zA-Z]\w*\b/,
-              },
-              {
-                className: 'number',
-                begin: /\d+/,
-              },
-            ],
-          },
-        ],
-      },
+      CODEPOINT,
+      TEST,
       {
         className: 'keyword',
         beginKeywords:
-          'U let lazy greedy range base atomic enable disable if else recursion regex test',
+          'U let lazy greedy range base atomic enable disable if else recursion regex test call',
       },
       {
         className: 'keyword',
@@ -136,7 +140,27 @@ hljs.registerLanguage('pomsky', function (hljs) {
       },
       {
         className: 'punctuation',
-        begin: /[[\](),=;|]+/,
+        begin: /\[/,
+        contains: [
+          hljs.HASH_COMMENT_MODE,
+          STRING,
+          CODEPOINT,
+          {
+            begin: [/\b(\w+:)?/, /\w+\b|\./],
+            beginScope: {
+              2: 'title',
+            },
+          },
+          {
+            className: 'keyword',
+            begin: /[-!]/,
+          },
+        ],
+        end: /\]/,
+      },
+      {
+        className: 'punctuation',
+        begin: /[\](),=;|]+/,
       },
       {
         className: 'number',

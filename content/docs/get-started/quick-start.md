@@ -22,27 +22,16 @@ Go to...
 
 ## CLI
 
-The CLI allows you to compile Pomsky expressions in the command line.
+The CLI allows you to compile Pomsky expressions in the command line. You can install it by...
 
-Pre-built binaries are available for Windows, Linux and macOS. Download them from the
-**[releases page](https://github.com/pomsky-lang/pomsky/releases)**.
+- downloading a pre-built binary
+- using the shell or PowerShell installer
+- using the Windows msi installer
+- installing the `@pomsky-lang/cli` NPM module globally
+- installing the `pomsky-bin` AUR package
+- building from source
 
-Pomsky is also packaged for some package managers:
-
-[![Packaging status](https://repology.org/badge/vertical-allrepos/pomsky.svg)](https://repology.org/project/pomsky/versions)
-
-### Install from source
-
-This requires that a recent Rust toolchain is installed. Instructions for how to install Rust can be
-found [here](https://www.rust-lang.org/tools/install).
-
-Install the CLI with
-
-```
-cargo install pomsky-bin
-```
-
-### Get help
+See the **[releases page](https://github.com/pomsky-lang/pomsky/releases)** for instructions.
 
 To find out how to use the CLI, run
 
@@ -99,3 +88,16 @@ const MY_REGEX: &str = pomsky!(["great!"] | "great!");
 ```
 
 Documentation can be [found here](https://docs.rs/pomsky-macro/latest/pomsky_macro/).
+
+## VSCode integration
+
+The [playground](https://playground.pomsky-lang.org/) is the easiest way to start writing Pomsky expressions. However, to edit Pomsky files locally, we recommend installing the [Pomsky extension](https://marketplace.visualstudio.com/items?itemName=pomsky-lang.pomsky-vscode) for VSCode. It provides a lot of convenient features:
+
+- Syntax highlighting
+- Underlined errors and warnings
+- Auto-completion
+- Running unit tests
+- Live preview of compiled expression
+- Hover tooltips and inlay hints
+- Go to definition, find usages
+- Refactor/rename variables

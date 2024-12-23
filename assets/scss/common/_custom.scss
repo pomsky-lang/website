@@ -516,3 +516,11 @@ article [id].h4 {
     }
   }
 }
+
+.footnotes ol {
+  font-size: 90%;
+
+  p {
+    font-size: inherit;
+  }
+}

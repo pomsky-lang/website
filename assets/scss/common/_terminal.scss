@@ -1,0 +1,60 @@
+.terminal {
+  padding: 1rem;
+  overflow: auto;
+  line-height: 120%;
+  background-color: #0003;
+
+  --red: #f22;
+  --bright-red: #f66;
+  --green: #2c2;
+  --bright-green: #5d5;
+  --yellow: #ff0;
+  --bright-yellow: #ff5;
+  --blue: #22f;
+  --bright-blue: #55f;
+  --cyan: #0dd;
+  --bright-cyan: #4ff;
+  --magenta: #f0f;
+  --bright-magenta: #f5f;
+
+  @media (max-width: 800px) {
+    font-size: 0.84rem;
+  }
+  @media (max-width: 560px) {
+    font-size: 0.8rem;
+  }
+
+  .shell {
+    color: #32d132;
+    user-select: none;
+    pointer-events: none;
+  }
+  .cmd {
+    color: #419df3;
+  }
+  .hl {
+    color: #00ffff;
+    font-weight: bold;
+  }
+  .arg {
+    color: white;
+  }
+  .str {
+    color: #ffba24;
+  }
+  .pipe,
+  .punct {
+    color: #a2be00;
+  }
+  .flag {
+    color: #ff7167;
+  }
+  .esc {
+    color: #d558f5;
+    font-weight: bold;
+  }
+  .caret {
+    background-color: white;
+    user-select: none;
+  }
+}
