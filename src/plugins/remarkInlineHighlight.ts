@@ -50,7 +50,7 @@ function processChild(tree: Tree, i: number) {
   const lang = lookupMap[tag[1] as keyof typeof lookupMap]
   if (!lang) return
 
-  const content = highlighter.codeToHtml(tree.children[i].value.replaceAll('╎', '|'), {
+  const content = highlighter.codeToHtml(tree.children[i].value, {
     lang,
     themes: {
       light: 'light-plus',
