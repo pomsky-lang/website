@@ -36,12 +36,12 @@ The string content is emitted by the compiler verbatim. If the expression is rep
 wrapped in a non-capturing group. Pomsky also adds a non-capturing group if the inline regex is
 surrounded by parentheses. For example:
 
-| Pomsky                      | Compiled regex |
-| --------------------------- | -------------- |
-| `regex 'a&#x7c;b' `#po      | `a\|b`         |
-| `regex 'a&#x7c;b'+ `#po     | `(?:a\|b)+`    |
-| `regex 'a&#x7c;b' 'c' `#po  | `a\|bc`        |
-| `(regex 'a&#x7c;b') 'c'`#po | `(?:a\|b)c`    |
+| Pomsky                  | Compiled regex |
+| ----------------------- | -------------- |
+| `regex 'a\|b' `#po      | `a\|b`         |
+| `regex 'a\|b'+ `#po     | `(?:a\|b)+`    |
+| `regex 'a\|b' 'c' `#po  | `a\|bc`        |
+| `(regex 'a\|b') 'c'`#po | `(?:a\|b)c`    |
 
 This is the only situation where parentheses affect the compiled regex, even though they do not
 affect precedence in the Pomsky expression.
