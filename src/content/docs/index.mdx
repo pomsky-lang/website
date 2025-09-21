@@ -1,0 +1,221 @@
+---
+title: Pomsky
+description: Next Level Regular Expressions
+template: splash
+editUrl: false
+hero:
+  tagline: Next Level Regular Expressions
+  image:
+    file: ../../assets/favicon.svg
+  actions:
+    - text: Get Started
+      link: /docs/get-started/introduction
+      icon: right-arrow
+      variant: primary
+    - text: Playground
+      link: https://playground.pomsky-lang.org
+      icon: external
+      variant: secondary
+---
+
+import '../../styles/splash.css'
+import { Card, CardGrid } from '@astrojs/starlight/components'
+import { Tabs, TabItem } from '@astrojs/starlight/components'
+
+<CardGrid>
+  <Card title="Saner Syntax" icon="seti:default">
+    Pomsky is designed to be easy to write and understand.
+  </Card>
+  <Card title="Instant Feedback" icon="seti:favicon">
+    Syntax highlighting, autocompletion, and diagnostics in VSCode.
+  </Card>
+  <Card title="Built-in Tests" icon="approve-check-circle">
+    Automated tests catch mistakes, and double as documentation.
+  </Card>
+  <Card title="Feature Rich" icon="rocket">
+    Pomsky has powerful features you won't find anywhere else.
+  </Card>
+  <Card title="Great Compatibility" icon="puzzle">
+    Pomsky is transpiled to normal RegExp's, so you can use it anywhere.
+  </Card>
+  <Card title="Optimized Output" icon="setting">
+    You can be confident that your expressions perform well.
+  </Card>
+</CardGrid>
+
+## Examples
+
+See at a glance what Pomsky looks like.
+
+<Tabs>
+  <TabItem label="Pomsky">
+
+    ```pomsky
+    'Hello' [space]+ ('world' | 'pomsky')
+    ```
+
+  </TabItem>
+  <TabItem label="Regex">
+
+    ```regexp
+    Hello\s+(?:world|pomsky)
+    ```
+
+  </TabItem>
+</Tabs>
+
+### Boundaries
+
+<Tabs>
+  <TabItem label="Pomsky">
+
+    ```pomsky
+    ^ % 'foo' % $
+    ```
+
+  </TabItem>
+  <TabItem label="Regex">
+
+    ```regexp
+    ^\bfoo\b$
+    ```
+
+  </TabItem>
+</Tabs>
+
+### Repetition
+
+<Tabs>
+  <TabItem label="Pomsky">
+
+    ```pomsky
+    'hello'{1,5} 'world'*
+    ```
+
+  </TabItem>
+  <TabItem label="Regex">
+
+    ```regexp
+    (?:hello){1,5}(?:world)*
+    ```
+
+  </TabItem>
+</Tabs>
+
+### Character classes
+
+<Tabs>
+  <TabItem label="Pomsky">
+
+    ```pomsky
+    ['acd[]' 'p'-'s' digit]
+    !['^']  # negated
+    ```
+
+  </TabItem>
+  <TabItem label="Regex">
+
+    ```regexp
+    [acd[\]p-s\d][^\^]
+    ```
+
+  </TabItem>
+</Tabs>
+
+### Unicode
+
+<Tabs>
+  <TabItem label="Pomsky">
+
+    ```pomsky
+    [s U+15 U+FEFF Greek Decimal_Number]
+    ```
+
+  </TabItem>
+  <TabItem label="Regex">
+
+    ```regexp
+    [\s\x15\uFEFF\p{Greek}\p{Nd}]
+    ```
+
+  </TabItem>
+</Tabs>
+
+### Capturing groups
+
+<Tabs>
+  <TabItem label="Pomsky">
+
+    ```pomsky
+    :([space]) :named(.)
+    ```
+
+  </TabItem>
+  <TabItem label="Regex">
+
+    ```regexp
+    (\s)(?<named>.)
+    ```
+
+  </TabItem>
+</Tabs>
+
+### Lookaround
+
+<Tabs>
+  <TabItem label="Pomsky">
+
+    ```pomsky
+    (<< 'foo' | 'bar')
+    (!>> 'foo' | 'bar')
+    ```
+
+  </TabItem>
+  <TabItem label="Regex">
+
+    ```regexp
+    (?<=foo|bar)(?!foo|bar)
+    ```
+
+  </TabItem>
+</Tabs>
+
+### Ranges
+
+<Tabs>
+  <TabItem label="Pomsky">
+
+    ```pomsky
+    range '0'-'255'
+    ```
+
+  </TabItem>
+  <TabItem label="Regex">
+
+    ```regexp
+    0|1[0-9]{0,2}|2(?:[0-4][0-9]?|5[0-5]?|[6-9])?|[3-9][0-9]?
+    ```
+
+  </TabItem>
+</Tabs>
+
+### Variables
+
+<Tabs>
+  <TabItem label="Pomsky">
+
+    ```pomsky
+    let number = '-'? [digit]+;
+    let op = ['+-*/'];
+    number (op number)*
+    ```
+
+  </TabItem>
+  <TabItem label="Regex">
+
+    ```regexp
+    -?\d+(?:[+\-*/]-?\d+)*
+    ```
+
+  </TabItem>
+</Tabs>

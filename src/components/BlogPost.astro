@@ -1,0 +1,53 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+
+const { frontmatter, content } = Astro.props;
+---
+
+<StarlightPage frontmatter={{ title: frontmatter.title, description: frontmatter.description, tableOfContents: false }} hasSidebar={false}>
+  <p class="meta">
+    Posted on <span class="date">{new Date(frontmatter.date).toLocaleDateString('en', { dateStyle: 'long' })}</span> by {frontmatter.authors}
+    – {content.minutesRead}
+  </p>
+  <slot />
+</StarlightPage>
+
+<style is:global>
+  p, ul, ol, blockquote {
+    font-size: 1.2rem;
+    margin: 1.2rem 0;
+  }
+
+  @media (max-width: 600px) {
+    p, ul, ol, blockquote {
+      font-size: 1.1rem;
+      margin: 1.1rem 0;
+    }
+  }
+
+  #_top {
+    text-align: center;
+    font-weight: 700;
+  }
+
+  p.meta {
+    text-align: center;
+    font-size: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  p.meta .date {
+    font-weight: 600;
+  }
+
+  main .content-panel:first-child {
+    padding-top: 2.5rem;
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  main .content-panel:nth-child(2) {
+    padding-top: 0;
+    border-top: 0;
+  }
+</style>

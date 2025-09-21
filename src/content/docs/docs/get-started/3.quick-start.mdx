@@ -1,0 +1,97 @@
+---
+title: Quick Start
+description: Summary of how to start using Pomsky
+sidebar:
+  order: 3
+---
+
+import { LinkButton } from '@astrojs/starlight/components'
+
+Go to...
+
+<LinkButton href="https://playground.pomsky-lang.org/" target="_blank">
+  Playground
+</LinkButton>
+<LinkButton href="#cli">CLI</LinkButton>
+<LinkButton href="#javascript-plugin">JavaScript</LinkButton>
+<LinkButton href="#rust-macro">Rust</LinkButton>
+
+## CLI
+
+The CLI allows you to compile Pomsky expressions in the command line.
+
+Pre-built binaries are available for Windows, Linux and macOS. Download them from the
+**[releases page](https://github.com/pomsky-lang/pomsky/releases)**.
+
+Pomsky is also packaged for some package managers:
+
+[![Packaging status](https://repology.org/badge/vertical-allrepos/pomsky.svg)](https://repology.org/project/pomsky/versions)
+
+### Install from source
+
+This requires that a recent Rust toolchain is installed. Instructions for how to install Rust can be
+found [here](https://www.rust-lang.org/tools/install).
+
+Install the CLI with
+
+```sh
+cargo install pomsky-bin
+```
+
+### Get help
+
+To find out how to use the CLI, run
+
+```sh
+pomsky --help
+```
+
+## JavaScript plugin
+
+Pomsky can be used with the npm module [`@pomsky-lang/unplugin`](https://www.npmjs.com/package/@pomsky-lang/unplugin). This is a compiler plugin, usable with Vite / Rollup / Webpack / ESBuild / ESM.
+
+If you're using Vite, add it to your config like this:
+
+```js
+import { defineConfig } from 'vite'
+import pomsky from '@pomsky-lang/unplugin'
+
+export default defineConfig({
+  plugins: [pomsky()],
+})
+```
+
+Then you can import `*.pom` files from JavaScript/TypeScript:
+
+```js
+import myRegex from './myRegex.pom'
+
+myRegex().test('does this string match?')
+```
+
+or declare Pomsky expressions with the built-in `pomsky$` macro:
+
+```js
+const myRegex = pomsky$(`% [word]{5} %`)
+
+myRegex().test('does this string match?')
+```
+
+## Rust macro
+
+If you want to write a Pomsky expression directly in your Rust source code, the
+[pomsky-macro](https://crates.io/crates/pomsky-macro) got you covered. Run this command:
+
+```sh
+cargo add pomsky-macro
+```
+
+Then you can import and use it with
+
+```rs
+use pomsky_macro::pomsky;
+
+const MY_REGEX: &str = pomsky!(["great!"] | "great!");
+```
+
+Documentation can be [found here](https://docs.rs/pomsky-macro/latest/pomsky_macro/).

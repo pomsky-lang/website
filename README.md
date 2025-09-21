@@ -1,7 +1,7 @@
-# Pomsky website
+# Pomsky website (landing page, documentation and blog)
 
-The Pomsky website.
+[pomsky-lang.org](https://pomsky-lang.org)
 
-### License
+Install dependencies with `pnpm i`.
 
-Dual-licensed under the MIT and Apache-2.0 license.
+Start development with `pnpm run dev`.

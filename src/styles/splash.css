@@ -1,0 +1,19 @@
+@media (min-width: 800px) {
+  .hero {
+    padding-top: clamp(2.5rem, calc(1rem + 4vmin), 10rem);
+  }
+
+  .hero h1 {
+    margin-top: 1em;
+  }
+}
+
+.hero img {
+  width: min(70%, 15rem);
+}
+
+@media (max-width: 799px) {
+  .hero img {
+    max-width: calc(25vw + 5rem);
+  }
+}

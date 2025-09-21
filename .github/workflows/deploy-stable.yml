@@ -5,25 +5,31 @@ on:
     branches: [stable]
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
-  deploy:
-    runs-on: ubuntu-20.04
+  build:
+    runs-on: ubuntu-latest
     steps:
-      - name: 🛎️ Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
+      - name: Install, build, and upload site
+        uses: withastro/action@v3
         with:
-          submodules: true # Fetch Hugo themes (true OR recursive)
-          fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
+          # path: . # The root location of your Astro project inside the repository. (optional)
+          # node-version: 20
+          package-manager: pnpm@latest
 
-      - name: 🚚 Install dependencies
-        run: npm ci
-
-      - name: 📦 Build website
-        run: npm run build -- -v
-
-      - name: 🚀 Deploy
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          token: ${{ secrets.WEBSITE_PUBLISH_TOKEN }}
-          branch: gh-pages
-          folder: public
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

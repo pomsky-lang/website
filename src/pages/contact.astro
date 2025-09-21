@@ -1,0 +1,37 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+---
+
+<StarlightPage frontmatter={{ title: 'About', tableOfContents: false }} hasSidebar={false}>
+  <p>
+    Pomsky is maintained by Ludwig Stecher.
+    You can reach me via <a href="mailto:ludwig.stecher@gmx.de">email</a>.
+  </p>
+
+  <p>
+    To report a problem with Pomsky or propose a new feature,
+    <a href="https://github.com/pomsky-lang/pomsky/issues">create an issue</a>.
+  </p>
+
+  <p>
+    For discussions or getting help, you can <a href="https://discord.gg/uwap2uxMFp">join our Discord</a>.
+  </p>
+
+  <h2>Donate</h2>
+  <p>
+    I maintain Pomsky in my spare time, so I appreciate donations via
+    <a href="https://github.com/sponsors/Aloso">GitHub sponsors</a>.
+  </p>
+
+  <h2>Code of Conduct</h2>
+  <p>
+    You can find the code of conduct <a href="/code-of-conduct">here</a>.
+  </p>
+</StarlightPage>
+
+<style>
+  p, li {
+    font-size: 1.25rem;
+    margin: 1rem 0;
+  }
+</style>
