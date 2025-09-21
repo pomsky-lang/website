@@ -1,4 +1,4 @@
-import { defineCollection } from 'astro:content'
+import { defineCollection, z } from 'astro:content'
 import { docsSchema } from '@astrojs/starlight/schema'
 import { docsLoader } from '@astrojs/starlight/loaders'
 import { blogSchema } from 'starlight-blog/schema'
@@ -9,6 +9,8 @@ const fileExtensionRegEx = /\.mdx?$/
 function toSlug(s: string) {
   return s.toLowerCase().replace(/\W/, '-')
 }
+
+const isNext = import.meta.env.IS_NEXT === '1'
 
 export const collections = {
   docs: defineCollection({
@@ -26,7 +28,18 @@ export const collections = {
       },
     }),
     schema: docsSchema({
-      extend: context => blogSchema(context),
+      extend: context =>
+        isNext
+          ? z.intersection(
+              blogSchema(context),
+              z.object({
+                banner: z.object({ content: z.string() }).default({
+                  content:
+                    'You are viewing the <b>next</b> version of this website. <a href="https://pomsky-lang.org">See current version</a>',
+                }),
+              }),
+            )
+          : blogSchema(context),
     }),
   }),
 }

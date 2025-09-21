@@ -8,7 +8,7 @@ await highlighter.loadTheme('dark-plus', 'light-plus')
 await highlighter.loadLanguage(pomskyGrammar, regexpGrammar)
 
 export const remarkInlineHighlight: RemarkPlugins[number] = () => {
-  return (tree, { data }) => {
+  return tree => {
     process(tree as Tree)
   }
 }

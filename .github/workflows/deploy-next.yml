@@ -16,12 +16,18 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: install sharp
+        run: npm i -g sharp
+
       - name: Install, build, and upload site
         uses: withastro/action@v3
         with:
           # path: . # The root location of your Astro project inside the repository. (optional)
           # node-version: 20
           package-manager: pnpm@latest
+        env:
+          IS_NEXT: 1
 
   deploy:
     needs: build
