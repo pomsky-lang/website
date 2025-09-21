@@ -10,7 +10,7 @@ function toSlug(s: string) {
   return s.toLowerCase().replace(/\W/, '-')
 }
 
-const isNext = import.meta.env.IS_NEXT === '1'
+const isNext = import.meta.env.PUBLIC_IS_NEXT === '1'
 
 export const collections = {
   docs: defineCollection({
