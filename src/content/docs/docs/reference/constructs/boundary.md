@@ -72,14 +72,14 @@ a word boundary, which means that it must be surrounded by either 0 or 2 word ch
 
 Every boundary can be expressed in terms of lookaround assertions:
 
-| Boundary | Equivalent lookarounds                        |
-| -------- | --------------------------------------------- |
-| `^`#po   | `!<< C`#po                                    |
-| `$`#po   | `!>> C`#po                                    |
-| `%`#po   | `(<<[w]) (!>>[w]) &#x7c; (!<<[w]) (>>[w])`#po |
-| `!%`#po  | `(<<[w]) (>>[w]) &#x7c; (!<<[w]) (!>>[w])`#po |
-| `<`#po   | `(!<<[w]) (>>[w])`#po                         |
-| `>`#po   | `(<<[w]) (!>>[w])`#po                         |
+| Boundary | Equivalent lookarounds                    |
+| -------- | ----------------------------------------- |
+| `^`#po   | `!<< C`#po                                |
+| `$`#po   | `!>> C`#po                                |
+| `%`#po   | `(<<[w]) (!>>[w]) \| (!<<[w]) (>>[w])`#po |
+| `!%`#po  | `(<<[w]) (>>[w]) \| (!<<[w]) (!>>[w])`#po |
+| `<`#po   | `(!<<[w]) (>>[w])`#po                     |
+| `>`#po   | `(<<[w]) (!>>[w])`#po                     |
 
 ## Compilation
 

@@ -59,12 +59,12 @@ example, `range '007'-'300'`#po matches `034`, but not `34`.
 Compilation of number ranges uses a complicated, novel algorithm to turn the range into a tree of
 alternations. For example:
 
-| Pomsky expression      | Compiled                                                     |
-| ---------------------- | ------------------------------------------------------------ |
-| `range '0'-'10'`#po    | `0&#x7c;10?&#x7c;[2-9]`#re                                   |
-| `range '0'-'63'`#po    | `0&#x7c;[1-5][0-9]?&#x7c;6[0-3]?&#x7c;[7-9]`#re              |
-| `range '63'-'137'`#po  | `1(?:[0-2][0-9]&#x7c;3[0-7])&#x7c;6[3-9]&#x7c;[7-9][0-9]`#re |
-| `range '100'-'200'`#po | `1[0-9]{2}&#x7c;20{2}`#re                                    |
+| Pomsky expression      | Compiled                                         |
+| ---------------------- | ------------------------------------------------ |
+| `range '0'-'10'`#po    | `0\|10?\|[2-9]`#re                               |
+| `range '0'-'63'`#po    | `0\|[1-5][0-9]?\|6[0-3]?\|[7-9]`#re              |
+| `range '63'-'137'`#po  | `1(?:[0-2][0-9]\|3[0-7])\|6[3-9]\|[7-9][0-9]`#re |
+| `range '100'-'200'`#po | `1[0-9]{2}\|20{2}`#re                            |
 
 The generated regex is a DFA, so for every digit there is at most one transition. This means that
 matching is very efficient, since regex engines never need to backtrack.
