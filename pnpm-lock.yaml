@@ -9,8 +9,8 @@ dependencies:
     specifier: ^0.9.4
     version: 0.9.4(typescript@5.9.2)
   '@astrojs/starlight':
-    specifier: ^0.35.3
-    version: 0.35.3(astro@5.13.10)
+    specifier: ^0.36.0
+    version: 0.36.0(astro@5.13.10)
   astro:
     specifier: ^5.13.8
     version: 5.13.10(typescript@5.9.2)
@@ -28,7 +28,7 @@ dependencies:
     version: 1.29.2
   starlight-blog:
     specifier: ^0.24.1
-    version: 0.24.1(@astrojs/starlight@0.35.3)(astro@5.13.10)
+    version: 0.24.1(@astrojs/starlight@0.36.0)(astro@5.13.10)
   typescript:
     specifier: ^5.4.5
     version: 5.9.2
@@ -167,8 +167,8 @@ packages:
       zod: 3.25.76
     dev: false
 
-  /@astrojs/starlight@0.35.3(astro@5.13.10):
-    resolution: {integrity: sha512-z9MbODjZl/STU3PPU18iOTkLObJBw7PA8xMe5s+KPscQGL0LNZyQUYeClG+F1/em/k+2AsokGpVPta+aOTk1sg==}
+  /@astrojs/starlight@0.36.0(astro@5.13.10):
+    resolution: {integrity: sha512-aVJVBfvFuE2avsMDhmRzn6I5GjDhUwIQFlu3qH9a1C0fNsPYDw2asxHQODAD7EfGiKGvvHCJgHb+9jbJ8lCfNQ==}
     peerDependencies:
       astro: ^5.5.0
     dependencies:
@@ -1264,7 +1264,7 @@ packages:
   /@types/sax@1.2.7:
     resolution: {integrity: sha512-rO73L89PJxeYM3s3pPPjiPgVVcymqU490g0YO5n5By0k2Erzj6tay/4lr1CHAAU4JyOWd1rpQ8bCf6cZfHU96A==}
     dependencies:
-      '@types/node': 17.0.45
+      '@types/node': 24.5.2
     dev: false
 
   /@types/unist@2.0.11:
@@ -1576,8 +1576,8 @@ packages:
     resolution: {integrity: sha512-b3N5eTW1g7vXkw+0CXh/HazGTcO5KYuu/RCNaJbDMPI6LHDi+7qe8EmxKUVe1sUbY2KZOVZFyj62x0OEz9qyAA==}
     dev: false
 
-  /bare-fs@4.4.4:
-    resolution: {integrity: sha512-Q8yxM1eLhJfuM7KXVP3zjhBvtMJCYRByoTT+wHXjpdMELv0xICFJX+1w4c7csa+WZEOsq4ItJ4RGwvzid6m/dw==}
+  /bare-fs@4.4.5:
+    resolution: {integrity: sha512-TCtu93KGLu6/aiGWzMr12TmSRS6nKdfhAnzTQRbXoSWxkbb9eRd53jQ51jG7g1gYjjtto3hbBrrhzg6djcgiKg==}
     engines: {bare: '>=1.16.0'}
     requiresBuild: true
     peerDependencies:
@@ -4066,7 +4066,7 @@ packages:
     resolution: {integrity: sha512-PEGlAwrG8yXGXRjW32fGbg66JAlOAwbObuqVoJpv/mRgoWDQfgH1wDPvtzWyUSNAXBGSk8h755YDbbcEy3SH2Q==}
     dev: false
 
-  /starlight-blog@0.24.1(@astrojs/starlight@0.35.3)(astro@5.13.10):
+  /starlight-blog@0.24.1(@astrojs/starlight@0.36.0)(astro@5.13.10):
     resolution: {integrity: sha512-zq4iSl6uXGC352MFjg4G1webPEfdeB4zH1z5sphNo5K5qFvcw/j0NkoR5YWFg7ubIQVasiktjyaSoBs1k8FeiA==}
     engines: {node: '>=18.20.8'}
     peerDependencies:
@@ -4075,7 +4075,7 @@ packages:
       '@astrojs/markdown-remark': 6.3.7
       '@astrojs/mdx': 4.3.6(astro@5.13.10)
       '@astrojs/rss': 4.0.12
-      '@astrojs/starlight': 0.35.3(astro@5.13.10)
+      '@astrojs/starlight': 0.36.0(astro@5.13.10)
       astro-remote: 0.3.4
       github-slugger: 2.0.0
       marked: 15.0.12
@@ -4183,7 +4183,7 @@ packages:
       pump: 3.0.3
       tar-stream: 3.1.7
     optionalDependencies:
-      bare-fs: 4.4.4
+      bare-fs: 4.4.5
       bare-path: 3.0.0
     transitivePeerDependencies:
       - bare-buffer
