@@ -24,11 +24,11 @@ export default {
         },
         {
           name: 'keyword.control.pomsky',
-          match: '\\b(if|else|lazy|greedy|range|base|atomic|recursion|regex)\\b|!?(<<|>>)|[+*?]',
+          match: '\\b(if|else|lazy|greedy|range|base|atomic|recursion|regex)\\b|<<|>>|[+*?!]',
         },
         {
           name: 'keyword.operator.pomsky',
-          match: '[|]',
+          match: '\\|',
         },
       ],
     },
@@ -44,11 +44,11 @@ export default {
       patterns: [
         {
           name: 'constant.character.escape.pomsky',
-          match: '\\\\["\\\\]', // String.raw`\\["\\]`
+          match: /\\["\\]/,
         },
         {
           name: 'invalid.illegal.escape.pomsky',
-          match: '\\\\.',
+          match: /\\./,
         },
       ],
     },
