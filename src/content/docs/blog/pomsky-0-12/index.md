@@ -14,7 +14,7 @@ excerpt: >
 
   - A convenient pomsky test subcommand for running unit tests
 
-  - Optimizations for repetitions, character sets, and single-character alternatives
+  - Powerful optimizations for repetitions, character sets, and alternatives
 
   - New IDE capabilities for the VSCode extension
 
@@ -43,7 +43,7 @@ This release comes packed with new features and improvements. Here are the highl
 
 - A convenient [pomsky test](#test-subcommand) subcommand for running unit tests
 
-- [Optimizations](#character-set-optimizations) for repetitions, character sets, and single-character alternatives
+- Powerful [optimizations](#optimizations) for repetitions, character sets, and alternatives
 
 - New [IDE capabilities](#editor-improvements) for the VSCode extension
 
@@ -112,9 +112,9 @@ Note that not all flavors support intersection. However, if both character sets 
 
 ## Unicode Script Extensions
 
-Most software has to handle text in different languages and scripts. That's why we have always counted good Unicode support as one of Pomsky's killer features. For example, Pomsky polyfills `\w` in JavaScript, which is not Unicode aware even with the `unicode` flag.
+Most software has to handle text in different languages and scripts. That's why we have always counted good Unicode support as one of Pomsky's killer features. For example, Pomsky polyfills `\w`#re in JavaScript, which is not Unicode aware even with the `unicode` flag.
 
-Pomsky also makes it easy to match a code point in a particular Unicode script: For example, `[Syriac]` matches all Syriac characters—_in theory:_ Unicode scripts cannot overlap, so code points that would belong in multiple scripts are assigned to the `Common` or `Inherited` script instead.
+Pomsky also makes it easy to match a code point in a particular Unicode script: For example, `[Syriac]`#po matches all Syriac characters—_in theory:_ Unicode scripts cannot overlap, so code points that would belong in multiple scripts are assigned to the `Common` or `Inherited` script instead.
 
 [Script Extensions](https://www.unicode.org/L2/L2011/11406-script-ext.html) solve this problem, which Pomsky now supports:
 
@@ -161,7 +161,7 @@ The last Pomsky release added the `test` construct and a `--test` flag to run un
 
 Previously, Pomsky only supported `pcre2` for running tests. Starting with Pomsky 0.12, `rust` is supported as well. We want to add more regex engines for unit tests, but this turns out to be quite difficult, so it didn't make it into this release.
 
-## Character set optimizations
+## Optimizations
 
 Pomsky allows you to refactor parts of an expression into variables to improve readability and follow the [DRY principle](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself). For example:
 
@@ -172,13 +172,17 @@ let hex_digit = digit | ['a'-'f'];
 
 But this comes with a trade-off: Sometimes the produced regex is less efficient—and therefore slower in some regex engines. Optimizations help with this, so you can write readable, DRY code without worrying too much about performance.
 
-In this release, Pomsky gained a few important optimizations: First, character ranges in a set are now merged if they are adjacent or overlap. For example, `['a' 'b'-'d' 'c'-'f']`#po becomes just `[a-f]`. Secondly, alternations of single characters are merged. For example, `'a' | ['b'-'d'] | ['c'-'f']`#po also compiles to just `[a-f]`.
+In this release, Pomsky gained some important optimizations:
 
-This is useful in the example above: After variable expansion, `digit | ['a'-'f']`#po becomes `['0'-'9'] | ['a'-'f']`#po, which is compiled to a single character class, `[0-9a-f]`.
+- Character ranges are merged if they are adjacent or overlap: `'a' | ['b'-'d' 'c'-'f']`#po becomes just `[a-f]`#re.
+
+- Alternations are merged if possible. For example, `"case" | "char" | "const" | "continue"`#po compiles to `c(?:ase|har|on(?:st|tinue))`#re.
+
+Merging common prefixes can help performance in backtracking regex engines. Note that optimizations are applied _after resolving variables_, which is important for the example above.
 
 ## Editor improvements
 
-A key feature of any computer language is its IDE integration. For this release, I improved the VSCode extension by adding the following actions:
+A key feature of any computer language is its IDE integration. For this release, the VSCode extension was improved by adding the following actions:
 
 - Go to definition
 - Find usages
@@ -192,7 +196,7 @@ I also added inlay hints to show the index of unnamed capturing groups, so you d
 
 ## New installers
 
-In this release, we adopted [cargo-dist](https://opensource.axo.dev/cargo-dist/) for distributing the `pomsky` binary, so we could provide more installation options: In addition to the Windows, Linux and macOS binaries, we now have
+For this release, we adopted the wonderful [cargo-dist](https://axodotdev.github.io/cargo-dist/) for distributing the `pomsky` binary, so we could provide more installation options: In addition to the Windows, Linux and macOS binaries, we now have
 
 - Shell and PowerShell scripts to download and install Pomsky
 
@@ -216,7 +220,7 @@ As before, you can also get Pomsky from the AUR with `yay -S pomsky-bin`, or fro
 
 Pomsky variables work much like _macros_ in Lisp and Rust: When Pomsky encounters a variable, it is substituted with its content. Variables are [hygienic](https://en.wikipedia.org/wiki/Hygienic_macro), which means they are properly scoped when substituted.
 
-However, we discovered that [modifiers](https://pomsky-lang.org/docs/language-tour/modifiers/) are not hygienic. Take this example:
+However, we discovered that [modifiers](https://pomsky-lang.org/docs/language-tour/modifiers/) are not hygienic. For example:
 
 ```pomsky
 let variable = .*;
@@ -227,6 +231,10 @@ let variable = .*;
 Is the repetition in line 1 lazy or not? In Pomsky 0.11, it was lazy, which is counterintuitive because the `enable lazy;`#po statement is not in scope where the repetition appears, only where the variable is used.
 
 Unfortunately, fixing this required a breaking change. We think that the impact will be minimal, but to be sure, please check if you are relying on this behavior anywhere.
+
+## Other changes
+
+See the full list of changes in the [changelog](https://github.com/pomsky-lang/pomsky/blob/main/CHANGELOG.md).
 
 ## Support us!
 

@@ -6,7 +6,9 @@ export default {
     // TODO: references (\g<...>, \k<...>, \3), char groups ([^...]), char classes, lookaround and other special groups, mode modifiers
     { include: '#comments' },
     { include: '#keywords' },
+    { include: '#unicodeProps' },
     { include: '#codepoints' },
+    { include: '#specialGroups' },
     { include: '#groups' },
     { include: '#repetition' },
     { include: '#repetitionBraces' },
@@ -24,42 +26,45 @@ export default {
       end: '\\)',
     },
     keywords: {
-      patterns: [
-        {
-          name: 'keyword.other.regexp',
-          match: '[\\^$]|\\.|\\\\[bBwWdDsS]|\\\\[pP]\\w|\\\\[X\\d]',
-        },
-        {
-          name: 'keyword.other.regexp',
-          begin: '\\\\[pP]\\{',
-          end: '\\}',
-        },
-      ],
+      name: 'keyword.other.regexp',
+      match: /[\^$]|\.|\\[bBwWdDsSnrte]|\\[X\d]/,
+    },
+    unicodeProps: {
+      name: 'keyword.other.regexp',
+      match: /\\[pP](?:(\w)|\{(\s*\w+\s*)\})/,
+      captures: {
+        1: { name: 'variable.name.regexp' },
+        2: { name: 'variable.name.regexp' },
+      },
     },
     codepoints: {
       name: 'constant.numeric.regexp',
-      match: '\\\\x[0-9a-fA-F]{2}|\\\\u[0-9a-fA-F]{4}|\\\\[ux]\\{[0-9a-fA-F]*\\}',
+      match: /\\x[0-9a-fA-F]{2}|\\u[0-9a-fA-F]{4}|\\[ux]\{[0-9a-fA-F]*\}/,
+    },
+    specialGroups: {
+      name: 'source.regexp',
+      match: /\((\?<?[=!]|\?P?<(\w+)>|\?>)/,
+      captures: {
+        1: { name: 'keyword.control.regexp' },
+        2: { name: 'variable.name.regexp' },
+      },
     },
     groups: {
       name: 'source.regexp',
-      match: /\(\?:|\(\?<?[=!]|\(\?P?<\w+>|\(\?>|\(|\)|\|/,
+      match: /\((\?:)?|\)|\|/,
     },
     repetition: {
       name: 'keyword.control.regexp',
       match: '[?*+]',
     },
     repetitionBraces: {
-      name: 'keyword.control.regexp',
+      name: 'source.pomsky',
       begin: '\\{',
       end: '\\}',
       patterns: [
         {
           name: 'constant.numeric.pomsky',
           match: '\\d+',
-        },
-        {
-          name: 'source.pomsky',
-          match: '[, ]',
         },
       ],
     },
@@ -69,20 +74,17 @@ export default {
     },
     charset: {
       name: 'source.regexp',
-      begin: /\[\^?/,
+      begin: /\[(\^?)/,
+      beginCaptures: { 1: { name: 'keyword.control.regexp' } },
       end: /\]/,
       patterns: [
         { include: '#comments' },
         { include: '#codepoints' },
         {
           name: 'keyword.other.regexp',
-          match: '\\\\[bBwWdDsS]|\\\\[pP]\\w',
+          match: /\\[bBwWdDsSnrte]|\\[pP]\w/,
         },
-        {
-          name: 'keyword.other.regexp',
-          begin: '\\\\[pP]\\{',
-          end: '\\}',
-        },
+        { include: '#unicodeProps' },
         { include: '#specialEscape' },
         { include: '#rest' },
       ],
@@ -93,7 +95,7 @@ export default {
       end: />/,
       patterns: [
         {
-          name: 'constant.numeric.pomsky',
+          name: 'variable.name.pomsky',
           match: '[^>]+',
         },
       ],

@@ -100,3 +100,9 @@ blockquote {
 .big-list a[href]:hover::after {
   width: 100%;
 }
+
+.terminal {
+  color: white;
+  background-color: #172027;
+  overflow: auto;
+}
