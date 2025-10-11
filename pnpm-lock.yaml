@@ -10,10 +10,10 @@ dependencies:
     version: 0.9.4(typescript@5.9.3)
   '@astrojs/starlight':
     specifier: ^0.35.3
-    version: 0.35.3(astro@5.14.3)
+    version: 0.35.3(astro@5.14.4)
   astro:
-    specifier: ^5.14.3
-    version: 5.14.3(typescript@5.9.3)
+    specifier: ^5.14.4
+    version: 5.14.4(typescript@5.9.3)
   mdast-util-to-string:
     specifier: ^4.0.0
     version: 4.0.0
@@ -28,7 +28,7 @@ dependencies:
     version: 3.13.0
   starlight-blog:
     specifier: ^0.24.1
-    version: 0.24.1(@astrojs/starlight@0.35.3)(astro@5.14.3)
+    version: 0.24.1(@astrojs/starlight@0.35.3)(astro@5.14.4)
   typescript:
     specifier: ^5.9.3
     version: 5.9.3
@@ -153,7 +153,7 @@ packages:
       - supports-color
     dev: false
 
-  /@astrojs/mdx@4.3.6(astro@5.14.3):
+  /@astrojs/mdx@4.3.6(astro@5.14.4):
     resolution: {integrity: sha512-jH04tYgaqLfq3To42+z1oEcXrXUzo3BxZ4fTkb+7BEmOJkQ9/c3iIixFEC+x0GgE8lJb4SuEDGldpAv7+1yY8A==}
     engines: {node: 18.20.8 || ^20.3.0 || >=22.0.0}
     peerDependencies:
@@ -162,7 +162,7 @@ packages:
       '@astrojs/markdown-remark': 6.3.7
       '@mdx-js/mdx': 3.1.1
       acorn: 8.15.0
-      astro: 5.14.3(typescript@5.9.3)
+      astro: 5.14.4(typescript@5.9.3)
       es-module-lexer: 1.7.0
       estree-util-visit: 2.0.0
       hast-util-to-html: 9.0.5
@@ -199,20 +199,20 @@ packages:
       zod: 3.25.76
     dev: false
 
-  /@astrojs/starlight@0.35.3(astro@5.14.3):
+  /@astrojs/starlight@0.35.3(astro@5.14.4):
     resolution: {integrity: sha512-z9MbODjZl/STU3PPU18iOTkLObJBw7PA8xMe5s+KPscQGL0LNZyQUYeClG+F1/em/k+2AsokGpVPta+aOTk1sg==}
     peerDependencies:
       astro: ^5.5.0
     dependencies:
       '@astrojs/markdown-remark': 6.3.7
-      '@astrojs/mdx': 4.3.6(astro@5.14.3)
+      '@astrojs/mdx': 4.3.6(astro@5.14.4)
       '@astrojs/sitemap': 3.6.0
       '@pagefind/default-ui': 1.4.0
       '@types/hast': 3.0.4
       '@types/js-yaml': 4.0.9
       '@types/mdast': 4.0.4
-      astro: 5.14.3(typescript@5.9.3)
-      astro-expressive-code: 0.41.3(astro@5.14.3)
+      astro: 5.14.4(typescript@5.9.3)
+      astro-expressive-code: 0.41.3(astro@5.14.4)
       bcp-47: 2.1.0
       hast-util-from-html: 2.0.3
       hast-util-select: 6.0.4
@@ -1412,12 +1412,12 @@ packages:
     hasBin: true
     dev: false
 
-  /astro-expressive-code@0.41.3(astro@5.14.3):
+  /astro-expressive-code@0.41.3(astro@5.14.4):
     resolution: {integrity: sha512-u+zHMqo/QNLE2eqYRCrK3+XMlKakv33Bzuz+56V1gs8H0y6TZ0hIi3VNbIxeTn51NLn+mJfUV/A0kMNfE4rANw==}
     peerDependencies:
       astro: ^4.0.0-beta || ^5.0.0-beta || ^3.3.0
     dependencies:
-      astro: 5.14.3(typescript@5.9.3)
+      astro: 5.14.4(typescript@5.9.3)
       rehype-expressive-code: 0.41.3
     dev: false
 
@@ -1432,8 +1432,8 @@ packages:
       ultrahtml: 1.6.0
     dev: false
 
-  /astro@5.14.3(typescript@5.9.3):
-    resolution: {integrity: sha512-iRvl3eEYYdSYA195eNREjh43hqMMwKY1uoHYiKfLCB9G+bjFtaBtDe8R0ip7AbTD69wyOKgUCOtMad+lkOnT/w==}
+  /astro@5.14.4(typescript@5.9.3):
+    resolution: {integrity: sha512-yqgMAO2Whi9GmZkByyiPcG7CiiPr0Me0iBSorMa6M0g+wQk/ewnIqUyr7T/uFCPTQndoKwucnYFTrf0yfb0urw==}
     engines: {node: 18.20.8 || ^20.3.0 || >=22.0.0, npm: '>=9.6.5', pnpm: '>=7.1.0'}
     hasBin: true
     dependencies:
@@ -4000,16 +4000,16 @@ packages:
     resolution: {integrity: sha512-PEGlAwrG8yXGXRjW32fGbg66JAlOAwbObuqVoJpv/mRgoWDQfgH1wDPvtzWyUSNAXBGSk8h755YDbbcEy3SH2Q==}
     dev: false
 
-  /starlight-blog@0.24.1(@astrojs/starlight@0.35.3)(astro@5.14.3):
+  /starlight-blog@0.24.1(@astrojs/starlight@0.35.3)(astro@5.14.4):
     resolution: {integrity: sha512-zq4iSl6uXGC352MFjg4G1webPEfdeB4zH1z5sphNo5K5qFvcw/j0NkoR5YWFg7ubIQVasiktjyaSoBs1k8FeiA==}
     engines: {node: '>=18.20.8'}
     peerDependencies:
       '@astrojs/starlight': '>=0.33.0'
     dependencies:
       '@astrojs/markdown-remark': 6.3.7
-      '@astrojs/mdx': 4.3.6(astro@5.14.3)
+      '@astrojs/mdx': 4.3.6(astro@5.14.4)
       '@astrojs/rss': 4.0.12
-      '@astrojs/starlight': 0.35.3(astro@5.14.3)
+      '@astrojs/starlight': 0.35.3(astro@5.14.4)
       astro-remote: 0.3.4
       github-slugger: 2.0.0
       marked: 15.0.12
