@@ -51,7 +51,6 @@ export default defineConfig({
         meta({ name: 'msapplication-TileColor', content: '#fff' }),
         // favicon
         link({ rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' }),
-        link({ rel: 'mask-icon', href: '/safari-pinned-tab.svg' }),
         // web manifest
         link({ rel: 'manifest', href: '/site.webmanifest' }),
         // fonts
