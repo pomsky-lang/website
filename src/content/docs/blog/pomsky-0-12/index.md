@@ -2,7 +2,7 @@
 title: 'Pomsky 0.12'
 description: 'See what’s new in Pomsky 0.12'
 excerpt: >
-  I am delighted to announce version 0.12 of Pomsky, the next level regular expression language! Pomsky makes it easier than ever to write _correct_ and _maintainable_ regular expressions. Pomsky expressions are transpiled to regexes and can be used with many regex engines.
+  I am happy to announce version 0.12 of Pomsky, the next level regular expression language! Pomsky makes it easier than ever to write _correct_ and _maintainable_ regular expressions. Pomsky expressions are transpiled to regexes and can be used with many regex engines.
 
   This release comes packed with new features and improvements. Here are the highlights:
 
@@ -27,7 +27,7 @@ date: 2024-12-18T10:00:00Z
 draft: true
 ---
 
-I am delighted to announce version 0.12 of Pomsky, the next level regular expression language! Pomsky makes it easier than ever to write _correct_ and _maintainable_ regular expressions. Pomsky expressions are transpiled to regexes and can be used with many regex engines.
+I am happy to announce version 0.12 of Pomsky, the next level regular expression language! Pomsky makes it easier than ever to write _correct_ and _maintainable_ regular expressions. Pomsky expressions are transpiled to regexes and can be used with many regex engines.
 
 ## What's new?
 
@@ -51,15 +51,13 @@ This release comes packed with new features and improvements. Here are the highl
 
 </div>
 
-This release also has a breaking change, [explained below](#breaking-change-fixing-hygiene).
-
 If you're unfamiliar with Pomsky, [here is a summary](/docs/get-started/quick-reference) of how Pomsky compares to regexes.
 
 Let's look at the most exciting new features in this release!
 
 ## RE2 Support
 
-RE2 is a fast regex engine from Google. Unlike backtracking regex engines such as PCRE2, it is based on finite automata, so it has better worst-case performance. Go's `regexp` package is (mostly[^1]) compatible with RE2. Pomsky now also offers a **RE2 flavor**, so you get better diagnostics when targeting RE2. For example, RE2 doesn't support features such as lookbehind, and Pomsky detects this:
+RE2 is a fast regex engine from Google. Unlike backtracking regex engines such as PCRE2, it is based on finite automata, so it has better worst-case performance. Pomsky now offers a **RE2 flavor**, which is also compatible with Go's `regexp` package. Because the RE2 flavor doesn't support advanced features such as lookbehind and backreferences, Pomsky produces an error when you try to use them:
 
 <pre class="terminal">
 <span class='shell'>&gt; </span><span class='cmd'>pomsky</span> <span class='flag'>-f</span> <span class='arg'>re2</span> <span class='str'>"&lt;&lt; &#39;test&#39;"</span>
@@ -85,7 +83,7 @@ With RE2, Pomsky now supports 8 regex flavors, covering most mainstream programm
 
 ## Character Set Intersection
 
-Several regex engines[^2] support intersecting and subtracting character sets:
+Several regex engines[^1] support intersecting and subtracting character sets:
 
 ```regexp
 [\p{Thai}&&\p{Nd}]
@@ -114,7 +112,7 @@ Note that not all flavors support intersection. However, if both character sets 
 
 Most software has to handle text in different languages and scripts. That's why we have always counted good Unicode support as one of Pomsky's killer features. For example, Pomsky polyfills `\w`#re in JavaScript, which is not Unicode aware even with the `unicode` flag.
 
-Pomsky also makes it easy to match a code point in a particular Unicode script: For example, `[Syriac]`#po matches all Syriac characters—_in theory:_ Unicode scripts cannot overlap, so code points that would belong in multiple scripts are assigned to the `Common` or `Inherited` script instead.
+Pomsky also makes it easy to match a code point in a particular Unicode script. For example, `[Syriac]`#po matches all Syriac characters—_in theory:_ Unicode scripts cannot overlap, so code points that would belong in multiple scripts are assigned to the `Common` or `Inherited` script instead.
 
 [Script Extensions](https://www.unicode.org/L2/L2011/11406-script-ext.html) solve this problem, which Pomsky now supports:
 
@@ -225,7 +223,7 @@ However, we discovered that [modifiers](https://pomsky-lang.org/docs/language-to
 ```pomsky
 let variable = .*;
 
-(enable lazy; variable);
+(enable lazy; variable)
 ```
 
 Is the repetition in line 1 lazy or not? In Pomsky 0.11, it was lazy, which is counterintuitive because the `enable lazy;`#po statement is not in scope where the repetition appears, only where the variable is used.
@@ -242,5 +240,4 @@ We have a lot of exciting plans to make Pomsky a success. To realize them, we ne
 
 Consider [**sponsoring me**](https://github.com/sponsors/Aloso) to help making my open-source work financially sustainable. Thank you ❤️
 
-[^1]: Go's `regexp` package doesn't support `\C` from RE2 (matching a single byte, which isn't supported in Pomsky either).
-[^2]: Character set intersection is supported in the JavaScript, Java, Ruby, and Rust flavors. Note that JavaScript requires the [v flag](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/unicodeSets) for this.
+[^1]: Character set intersection is supported in the JavaScript, Java, Ruby, and Rust flavors. Note that JavaScript requires the [v flag](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/unicodeSets) for this.
