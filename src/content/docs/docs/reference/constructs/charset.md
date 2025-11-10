@@ -37,7 +37,7 @@ let ShorthandIdent =
     | 'd' | 'digit'
     | 's' | 'space'
     | 'h' | 'horiz_space'
-    | 'v' | 'vert_space'
+    | 'v' | 'vert_space';
 
 let AsciiShorthand =
     | 'ascii'
@@ -55,7 +55,14 @@ let AsciiShorthand =
     | 'ascii_word'
     | 'ascii_xdigit';
 
-let UnicodeProperty = '!'? Name;
+let UnicodeProperty = '!'? PropertyType? Name;
+
+let PropertyType =
+    | 'gc:' | 'general_category:'
+    | 'sc:' | 'script:'
+    | 'scx:' | 'script_extensions:'
+    | 'blk:' | 'block:'
+
 ```
 
 ## Example
@@ -154,6 +161,14 @@ However, not all Unicode properties are supported in every flavor. For example, 
 support Unicode properties at all, JavaScript does not support blocks, and Java does not support
 most boolean properties.
 
+- Unicode general categories may be prefixed with `gc:` or `general_category:`.
+- Unicode scripts may be prefixed with `sc:` or `script:`.
+- Unicode script extensions _must_ be prefixed with `scx:` or `script_extensions:` to disambiguate
+  them from scripts.
+- Unicode blocks must be prefixed with `blk:`, `block:`, or `In` – for example, the `BasicLatin`
+  block can be matched with `[blk:Basic_Latin]`#po, `[block:Basic_Latin]`#po, or
+  `[InBasic_Latin]`#po, although the latter is discouraged and may be deprecated in the future.
+
 Details about supported Unicode properties can be [found here](/docs/appendix/unicode-properties).
 
 ### Negation of shorthands
@@ -182,15 +197,18 @@ element is unwrapped:
 Pomsky removes duplicate items and eliminates double negation where possible:
 
 ```pomsky
-['test']  # [tes]
+['test']  # [est]
 ![!word]  # \w
 ```
+
+Pomsky also merges adjacent or overlapping Unicode ranges and orders them in ascending order,
+according to their Unicode scalar value.
 
 Special characters are escaped when needed, but `^` is only escaped if it is the first character:
 
 ```pomsky
-['[]-^&\']   # [\[\]\-^\&\\]
-['^']       # [\^]
+['!&^']   # [!\&^]
+['^a']    # [\^a]
 ```
 
 `&` and `|` are not escaped when targeting JavaScript.
@@ -204,12 +222,9 @@ classes".
 
 Behavior is incorrect in .NET (see [above](#support)).
 
-Union and intersection of sets is not yet implemented.
-
-The expression `['&' '&'-'Z']`#po miscompiles in JS with the `/v` flag because `&` is not escaped.
-
 ## History
 
+- Added the ordering and merging of Unicode ranges in Pomsky 0.12
 - Deprecated shorthands in character ranges in Pomsky 0.11
 - Extended set of supported Unicode properties in Pomsky 0.10
 - Added support for Unicode blocks and boolean properties in Pomsky 0.8

@@ -82,5 +82,6 @@ Some mode modifiers are not yet implemented, most importantly `ignore_case`, `si
 
 ## History
 
+- Hygiene of modifiers fixed in Pomsky 0.12
 - Non-Unicode mode added in Pomsky 0.10
 - Lazy mode added in Pomsky 0.3
