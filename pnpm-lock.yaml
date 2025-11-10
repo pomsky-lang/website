@@ -27,8 +27,8 @@ importers:
         specifier: ^1.29.2
         version: 1.29.2
       starlight-blog:
-        specifier: ^0.24.2
-        version: 0.24.3(@astrojs/starlight@0.36.2(astro@5.15.4(@types/node@24.10.0)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1)))(astro@5.15.4(@types/node@24.10.0)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1))
+        specifier: ^0.25.0
+        version: 0.25.0(@astrojs/starlight@0.36.2(astro@5.15.4(@types/node@24.10.0)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1)))(astro@5.15.4(@types/node@24.10.0)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1))
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -1950,8 +1950,8 @@ packages:
   space-separated-tokens@2.0.2:
     resolution: {integrity: sha512-PEGlAwrG8yXGXRjW32fGbg66JAlOAwbObuqVoJpv/mRgoWDQfgH1wDPvtzWyUSNAXBGSk8h755YDbbcEy3SH2Q==}
 
-  starlight-blog@0.24.3:
-    resolution: {integrity: sha512-UzfACsv097UUP9E1C7/83B2Ju0hLk/3D94cJJAMKK8xCJYy/5vjeYyIOL2J3gTPHX7m9bdfIkRkn6t2hw2J/BA==}
+  starlight-blog@0.25.0:
+    resolution: {integrity: sha512-VbbfwmpENqlhpGe1Ht2y8Q9tnIpMSylw9j6g7AqIBnnndpEbH7+QRqaEFUkdvqo7FKJKTPSH7gtabwpMbgpGwA==}
     engines: {node: '>=18.20.8'}
     peerDependencies:
       '@astrojs/starlight': '>=0.33.0'
@@ -4962,7 +4962,7 @@ snapshots:
 
   space-separated-tokens@2.0.2: {}
 
-  starlight-blog@0.24.3(@astrojs/starlight@0.36.2(astro@5.15.4(@types/node@24.10.0)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1)))(astro@5.15.4(@types/node@24.10.0)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1)):
+  starlight-blog@0.25.0(@astrojs/starlight@0.36.2(astro@5.15.4(@types/node@24.10.0)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1)))(astro@5.15.4(@types/node@24.10.0)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1)):
     dependencies:
       '@astrojs/markdown-remark': 6.3.8
       '@astrojs/mdx': 4.3.10(astro@5.15.4(@types/node@24.10.0)(rollup@4.53.2)(typescript@5.9.3)(yaml@2.8.1))
