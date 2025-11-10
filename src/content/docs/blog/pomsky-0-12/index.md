@@ -23,11 +23,12 @@ excerpt: >
   ***
 
   [Continue reading](/blog/pomsky-0-12/)
-date: 2024-12-18T10:00:00Z
-draft: true
+date: 2025-11-10T10:00:00Z
 ---
 
-I am happy to announce version 0.12 of Pomsky, the next level regular expression language! Pomsky makes it easier than ever to write _correct_ and _maintainable_ regular expressions. Pomsky expressions are transpiled to regexes and can be used with many regex engines.
+I'm happy to announce version 0.12 of Pomsky, the next-level regular expression language! Pomsky makes writing correct and maintainable regular expressions a breeze. Pomsky expressions are converted into regexes, which can be used with many different regex engines.
+
+If you're not familiar with Pomsky, [here is a quick summary](/docs/get-started/quick-reference) of how it compares to regular expressions.
 
 ## What's new?
 
@@ -51,9 +52,9 @@ This release comes packed with new features and improvements. Here are the highl
 
 </div>
 
-If you're unfamiliar with Pomsky, [here is a summary](/docs/get-started/quick-reference) of how Pomsky compares to regexes.
+You might have noticed that Pomsky has a new logo. I've also updated the website by switching from Hugo to [Starlight](https://starlight.astro.build/), as the Hugo theme we were using was no longer being maintained.
 
-Let's look at the most exciting new features in this release!
+This release took longer than usual because of a few unplanned delays. The last version was released almost two years ago! I had planned to cut a release by the end of 2024, but sometimes things don't go as planned. The wait is finally over, so let's take a look at the most exciting new features in this release!
 
 ## RE2 Support
 
@@ -83,7 +84,7 @@ With RE2, Pomsky now supports 8 regex flavors, covering most mainstream programm
 
 ## Character Set Intersection
 
-Several regex engines[^1] support intersecting and subtracting character sets:
+Several regex engines[^1] support intersecting character sets:
 
 ```regexp
 [\p{Thai}&&\p{Nd}]
@@ -95,7 +96,7 @@ The above matches a codepoint that is in the ‘Thai’ script _and_ in the ‘N
 [Thai] & [Nd]
 ```
 
-Some regex engines also have _subtraction_. Pomsky doesn't provide this feature, since it can be easily emulated:
+Some regex engines also support _subtraction_. Pomsky doesn't offer this feature, but it can be easily emulated using negation:
 
 ```pomsky
 [Thai] & ![Nd]   # negating one character set subtracts it
@@ -110,9 +111,9 @@ Note that not all flavors support intersection. However, if both character sets 
 
 ## Unicode Script Extensions
 
-Most software has to handle text in different languages and scripts. That's why we have always counted good Unicode support as one of Pomsky's killer features. For example, Pomsky polyfills `\w`#re in JavaScript, which is not Unicode aware even with the `unicode` flag.
+Most software has to be able to handle text in different languages and writing systems. This is why I've always considered good Unicode support to be one of Pomsky's strongest features. For example, Pomsky polyfills `\w`#re in JavaScript, which is surprisingly not Unicode aware, even with the `unicode` flag enabled.
 
-Pomsky also makes it easy to match a code point in a particular Unicode script. For example, `[Syriac]`#po matches all Syriac characters—_in theory:_ Unicode scripts cannot overlap, so code points that would belong in multiple scripts are assigned to the `Common` or `Inherited` script instead.
+Pomsky also makes it easy to match a code point in a particular Unicode script: For example, `[Syriac]`#po matches all Syriac characters – at least in theory. But Unicode scripts cannot overlap, so code points that would belong in multiple scripts are assigned to the `Common` or `Inherited` script instead.
 
 [Script Extensions](https://www.unicode.org/L2/L2011/11406-script-ext.html) solve this problem, which Pomsky now supports:
 
@@ -135,11 +136,11 @@ In addition to `scx:`, you can also use the `gc:`, `sc:`, and `blk:` prefixes to
 [blk:Basic_Latin] # new
 ```
 
-Note that the `In` prefix of Unicode blocks is omitted when using the `blk:` prefix. We strongly recommend using `blk:` because we will deprecate the `In` prefix in the future.
+Note that the `In` prefix of Unicode blocks is omitted when using the `blk:` prefix. It is recommended to use `blk:` because we will deprecate the `In` prefix in the future.
 
 ## Test subcommand
 
-The last Pomsky release added the `test` construct and a `--test` flag to run unit tests during compilation. This was a big step forward to make Pomsky expressions more correct and maintainable. However, there was no easy way to test all Pomsky expressions in a project during a CI workflow. This has now been addressed with the `pomsky test` command:
+Pomsky 0.11 added the `test` construct and a `--test` flag to run unit tests during compilation. This was a big step towards making Pomsky expressions more correct and maintainable. However, there was no easy way to test all Pomsky expressions in a project during a CI workflow. This has now been addressed with the new `pomsky test` command:
 
 <pre class="terminal">
 <span class='shell'>&gt; </span><span class='cmd'>pomsky</span> <span class='arg'>test</span> <span class='flag'>--path</span> <span class='arg'>examples/</span> <span class='flag'>-e</span> <span class='arg'>pcre2</span>
@@ -155,42 +156,42 @@ The last Pomsky release added the `test` construct and a `--test` flag to run un
 </span>test result: <span style='color:var(--green,#0a0)'><b>ok</b></span>, 8 files tested in 1.41ms
 </pre>
 
-`pomsky test` recursively iterates over the given directory, taking `.ignore` and `.gitignore` files into account, and tests all files with the `.pomsky` file ending. If at least one file doesn't compile or contains a failing test, the program exists with an error, so it's easy to include it in your CI pipeline.
+`pomsky test` recursively iterates through the given directory, taking `.ignore` and `.gitignore` files into account, and tests all files ending with `.pomsky`. If at least one file doesn't compile or contains a failing test, the program exits with an error, so it's easy to include it in your CI pipeline.
 
-Previously, Pomsky only supported `pcre2` for running tests. Starting with Pomsky 0.12, `rust` is supported as well. We want to add more regex engines for unit tests, but this turns out to be quite difficult, so it didn't make it into this release.
+Pomsky previously only supported `pcre2` for running tests. In this release, we added `rust` as another option. We want to add more regex engines for unit tests, but this is proving tricky, so it didn't make it into this release.
 
 ## Optimizations
 
-Pomsky allows you to refactor parts of an expression into variables to improve readability and follow the [DRY principle](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself). For example:
+Pomsky lets you to refactor parts of an expression into variables to improve readability and follow the [DRY principle](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself). For example:
 
 ```pomsky
 let digit = ['0'-'9'];
 let hex_digit = digit | ['a'-'f'];
 ```
 
-But this comes with a trade-off: Sometimes the produced regex is less efficient—and therefore slower in some regex engines. Optimizations help with this, so you can write readable, DRY code without worrying too much about performance.
+But this comes with a trade-off: Sometimes the produced regex is less efficient and slower in some regex engines. Optimizations help with this, so you can write readable, DRY code without worrying too much about performance.
 
 In this release, Pomsky gained some important optimizations:
 
-- Character ranges are merged if they are adjacent or overlap: `'a' | ['b'-'d' 'c'-'f']`#po becomes just `[a-f]`#re.
+- Character ranges are merged if they are adjacent or overlap. For instance, `'a' | ['b'-'d' 'c'-'f']`#po becomes just `[a-f]`#re.
 
-- Alternations are merged if possible. For example, `"case" | "char" | "const" | "continue"`#po compiles to `c(?:ase|har|on(?:st|tinue))`#re.
+- Alternations are merged if possible: `"case" | "char" | "const" | "continue"`#po compiles to `c(?:ase|har|on(?:st|tinue))`#re.
 
 Merging common prefixes can help performance in backtracking regex engines. Note that optimizations are applied _after resolving variables_, which is important for the example above.
 
 ## Editor improvements
 
-A key feature of any computer language is its IDE integration. For this release, the VSCode extension was improved by adding the following actions:
+A key feature of any computer language is its IDE integration. For this release, we've added a few new features to the VSCode extension, including:
 
 - Go to definition
 - Find usages
 - Rename variable
 
-There's just one caveat: For these features to work, the file has to be syntactically valid. This is because these actions work on the _abstract syntax tree_ (AST), and we currently can't get the AST if parsing fails.
+There's just one caveat: for these features to work, the file has to be syntactically valid. This is because these actions work on the _abstract syntax tree_ (AST), and we currently can't get the AST if parsing fails.
 
-To solve this, the next step is making the parser _recoverable_, so it can produce an (possibly incomplete) AST even in the face of syntax errors. This will also help to improve autocompletions, which currently don't use the AST.
+The next step is therefore to make the parser _recoverable_, so that it can produce an AST even in the presence of syntax errors. This will also help to improve autocompletion, which currently doesn't use the AST.
 
-I also added inlay hints to show the index of unnamed capturing groups, so you don't need to count them when writing a replacement pattern.
+We've also added inlay hints to show the index of unnamed capturing groups, meaning you no longer need to count them when writing a replacement pattern.
 
 ## New installers
 
@@ -212,7 +213,7 @@ For this release, we adopted the wonderful [cargo-dist](https://axodotdev.github
 
 - An msi for installing and uninstalling Pomsky on Windows
 
-As before, you can also get Pomsky from the AUR with `yay -S pomsky-bin`, or from crates.io with `cargo install pomsky-bin`. The Homebrew formula hasn't been updated to version 0.12 yet, but we're working on it.
+As before, you can also get Pomsky from the AUR with `yay -S pomsky-bin`, from crates.io with `cargo install pomsky-bin`, or from Homebrew.
 
 ## Breaking change: Fixing hygiene
 
