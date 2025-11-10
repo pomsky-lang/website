@@ -11,13 +11,12 @@
 	},
 	"dependencies": {
 		"@astrojs/check": "^0.9.4",
-		"@astrojs/starlight": "^0.35.3",
+		"@astrojs/starlight": "^0.36.0",
 		"astro": "^5.14.3",
 		"mdast-util-to-string": "^4.0.0",
-		"reading-time": "^1.5.0",
 		"sharp": "^0.32.6",
-		"shiki": "^3.13.0",
-		"starlight-blog": "^0.24.1",
+		"shiki": "^1.29.2",
+		"starlight-blog": "^0.24.2",
 		"typescript": "^5.9.3"
 	}
 }

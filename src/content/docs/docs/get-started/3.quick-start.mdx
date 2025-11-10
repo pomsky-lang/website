@@ -5,46 +5,77 @@ sidebar:
   order: 3
 ---
 
-import { LinkButton } from '@astrojs/starlight/components'
+import { Tabs, TabItem } from '@astrojs/starlight/components'
 
-Go to...
+## Playground
 
-<LinkButton href="https://playground.pomsky-lang.org/" target="_blank">
-  Playground
-</LinkButton>
-<LinkButton href="#cli">CLI</LinkButton>
-<LinkButton href="#javascript-plugin">JavaScript</LinkButton>
-<LinkButton href="#rust-macro">Rust</LinkButton>
+Get started instantly with the [online playground](https://playground.pomsky-lang.org/). It has a live preview, search and replace, and allows you to share your code!
 
 ## CLI
 
-The CLI allows you to compile Pomsky expressions in the command line.
+The CLI allows you to compile Pomsky expressions in the command line. Install it via
 
-Pre-built binaries are available for Windows, Linux and macOS. Download them from the
-**[releases page](https://github.com/pomsky-lang/pomsky/releases)**.
+<Tabs>
+  <TabItem label='shell'>
 
-Pomsky is also packaged for some package managers:
+    ```sh
+    curl --proto '=https' --tlsv1.2 -LsSf https://github.com/pomsky-lang/pomsky/releases/latest/download/pomsky-bin-installer.sh | sh
+    ```
 
-[![Packaging status](https://repology.org/badge/vertical-allrepos/pomsky.svg)](https://repology.org/project/pomsky/versions)
+  </TabItem>
+  <TabItem label='powershell'>
+  
+    ```sh
+    powershell -ExecutionPolicy Bypass -c "irm https://github.com/pomsky-lang/pomsky/releases/latest/download/pomsky-bin-installer.ps1 | iex"
+    ```
 
-### Install from source
+  </TabItem>
+  <TabItem label='NPM'>
+
+    ```sh
+    npm install -g @pomsky-lang/cli
+    ```
+
+  </TabItem>
+  <TabItem label='AUR'>
+
+    ```sh
+    yay -S pomsky-bin
+    ```
+
+  </TabItem>
+</Tabs>
+
+Or download it from the [releases page](https://github.com/pomsky-lang/pomsky/releases).
+
+<details>
+<summary>Install from source</summary>
 
 This requires that a recent Rust toolchain is installed. Instructions for how to install Rust can be
 found [here](https://www.rust-lang.org/tools/install).
 
-Install the CLI with
+Install the CLI from source with
 
 ```sh
 cargo install pomsky-bin
 ```
 
-### Get help
+</details>
+
+<details>
+<summary>How to use the CLI</summary>
 
 To find out how to use the CLI, run
 
 ```sh
 pomsky --help
 ```
+
+</details>
+
+## VS Code Extension
+
+To use Pomsky in Visual Studio Code, install [the extension](https://marketplace.visualstudio.com/items?itemName=pomsky-lang.pomsky-vscode) and the **CLI** (see above).
 
 ## JavaScript plugin
 
