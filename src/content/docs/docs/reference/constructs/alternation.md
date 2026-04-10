@@ -10,12 +10,11 @@ An alternation matches one of several alternatives.
 ```pomsky
 let Alternation = ('|'? Alternatives)?;
 
-let Alternatives = Alternative ('|' Alternative)*;
+let Alternatives = Intersection ('|' Intersection)*;
 
-let Alternative = FixExpression+;
 ```
 
-See _[FixExpression](/docs/reference/grammar/#fixexpression)_.
+See _[Intersection](/docs/reference/constructs/intersection/)_.
 
 Note that an alternation may have a leading pipe. Also note that an alternative may not be empty,
 i.e. `| |` is not allowed. Use an empty string instead, e.g. `'foo' | '' | 'bar'`#po.
@@ -39,15 +38,22 @@ Alternatives are matched consecutively. The first alternative that matches is us
 
 Compiled to an alternation. The example above would be compiled to `hello|(?:pomsky)+`.
 
+Alternations are subject to advanced optimizations:
+
+- Merging of single-character alternations: `'a' | ['bc']`#po becomes `[a-c]`#re.
+- Prefix merging: `'world' | 'wow'`#po becomes `wo(?:rld|w)`#re.
+- Empty alternatives: If the first or last alternative is empty, it is replaced with a `?` or `??`
+  quantifier.
+
+These alternatives are sometimes combined. There is no guarantee regarding in which order the
+optimizations are applied.
+
 ## Issues
 
-Alternations aren't yet properly optimized. Planned optimizations include:
-
-- Common prefixes: `'test' | 'testament' | 'testing'`#po to
-  `test(?:|ament|ing)`#re
-- Single char alternation: `'a' | 'c' | '?'`#po to `[ac?]`#re
+Merging of alternatives is currently not supported if they are not adjacent.
 
 ## History
 
+- Many optimizations added in Pomsky 0.12
 - Support for leading pipes added in Pomsky 0.6
 - Initial implementation in Pomsky 0.1

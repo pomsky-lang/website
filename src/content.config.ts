@@ -1,7 +1,8 @@
-import { defineCollection, z } from 'astro:content'
+import { defineCollection } from 'astro:content'
 import { docsSchema } from '@astrojs/starlight/schema'
 import { docsLoader } from '@astrojs/starlight/loaders'
 import { blogSchema } from 'starlight-blog/schema'
+import { z } from 'astro/zod'
 
 const leadingNumberAndDotRegEx = /^[0-9]+\./
 const fileExtensionRegEx = /\.mdx?$/

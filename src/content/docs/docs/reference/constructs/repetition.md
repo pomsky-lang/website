@@ -86,12 +86,12 @@ expansion, it may simplify nested repetitions using rules like the following:
 Note that most of these optimizations are only valid if either both repetitions are lazy or both
 are greedy.
 
-Pomsky will then produce a maximally compact repetition, using `?`, `+` or `?` if possible, or using
+Pomsky will then produce a maximally compact repetition, using `?`, `+` or `*` if possible, or using
 `{n}`, `{n,}` or `{m,n}` otherwise. If the repetition is lazy, another `?` is added. For example,
 `'x'{1,} lazy`#po compiles to `x+?`.
 
 Sometimes the repeated expression must be wrapped in a non-capturing group, e.g.
-`'test'_`#po is compiled to `(?:test)\_`.
+`'test'?`#po is compiled to `(?:test)?`.
 
 ## Security concerns
 
