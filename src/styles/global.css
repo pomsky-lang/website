@@ -106,3 +106,8 @@ blockquote {
   background-color: #172027;
   overflow: auto;
 }
+
+.small-table td,
+.small-table th {
+  padding-block: 0.125rem;
+}

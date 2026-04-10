@@ -3,6 +3,8 @@ import starlight from '@astrojs/starlight'
 import starlightBlog from 'starlight-blog'
 
 import { remarkInlineHighlight } from './src/plugins/remarkInlineHighlight.js'
+import pomskyGrammar from './src/plugins/grammars/pomsky.js'
+import regexpGrammar from './src/plugins/grammars/regexp.js'
 
 function meta(attrs: Record<string, any>) {
   return { tag: 'meta', attrs } as const
@@ -95,10 +97,7 @@ export default defineConfig({
       expressiveCode: {
         themes: ['dark-plus', 'light-plus'],
         shiki: {
-          langs: [
-            import('./src/plugins/grammars/pomsky.js'),
-            import('./src/plugins/grammars/regexp.js'),
-          ],
+          langs: [pomskyGrammar, regexpGrammar],
         },
       },
     }),

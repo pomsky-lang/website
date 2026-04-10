@@ -10,6 +10,7 @@ export default {
     { include: '#references' },
     { include: '#codepoints' },
     { include: '#numbers' },
+    { include: '#sets' },
     { include: '#constants' },
     { include: '#testBlocks' },
   ],
@@ -68,6 +69,21 @@ export default {
     numbers: {
       name: 'constant.numeric.pomsky',
       match: '\\b[0-9]+\\b',
+    },
+    sets: {
+      name: 'source.pomsky',
+      begin: '\\[',
+      end: '\\]',
+      patterns: [
+        { include: '#comments' },
+        { include: '#dstrings' },
+        { include: '#sstrings' },
+        { include: '#codepoints' },
+        {
+          name: 'keyword.other.pomsky',
+          match: '\\b\\w+\\s*:',
+        },
+      ],
     },
     constants: {
       patterns: [
